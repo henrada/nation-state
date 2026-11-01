@@ -5,15 +5,15 @@ let storage={},c=boot(storage);
 vm.runInContext(`
 function check(x,m){if(!x)throw Error(m)}function near(a,b,m){check(Math.abs(a-b)<1e-7,m+': '+a+' / '+b)}
 function fresh(reg='presidential',seed='procedure107',hard=false){selectedRegime=reg;pendingAdmin107=true;pendingDifficulty=hard;create(seed);pstate().current=null;pstate().queue=[];sits().notices=[];features107().notices=[];pstate().ap=100;s.approval=90;s.stability=90;s.confidence=90;s.inflation=3;s.unemployment=6;s.debt=s.gdp*.4}
-function isolated(reg='presidential',seed='isolated107'){fresh(reg,seed);sits().active=sits().active.filter(x=>MINORITY_KINDS107.includes(x.kind))}
+function isolated(reg='presidential',seed='isolated107'){fresh(reg,seed);sits().active=sits().active.filter(x=>MINORITY_KINDS107.includes(x.kind)||x.kind==='military-transition')}
 function setCourt(n){let d=constitution().docket;constitution().judges.forEach((j,i)=>{j.chief=i===0;j.relation=0;j.boosts=i<n?[{docketId:d.id,amount:100,until:s.q+3}]:[]})}
 const nativeRate=billPassRate104,nativeRand=rand;
 let religious=0,ethnic=0;
 for(let r of REGIMES)for(let hard of [false,true])for(let i=0;i<10;i++){
- fresh(r.id,'issue-'+r.id+'-'+i,hard);check(sits().active.length===(hard?3:2),'extra opening issue');let x=minoritySituation107();check(!!x&&x.method===null,'one persistent issue');check(sits().active.filter(x=>MINORITY_KINDS107.includes(x.kind)).length===1,'exactly one');if(x.kind==='religious-minority')religious++;else ethnic++;
+ fresh(r.id,'issue-'+r.id+'-'+i,hard);check(sits().active.length===(hard?3:2)+(r.id==='tyranny'?1:0),'extra opening issue');let x=minoritySituation107();check(!!x&&x.method===null,'one persistent issue');check(sits().active.filter(x=>MINORITY_KINDS107.includes(x.kind)).length===1,'exactly one');if(x.kind==='religious-minority')religious++;else ethnic++;
  check(validSave(JSON.parse(JSON.stringify(s))),'fresh save valid');let before=JSON.stringify(s);judiciary();archive();assembly();situationsPage();guideCatalog104();check(JSON.stringify(s)===before,'render never rerolls');
  check(situationActions(x).length===(r.democratic?0:2),'only non-democratic forced options');
- meetMember(0);check($('modal').innerHTML.includes("constitutionalMenu('amend')"),'every regime chairman amendment entry');meetJudge(constitution().judges.find(j=>j.chief).id);check(!$('modal').innerHTML.includes("constitutionalMenu('amend')"),'no amendment entry at chief');
+ meetMember(0);check($('modal').innerHTML.includes("constitutionalMenu('amend')")!==(r.id==='tyranny'),'amendment entry follows institution');meetJudge(constitution().judges.find(j=>j.chief).id);check($('modal').innerHTML.includes("constitutionalMenu('amend')")===(r.id==='tyranny'),'military court amendment entry');
 }
 check(religious>80&&ethnic>80,'both 50/50 outcomes represented across independent seeds');
 isolated();for(let i=0;i<5;i++){let f=pstate().factions[i];f.name='社会民主党';check(factionColor107(i)===PARTY_COLORS107.social,'social democratic magenta independent of seat order');f.name='自由民主党';check(factionColor107(i)===PARTY_COLORS107.market,'liberal yellow');f.name='国民党';check(factionColor107(i)===PARTY_COLORS107.conservative,'nationalist blue')}
@@ -34,13 +34,13 @@ for(let [method,duration,approvalLoss,confidenceLoss] of [['forced-migration',20
  check(validSave(JSON.parse(JSON.stringify(s))),'completed forced path save valid');
 }
 isolated();let x=minoritySituation107(),before=JSON.stringify(s);startMinorityPolicy107(x.id,'forced-migration');check(JSON.stringify(s)===before,'democracy cannot force');
-for(let source of REGIMES.filter(r=>!r.democratic&&r.id!=='aristocratic').map(r=>r.id))for(let roll of [.1,.9]){
+for(let source of REGIMES.filter(r=>!r.democratic&&!['aristocratic','tyranny'].includes(r.id)).map(r=>r.id))for(let roll of [.1,.9]){
  isolated(source,'transition-'+source+'-'+roll);let names=pstate().candidates.map(x=>x.name).join('|'),gdp=s.gdp,judges=constitution().judges.map(j=>j.name).join('|');s.q=7;proposeConstitution('amend','competitive','enabled');setCourt(0);billPassRate104=()=>90;voteConstitution();setCourt(Math.ceil(constitution().judges.length/2));rand=()=>roll;save();rand=nativeRand;billPassRate104=nativeRate;
  let targets=['symbolic','party'].includes(source)?['presidential','semi']:source==='theoabsolute'?['theorepublic','presidential']:['constitutional','westminster'];check(regime().id===targets[roll<.5?0:1],'correct 50/50 target');check(regime().democratic&&constitution().competitiveClause,'competitive constitution active');check(s.q===7&&s.gdp===gdp,'history and economy preserved');check(pstate().candidates.map(x=>x.name).join('|')===names&&constitution().judges.map(x=>x.name).join('|')===judges,'identities preserved');check(Object.values(pstate().cabinet).every(item=>!item||cabinetEligible(pstate().candidates[item.candidate])),'cabinet eligibility after transition');check(!regime().head?!('head' in pstate().cabinet):'head' in pstate().cabinet,'head office follows regime');check(validSave(JSON.parse(JSON.stringify(s))),'transition save valid');if(automaticCoalition107())check(coalitionShare107()>=50,'parliamentary transition builds majority');
 }
 isolated('party');let force=minoritySituation107();startMinorityPolicy107(force.id,'forced-assimilation');enactCompetitiveElections107('party');s.q++;minorityQuarter107();check(force.elapsed===1&&force.method==='forced-assimilation'&&situationActions(force).length===0,'transition does not cancel forced policy');
 isolated();proposeConstitution('amend','rights','equal');setCourt(0);billPassRate104=()=>90;voteConstitution();billPassRate104=nativeRate;let good=JSON.parse(JSON.stringify(s));for(let mutate of [v=>v.constitution.docket.reviewDeadline++,v=>v.situations.active=v.situations.active.filter(x=>x.kind!=='amendment'),v=>v.constitution.minority.kind='invalid']){let copy=JSON.parse(JSON.stringify(good));mutate(copy);check(!validSave(copy),'malformed process rejected')}
-console.log('PASS 1.0.7 process: 240 opening worlds; semantic colors; 2/3 and exact 1/2 boundaries; automatic deadline and lobbying; all 14 transition outcomes; admission gates; irreversible 20/25-quarter costs; validation.');
+console.log('PASS 1.0.7 process: 240 opening worlds; semantic colors; 2/3 and exact 1/2 boundaries; automatic deadline and lobbying; eligible transition outcomes; admission gates; irreversible 20/25-quarter costs; validation.');
 `,c);
 // Exact reload during review and during an irreversible policy.
 vm.runInContext(`isolated('party');startMinorityPolicy107(minoritySituation107().id,'forced-migration');s.q=2;minorityQuarter107();proposeConstitution('amend','rights','equal');setCourt(0);billPassRate104=()=>90;voteConstitution();billPassRate104=nativeRate;save()`,c);

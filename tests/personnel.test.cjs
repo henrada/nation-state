@@ -10,13 +10,13 @@ vm.runInContext(`
 function check(x,m){if(!x)throw Error(m)}
 function fresh(reg,seed='personnel'){selectedRegime=reg;pendingDifficulty=true;pendingAdmin107=true;create(seed+'-'+reg)}
 let seen=new Set(),rareTotal=0,rareHonours=0,openingScandals=0;
-for(const r of REGIMES)for(let n=0;n<20;n++){
+for(const r of REGIMES)for(let n=0;n<30;n++){
  fresh(r.id,'roster-'+n);let p=pstate(),people=personnelRoster107();
  for(const key of OFFICE_KEYS107){const title=office(key);check((key==='head'&&!r.head||key==='deputy'&&r.id==='federal')?title===null:typeof title==='string'&&title.length>0,'complete offices '+r.id+' '+key)}
  check(validSave(JSON.parse(JSON.stringify(s))),'valid save '+r.id);
  check(new Set(people.map(x=>x.name)).size===people.length,'unique display names');
  check(new Set(people.map(x=>x.baseName)).size===people.length,'unique identities');
- check(p.members.length===9&&p.members.every((m,i)=>m.id===i),'stable member IDs');
+ check(p.members.length===4+p.factions.length&&p.members.every((m,i)=>m.id===i),'stable member IDs');
  for(const f of p.factions)check(p.members.slice(4).filter(m=>m.faction===f.id).length===1,'one representative per faction');
  for(const person of people){
   if(person.honour)seen.add(person.honour.title);
@@ -68,5 +68,5 @@ for(const source of ['absolute','theoabsolute','party','symbolic'])for(const rol
  check(office('foreign')===OFFICE_TITLES107[regime().id][3],'transition office follows regime');check(validSave(s),'valid after transition');
 }
 fresh('absolute','validation');let malformed=JSON.parse(JSON.stringify(s));malformed.political.candidates[0].honour={kind:'nobility',rank:99,title:'公爵'};check(!validSave(malformed),'invalid honours rejected');
-console.log('PASS personnel: 240 worlds / 12 regimes; office titles, all three religious traditions, faction exclusions and rare rate, ranked appointments, one representative, coalition eligibility, chief judges, opening scandals, exact old-save migration/reload, free later appointments and constitutional transitions.');
+console.log('PASS personnel: 360 worlds / 12 regimes; office titles, all three religious traditions, faction exclusions and rare rate, ranked appointments, one representative, coalition eligibility, chief judges, opening scandals, exact old-save migration/reload, free later appointments and constitutional transitions.');
 `,c);

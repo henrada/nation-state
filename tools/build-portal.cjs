@@ -5,7 +5,7 @@ vm.createContext(ctx);for(const [,src] of fs.readFileSync(path.join(root,'index.
 const get=code=>JSON.parse(vm.runInContext('JSON.stringify('+code+')',ctx));
 const regimes=get('REGIMES.map(r=>({id:r.id,name:r.name,player:r.player,motto:REGIME_ART[r.id].motto,focus:REGIME_ART[r.id].focus,body:CHAMBERS108[r.id]?.[0]||r.body,upper:CHAMBERS108[r.id]?.[1]||null,court:r.court,executive:EXECUTIVE_NAMES[r.id]}))');
 const groups={start:'初次执政',state:'政体与国家',law:'立法与司法',cabinet:'内阁与人事',money:'财政与改革',vote:'地方与选举',crisis:'局势与危机',archive:'档案与评估'};
-function group(e){const {id,category:c}=e;if(id==='quickstart'||/^(office-(desk|files|phone|map|calendar)|ap($|-)|research|calendar|country|new-world|seed|difficulty|guide|tutorial|page-tutorial|advance|alerts|console|overview)$/.test(id)||id.startsWith('ap-'))return 'start';
+function group(e){const {id,category:c}=e;if(id==='military-transition')return 'crisis';if(id==='military-reforms')return 'money';if(id==='military-council'||id==='military-factions')return 'law';if(c==='军政府与转型')return 'state';if(id==='quickstart'||/^(office-(desk|files|phone|map|calendar)|ap($|-)|research|calendar|country|new-world|seed|difficulty|guide|tutorial|page-tutorial|advance|alerts|console|overview)$/.test(id)||id.startsWith('ap-'))return 'start';
  if(['appoint','dismiss','replace','office-archives'].includes(id))return id==='office-archives'?'archive':'cabinet';
  if(['court-actions','faction-details','meet','withdraw'].includes(id))return 'law';if(id==='reforms')return 'money';if(id==='situations')return 'crisis';if(id==='capital-city')return 'vote';
  if(/^(regime-|role-|chamber-configuration|famil|central-authority|national-future|political-ally|party-route)/.test(id)||c==='家族政治')return 'state';

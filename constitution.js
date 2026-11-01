@@ -13,7 +13,7 @@ const JUDGE_TITLES={
  federal:['联邦大法官','联邦首席大法官'],theorepublic:['宗教宪法法官','首席宗教宪法大法官'],
  symbolic:['法官','首席大法官'],party:['审判员','最高人民法院院长'],
  absolute:['王国审判官','王国首席审判官'],aristocratic:['贵族裁判官','最高裁判长'],
- tyranny:['国家裁判官','国家首席裁判长'],theoabsolute:['教法审判官','首席教法审判长']
+ tyranny:['宪法法官','宪法法庭庭长'],theoabsolute:['教法审判官','首席教法审判长']
 };
 function constitution(){return s.constitution}
 function constitutionBaseRegime(){return REGIMES.find(r=>r.id===pstate().regime)||REGIMES[0]}

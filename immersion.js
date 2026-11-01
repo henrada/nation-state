@@ -1,5 +1,5 @@
 /* Regime-specific presentation, illustrated world setup and a movable reminder dock. */
-const EXECUTIVE_NAMES={constitutional:'内阁府',presidential:'总统行政办公室',semi:'总统府',westminster:'首相府',federal:'联邦委员会',theorepublic:'最高领袖办公室',symbolic:'总统府',party:'政务院',absolute:'御前政务院',aristocratic:'公爵政务厅',tyranny:'执政官署',theoabsolute:'教廷国务署'};
+const EXECUTIVE_NAMES={constitutional:'内阁府',presidential:'总统行政办公室',semi:'总统府',westminster:'首相府',federal:'联邦委员会',theorepublic:'最高领袖办公室',symbolic:'总统府',party:'政务院',absolute:'御前政务院',aristocratic:'公爵政务厅',tyranny:'行政院',theoabsolute:'教廷国务署'};
 function executiveName(){return EXECUTIVE_NAMES[regime().id]||'政府'}
 function governmentBriefings(limit=4){return governingChronicle().slice(0,limit)}
 
@@ -14,10 +14,10 @@ const REGIME_ART={
  party:{motto:'在组织与路线间凝聚支持',focus:'党内派别 · 会议协商',alt:'一党独大制示意图片'},
  absolute:{motto:'王令从御前议事厅发出',focus:'君主裁决 · 宰相施政',alt:'君主专制示意图片'},
  aristocratic:{motto:'家族之间，权力需要平衡',focus:'贵族协商 · 家族利益',alt:'贵族制示意图片'},
- tyranny:{motto:'秩序系于忠诚与威望',focus:'个人权威 · 安全系统',alt:'僭主制示意图片'},
+ tyranny:{motto:'枕戈待旦，国运尚待抉择',focus:'委员会共治 · 军政转型',alt:'军政府制示意图片'},
  theoabsolute:{motto:'教法与政令来自同一权威',focus:'宗教等级 · 宰相行政',alt:'神权专制示意图片'}
 };
-function regimeImage(id){return `assets/regimes/${id}.png?v=${id==='party'?'1.0.7-partyart2':'1.0.7-r1'}`}
+function regimeImage(id){return `assets/regimes/${id}.png?v=${id==='tyranny'?'military-art1':id==='party'?'1.0.7-partyart2':'1.0.7-r1'}`}
 function regimePreview(id){
  let r=REGIMES.find(r=>r.id===id);if(!r)return '<div class="regime-random-art" aria-hidden="true">✦</div><div><span class="tag">尚未揭晓的历史</span><h3>让世界决定你的起点</h3><p>从十二种政体中抽取一个。国家名称、社会条件与政治人物随后生成。</p><small>选择下方卡片，可预览各制度的执政身份与主要挑战。</small></div>';
  let art=REGIME_ART[id];return `<img src="${regimeImage(id)}" alt="${art.alt}" width="600" height="400"><div><span class="tag">${art.motto}</span><h3>${r.name}</h3><p>${r.note}</p><div class="regime-preview-facts"><span>你的身份：<b>${r.player}</b></span><span>议事机关：<b>${r.body}</b></span><span>行政机构：<b>${EXECUTIVE_NAMES[id]}</b></span></div></div>`;

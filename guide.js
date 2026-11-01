@@ -10,7 +10,7 @@ const REGIME_GUIDE104={
  party:'你所扮演的是一党独大制国家。最高人民会议包含执政党内部派系、民主党派和无党籍团体。',
  absolute:'你所扮演的是君主专制国家。君主决定重大国务，枢密院提供政治支持，宰相负责日常治理。',
  aristocratic:'你所扮演的是贵族制国家。执政公爵需协调贵族和地方团体，宰相拥有较强行政权。',
- tyranny:'你所扮演的是僭主制国家。最高执政官依赖精英、地方和安全系统的配合维持统治。',
+ tyranny:'你所扮演的是军政府制国家。作为军事委员会主席，你须协调委员表决，并在军方、文官与公众之间决定转型方向。',
  theoabsolute:'你所扮演的是神权专制国家。最高教长统治国家，教团组成枢密院，宰相负责行政执行。'
 };
 function playerGuide104(){let r=regime();if(r.id==='federal')return '你担任联邦总理，是名义领袖并兼管财政；委员自主施政，不可强制撤换。忠诚达到70后可协调任务、协助提案。普通任期仍为48季度，管理员模式不受失败和任期限制。';if(s.adminMode)return `你担任${r.player}并兼管财政。本存档已启用管理员模式，控制台可修改数据，选举失败与其他结束条件均不会终止本局。`; if(r.id==='theorepublic')return '最高领袖掌握重大国务决策权，没有任期。本游戏将总统和财政部长的职责一并融合于最高领袖，方便玩家游玩；仍须维持政治稳定。';if(r.democratic)return `你担任${r.player}，决定预算、人事与重大政策，并兼管财政。选举决定是否留任，最多执政两届、48 个季度。`;return `你担任${r.player}，决定重大国务并兼管财政，没有民主选举的强制任期限制。低稳定仍会导致统治结束，第 48 季度起可选择结算。`}
@@ -47,7 +47,7 @@ function guideCatalog104(){
  add('capital','基础设施水平',['基础设施等级','基建资本','资本存量'],'反映已有交通、能源和公共设施的积累，与本季基础设施预算不同。持续投资、公共工程和改革可提高它；灾害会破坏设施。','经济与财政');
  add('human','人力资本',['教育资本'],'反映知识、技能与生产能力的积累，影响潜在经济增长。教育投入、教育部门提案和相关改革可以提高它；科研等级另外决定政治行动额度。','经济与财政');
  add('research','科研水平',['科研等级','科研','科研进度','下一级进度'],`每季度科研进度增加教育预算数值×2，教育部门提案完成后×3。每100%升一级，保留溢出进度；${actionResearchDescription()}升级在当季发放行动点前结算，已经发放的点数不会因浏览、刷新或导入重复增加。`,'内阁与科研');
- add('assembly',institutionSectionName(),['立法机构','监察机构','权力机关','议会','立法机关','枢密院','最高人民会议','人民会议'],'电话中的机构入口。君主专制、贵族制、僭主制和神权专制显示为“监察机构”，其他政体显示为“立法机构”。进入后按本国制度显示具体机构或议院名称；两院制可切换查看两院。可协商党派或派系、会见负责人、提出并表决议案。','页面与操作');
+ add('assembly',institutionSectionName(),['立法机构','监察机构','权力机关','议会','立法机关','枢密院','最高人民会议','人民会议'],'电话中的机构入口。君主专制、贵族制、军政府制和神权专制显示为“监察机构”，其他政体显示为“立法机构”。进入后按本国制度显示具体机构或议院名称；两院制可切换查看两院。可协商党派或派系、会见负责人、提出并表决议案。','页面与操作');
  add('groups','政党与派系',['政党','党派','派系','党团','政治团体','执政党','执政派系','民主党派','无党籍团体','主流派','新锐派','改革派'],'政党和派系代表不同政治力量。席位决定其表决权重，团体关系、成员关系、倾向和政策偏好决定支持。一党独大制中的前三组是执政党内部派系，并非三个竞争执政党。','立法与政治');
  add('seats','席位',['议席','席','席位占比','议席比例','议事权重','权力构成'],'席位占比表示各党或派系在立法机关的表决权重，以整数百分比显示，总和为100%。表决仍使用实际席位与支持比例计算，不因显示取整改变结果；枢密院使用同样机制表示政治配合程度。最高司法机关仍按法官席数显示。','立法与政治');
  add('faction-relation','团体关系',['派系关系','党派关系','集团关系'],'政府与一个党派或派系的关系，范围0至100。协商、任命、事件和承诺会影响它。民主与象征性民主政体中，关系达到70后，可向该党总召邀请组建联合政府。','立法与政治');
@@ -136,7 +136,7 @@ function guideCatalog104(){
  add('page-tutorial','本页教程',['页面教程','板块教程'],'先在左栏选择需要了解的板块，再点击主窗口右上方“本页教程”。按空格进入下一步。只高亮和讲解当前板块中的概念与功能按钮，不跳转到其他板块，不执行政策或消耗行动点。','页面与操作');
  for(let r of REGIMES)add('regime-'+r.id,r.name,r.id==='presidential'?['总统制','民主共和制']:r.id==='theorepublic'?['神权君主立宪体制']:[],REGIME_GUIDE104[r.id]+' '+r.note,'政体与职务');
  add('player','玩家职务',[],playerGuide104(),'政体与职务');
- for(let [role,text]of Object.entries({最高领袖:'神权共和制中的玩家职务。最高领袖掌握重大国务决策权，没有任期；本游戏将总统和财政部长的职责一并融合于最高领袖，方便玩家游玩。',国家主席:'一党独大制中的玩家职务，决定重大政策与人事，任命总理协调内阁。',最高执政官:'僭主制中的玩家职务，依赖安全系统与政治精英维持统治，任命宰相执行日常行政。',执政公爵:'贵族制中的玩家职务，需要协调枢密院内的贵族与地方利益。',君主:'君主专制中的玩家职务，任命宰相处理日常行政；君主立宪制中君主为礼仪元首，玩家改任总理。',最高教长:'神权专制中的玩家职务，领导宗教与国家事务，任命宰相协调行政。',联邦总理:'联邦委员会制的名义领袖，协调委员共同施政，不得强制撤换在任委员。',总统:'总统制、半总统制或象征性民主制中的玩家职务，负责重大国务并兼管财政，任命总理协调施政。',首相:'西敏议会制中的玩家职务，直接组建内阁，对议会和选举负责。'}))add('role-'+role,role,[],text,'政体与职务');
+ for(let [role,text]of Object.entries({最高领袖:'神权共和制中的玩家职务。最高领袖掌握重大国务决策权，没有任期；本游戏将总统和财政部长的职责一并融合于最高领袖，方便玩家游玩。',国家主席:'一党独大制中的玩家职务，决定重大政策与人事，任命总理协调内阁。',军事委员会主席:'军政府制中的玩家职务，主持军事委员会并兼管财政，任命行政院长处理政府事务。',执政公爵:'贵族制中的玩家职务，需要协调枢密院内的贵族与地方利益。',君主:'君主专制中的玩家职务，任命宰相处理日常行政；君主立宪制中君主为礼仪元首，玩家改任总理。',最高教长:'神权专制中的玩家职务，领导宗教与国家事务，任命宰相协调行政。',联邦总理:'联邦委员会制的名义领袖，协调委员共同施政，不得强制撤换在任委员。',总统:'总统制、半总统制或象征性民主制中的玩家职务，负责重大国务并兼管财政，任命总理协调施政。',首相:'西敏议会制中的玩家职务，直接组建内阁，对议会和选举负责。'}))add('role-'+role,role,[],text,'政体与职务');
  add('premier','总理',['政府首脑'],'在总统制等政体中由玩家任命，协调内阁并自主执行任务；在君主立宪、西敏与联邦委员会制中由玩家直接承担相应政府首脑职责。','政体与职务');
  add('chancellor','宰相',[],'专制和贵族政体中的政府首脑，拥有比普通总理更强的行政裁量。能力、倾向和忠诚决定施政；撤换也可能带来更大稳定冲击。','政体与职务');
  add('finance-minister','财政部长',['财政大臣','玩家兼任'],'由玩家直接操控税收、预算与债务安排，因此不进入普通内阁候选人的任命列表。','政体与职务');
@@ -151,7 +151,7 @@ function guideCatalog104(){
  let seen=new Set(entries.flatMap(e=>e.aliases.map(guideNormalize104)));for(let kind of Object.keys(SIT_NAMES))for(let a of situationActions({kind,progress:100,responsibility:false})){if(seen.has(guideNormalize104(a.label)))continue;add('situation-action-'+kind+'-'+a.key,a.label,[],`${SIT_NAMES[kind]}中的处置措施。${a.detail}执行需1行动点。`,'局势处置');seen.add(guideNormalize104(a.label))}
  add('ban','禁止一切抗议行为',[],'仅非民主与象征性民主政体在司法公平局势中可用。支持−10、稳定−5，永久结束此类司法抗议；独立性并不会因此恢复，其他危机仍可能发生。','局势处置');
  add('suppress','压制调查',[],'非民主政体的政治丑闻处置：司法独立−5、信心−3，暂减民意损耗两季，可能因再次泄露而反弹；冷却三季度。','局势处置');
- add('mandate','紧急行政命令',['议会紧急立法','联邦委员会紧急决定','总统紧急行政令','总统与政府联合行政令','国务院紧急经济决定','王室敕令','枢密院紧急令','最高执政官命令','最高教长谕令','最高领袖紧急令','总统行政令'],'经济危机处置中快速采取政策的程序名称，随政体变化。其具体费用与效果由相应局势选项列明，不表示所有国家都拥有相同的现实法律制度。','局势处置');
+ add('mandate','紧急行政命令',['议会紧急立法','联邦委员会紧急决定','总统紧急行政令','总统与政府联合行政令','国务院紧急经济决定','王室敕令','枢密院紧急令','军事委员会紧急决定','最高教长谕令','最高领袖紧急令','总统行政令'],'经济危机处置中快速采取政策的程序名称，随政体变化。其具体费用与效果由相应局势选项列明，不表示所有国家都拥有相同的现实法律制度。','局势处置');
  for(let [i,axis]of AXIS_NAMES.entries())add('axis-'+i,axis,[],`统治画像的一个维度，用于概括你在“${axis}”方面的决策与政策偏好。最终与其他八个维度共同决定统治倾向契合度。`,'历史与评估');
  let ideologies=[...DEMO_IDEOLOGIES,...NONDEMO_IDEOLOGIES,...SOCIALIST_IDEOLOGIES];
  for(let [name,vector]of ideologies){if(entries.some(e=>e.title===name))continue;let focus=vector.map((v,i)=>({v,name:AXIS_NAMES[i]})).sort((a,b)=>b.v-a.v).slice(0,3).map(x=>x.name).join('、');add('ideology-'+name,name,[],`一种游戏内的结算统治倾向。该模型较重视${focus}；系统比较你的决策和最终政策画像，计算与它的契合度。是否进入候选列表取决于政体与经济制度。`,'统治倾向')}
@@ -165,7 +165,7 @@ function guideCatalog104(){
  if(typeof federalGuide108==='function')federalGuide108(entries);
  if(typeof bicameralGuide108==='function')bicameralGuide108(entries);
  if(typeof institutionsGuide==='function')institutionsGuide(entries);
- if(typeof familiesGuide==='function')familiesGuide(entries);
+ if(typeof familiesGuide==='function')familiesGuide(entries);if(typeof militaryGuide==='function')militaryGuide(entries);
  if(typeof electionsGuide==='function')electionsGuide(entries);
  return entries;
 }
@@ -176,7 +176,7 @@ showHelp=function(){guideEntries104=guideCatalog104();modal(`<div class="guide-h
 function searchGuide104(query){let matches=guideMatches104(query,guideEntries104.length?guideEntries104:guideCatalog104());$('guide-results').innerHTML=matches.length?`<p class="guide-result-count">${query?'找到 '+matches.length+' 个条目':'常用概念'}</p>`+matches.map(guideArticle104).join(''):'<p class="guide-empty">该概念不存在于此游戏，请检查输入是否正确</p>'}
 
 const TUTORIAL_HOST105={
- constitutional:['总理大人','枢密院'],presidential:['总统大人','总统行政办公室'],semi:['总统大人','总统府秘书处'],westminster:['首相大人','枢密院'],federal:['总理大人','联邦委员会秘书处'],theorepublic:['最高领袖','最高领袖办公室'],symbolic:['总统大人','总统行政办公室'],party:['主席同志','中央办公厅'],absolute:['陛下','枢密院'],aristocratic:['公爵阁下','枢密院'],tyranny:['最高执政官阁下','执政官办公厅'],theoabsolute:['最高教长','教廷国务秘书处']
+ constitutional:['总理大人','枢密院'],presidential:['总统大人','总统行政办公室'],semi:['总统大人','总统府秘书处'],westminster:['首相大人','枢密院'],federal:['总理大人','联邦委员会秘书处'],theorepublic:['最高领袖','最高领袖办公室'],symbolic:['总统大人','总统行政办公室'],party:['主席同志','中央办公厅'],absolute:['陛下','枢密院'],aristocratic:['公爵阁下','枢密院'],tyranny:['主席阁下','军事委员会秘书处'],theoabsolute:['最高教长','教廷国务秘书处']
 };
 function tutorialWelcome105(){let [address,host]=TUTORIAL_HOST105[regime().id];return `欢迎您，${address}。受${host}委托，我将为您介绍本游戏的基本游玩方式。`}
 // Every tour target is an existing UI element. Missing optional controls are skipped.
@@ -296,4 +296,4 @@ function stopTutorial(){let t=tutorial104;if(!t)return;tutorial104=null;t.opened
 // Keep the original bootstrap for non-browser rule tests and legacy hosts.
 if(typeof window==='undefined'||!document.documentElement.hasAttribute('data-office-ui'))bootGame();
 
-function tutorialSteps104(scope='intro',page=tab){let steps=tutorialStepsBase104(scope,page);if(typeof bicameralTutorial108==='function')steps=bicameralTutorial108(steps,scope,page);if(typeof institutionsTutorial==='function')steps=institutionsTutorial(steps,scope,page);if(typeof familiesTutorial==='function')steps=familiesTutorial(steps,scope,page);return typeof electionsTutorial==='function'?electionsTutorial(steps,scope,page):steps}
+function tutorialSteps104(scope='intro',page=tab){let steps=tutorialStepsBase104(scope,page);if(typeof bicameralTutorial108==='function')steps=bicameralTutorial108(steps,scope,page);if(typeof institutionsTutorial==='function')steps=institutionsTutorial(steps,scope,page);if(typeof familiesTutorial==='function')steps=familiesTutorial(steps,scope,page);if(typeof militaryTutorial==='function')steps=militaryTutorial(steps,scope,page);return typeof electionsTutorial==='function'?electionsTutorial(steps,scope,page):steps}

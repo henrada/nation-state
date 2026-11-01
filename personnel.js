@@ -10,13 +10,13 @@ const OFFICE_TITLES107={
  symbolic:['总理','第一副总理','财政与发展部长','对外事务部长','国防与安全部长','司法行政部长','内政与行政管理部长','劳动与社会事务部长','教育与人才发展部长','国家卫生部长','文化与公共传播部长','环境与资源部长'],
  absolute:['御前宰相','副宰相','王室财政大臣','外务大臣','军务大臣','掌玺司法大臣','内务大臣','劳务与民生大臣','学务大臣','医务大臣','礼仪与文化大臣','山林与水土大臣'],
  aristocratic:['联邦宰相','副宰相','财赋总监','外事大臣','联防大臣','律政大臣','领地事务大臣','劳工与行会事务大臣','学务总监','医务总监','文化与典礼大臣','土地与水务大臣'],
- tyranny:['国务宰相','副宰相','国库总监','对外事务总监','军事事务总监','司法总监','内务总监','劳动事务总监','教育与技术总监','公共卫生总监','文化事务总监','资源与环境总监'],
+ tyranny:['行政院长','行政副院长','财政部长','外交事务部长','国防部长','法务部长','内政部长','劳动与社会保障部长','教育与科研部长','卫生部长','文化部长','资源与环境部长'],
  theorepublic:['总理','副总理','财政与公共基金部长','外交与宗教联络部长','国防部长','司法与教法事务部长','内政与地方事务部长','劳动与社会关怀部长','教育与学术事务部长','卫生与慈善部长','文化与宗教事务部长','环境与公共资源部长'],
  theoabsolute:['教廷国务宰相','国务副宰相','财赋与公共基金部长','外务与教际事务部长','圣地防务部长','司法与教法事务部长','内政与教区事务部长','人力和社会部部长','教育与经学院事务部长','卫生与救济部长','文化与礼仪部长','土地与环境部长']
 };
 const officeBeforePersonnel107=office;
 office=function(key){const i=OFFICE_KEYS107.indexOf(key),names=OFFICE_TITLES107[regime().id];return i<0?officeBeforePersonnel107(key):names[i]};
-const NOBLE_REGIMES107=['absolute','constitutional','westminster','aristocratic','tyranny'];
+const NOBLE_REGIMES107=['absolute','constitutional','westminster','aristocratic'];
 const RELIGIOUS_REGIMES107=['theorepublic','theoabsolute'];
 // These are fictional in-game orders of precedence, not a ranking of real religions.
 const NOBLE_HONOURS107=[null,{title:'爵士',kind:'decoration',rank:1},{title:'男爵',kind:'nobility',rank:2},{title:'子爵',kind:'nobility',rank:3},{title:'伯爵',kind:'nobility',rank:4},{title:'侯爵',kind:'nobility',rank:5},{title:'公爵',kind:'nobility',rank:6}];
@@ -125,14 +125,14 @@ validSave=function(v){
   const h=person.honour;if(h===null)return person.name===person.baseName;
   if(!h||!Number.isInteger(h.rank)||h.rank<1||typeof h.title!=='string'||!['religious','nobility','decoration'].includes(h.kind))return false;
   const valid=h.kind==='religious'?RELIGIOUS_REGIMES107.includes(meta.originRegime)&&h.tradition===meta.religiousTradition&&RELIGIOUS_HONOURS107[h.tradition]?.titles[h.rank-1]===h.title:
-   NOBLE_REGIMES107.includes(meta.originRegime)&&NOBLE_HONOURS107[h.rank]?.kind===h.kind&&NOBLE_HONOURS107[h.rank]?.title===h.title;
+   (meta.originRegime==='tyranny'||NOBLE_REGIMES107.includes(meta.originRegime))&&NOBLE_HONOURS107[h.rank]?.kind===h.kind&&NOBLE_HONOURS107[h.rank]?.title===h.title;
   return !!valid&&person.name===person.baseName+h.title;
  });
 };
 
 function personnelGuide107(entries){
  const add=(id,title,aliases,text,category)=>entries.push({id,title,aliases:[title,...aliases],text,category});
- add('honours','人物称号',['荣誉称号','授勋称号','爵位','教职','礼序等级',...NOBLE_HONOURS107.filter(Boolean).map(h=>h.title),...Object.values(RELIGIOUS_HONOURS107).flatMap(x=>x.titles)],'君主专制、君主立宪制、西敏议会制、贵族制和僭主制可能出现爵位与授勋称号；世俗派系不生成，商人或技术官僚派系仅有2.5%概率获最低级称号。神权国家按本局宗教传统生成教职。新开局在组阁资格和每派一位代表等条件内，按礼序等级优先分配首脑、机关负责人及内阁岗位，同级再参考能力或关系。爵位顺序为爵士、男爵、子爵、伯爵、侯爵、公爵；教职顺序为本局对应传统的1至5级，仅是虚构游戏的礼序。等级不改变人物能力、忠诚或政治倾向，后续任命仍由玩家决定。旧存档只补充称号，不重新分配职位；转型保留原有个人荣誉。','政体与职务');
+ add('honours','人物称号',['荣誉称号','授勋称号','爵位','教职','礼序等级',...NOBLE_HONOURS107.filter(Boolean).map(h=>h.title),...Object.values(RELIGIOUS_HONOURS107).flatMap(x=>x.titles)],'君主专制、君主立宪制、西敏议会制和贵族制可能出现爵位与授勋称号；世俗派系不生成，商人或技术官僚派系仅有2.5%概率获最低级称号。神权国家按本局宗教传统生成教职。新开局在组阁资格和每派一位代表等条件内，按礼序等级优先分配首脑、机关负责人及内阁岗位，同级再参考能力或关系。爵位顺序为爵士、男爵、子爵、伯爵、侯爵、公爵；教职顺序为本局对应传统的1至5级，仅是虚构游戏的礼序。等级不改变人物能力、忠诚或政治倾向，后续任命仍由玩家决定。旧存档只补充称号，不重新分配职位；转型保留原有个人荣誉。','政体与职务');
  add('office-head',office('head')||'政府首脑',['政府首脑',...Object.values(OFFICE_TITLES107).map(row=>row[0]).filter(Boolean)],'总理或宰相协调内阁并自主施政，任免仍遵守行动点和政治后果规则。新开局在合资格人物中按称号等级优先任用；后续由玩家决定。议会制国家的政府首脑由玩家担任，不另设可任命席位。','政体与职务');
  for(const entry of entries){
   const key=entry.id==='finance-minister'?'finance':entry.id.startsWith('office-')?entry.id.slice(7):null;

@@ -39,10 +39,10 @@ function regionSuffix107(index){
  if(index===2)return pick(['特别市','特区']);
  if(index===3)return pick(['特区','特别市']);
  if(id==='federal')return index===0?'邦':index===1?'加盟共和国':index===5?'自治州':index===6?'领':'州';
- if(['absolute','aristocratic','tyranny','theoabsolute','constitutional','westminster'].includes(id))return index===0&&['aristocratic','constitutional','westminster'].includes(id)?'邦':index===5?'自治领':'领';
+ if(id==='tyranny')return index===5?'自治区':index===2?'特区':'省';if(['absolute','aristocratic','theoabsolute','constitutional','westminster'].includes(id))return index===0&&['aristocratic','constitutional','westminster'].includes(id)?'邦':index===5?'自治领':'领';
  return index===5?'自治区':pick(['省','州']);
 }
-function capitalSuffix107(){let options={constitutional:['大市','特别市'],westminster:['大市','特别市'],federal:['特别行政区','特区'],presidential:['特别行政区','特别市','特区'],semi:['特别市','特别行政区'],party:['特别市','特区'],symbolic:['特别行政区','特别市'],theorepublic:['特别行政区','特别市'],absolute:['领地','大市'],aristocratic:['领地','大市'],tyranny:['特区','领地'],theoabsolute:['领地','特区']};return pick(options[regime().id])}
+function capitalSuffix107(){let options={constitutional:['大市','特别市'],westminster:['大市','特别市'],federal:['特别行政区','特区'],presidential:['特别行政区','特别市','特区'],semi:['特别市','特别行政区'],party:['特别市','特区'],symbolic:['特别行政区','特别市'],theorepublic:['特别行政区','特别市'],absolute:['领地','大市'],aristocratic:['领地','大市'],tyranny:['特别市','特区'],theoabsolute:['领地','特区']};return pick(options[regime().id])}
 function makeRegion107(id,weight,used){let profile=PROFILES[id],stem=randomPlace107(used,profile.sector),capital=id===7;return {id,stem,name:stem+(capital?capitalSuffix107():regionSuffix107(id)),isCapital:capital,sector:profile.sector,weight,population:s.pop*weight/100,development:38+Math.floor(rand()*30),attitude:0,termProgress:0,totalProgress:0,lastResult:null}}
 function initializeRegions107(){let used=new Set(),weights=[18,16,14,12,10,10,8,12];v3().regions=weights.map((weight,id)=>makeRegion107(id,weight,used));s.capital=v3().regions[7].name}
 function regionMatchesTags107(region,tags){return tags.includes(region.sector)||region.isCapital&&tags.some(tag=>['welfare','technology','security'].includes(tag))}
