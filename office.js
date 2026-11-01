@@ -1,3 +1,23 @@
+function officeGuideEntries104(source){
+  const entries=source.map(entry=>({...entry,aliases:[...entry.aliases]}));
+  const text={
+   advance:'点击“进入下一季度”结算经济、官员施政、科研与持续局势，并发放新一季行动点。还有剩余行动点时会先询问是否继续；右下角可勾选“本局不再提示”，该设置保存在本局存档，新历史恢复提示。待决事件、结算和结束页面按原流程处理。',
+   tutorial:'顶部的入门教程简要介绍政体、受托机构、任期、执政目标、9维评估、桌面入口与分板块学习方法。按空格进入下一步，或用左右方向键浏览，右下角跳过或Esc退出。',
+   'page-tutorial':'从办公桌的文件、电话、档案或地图进入所需板块，再点击纸页右上方的“本页教程”。按空格进入下一步；只介绍当前板块，不执行政策或消耗行动点。',
+   console:'仅在创建新世界时选择管理员模式后开放，入口位于办公室顶部，也可从档案打开。可调整数据和触发局势，保留正常模拟，但取消所有失败结局和回合上限；开启新历史才会替换本局。',
+   'new-world':'在主菜单点击“开启新历史”，可设置种子、政体、经济制度、困难模式与行动点规则。生成国家会替换当前进度，保留旧进度请先到档案中的国家档案导出存档。'
+  };
+  for(const entry of entries){if(text[entry.id])entry.text=text[entry.id];if(entry.id==='advance'){entry.title='进入下一季度';entry.aliases.push('进入下一季度','本局不再提示','行动点提醒')}}
+  for(const [id,title,aliases,body]of [
+   ['office-desk','办公桌',['办公室','桌面'],'点击桌上的文件、电话、档案、地图处理国务。桌面下按数字1至4也可打开；收回桌面或Esc可返回。办公室陈设随政体变化。'],
+   ['office-files','文件',['待批文件','公文'],'处理本季事件、财政预算、结构性改革和持续局势，也可从宪制议程联系修宪、释宪的受理机关。'],
+   ['office-phone','电话',[],`联系${institutionSectionName()}、内阁和最高司法机关。会见、协商、任免、任务和提案继续使用现有行动点与表决规则。`],
+   ['office-map','地图',['地区目录'],'查看全部地区、地方诉求、完成进度及选举预测。点击编号或目录定位地区；示意图不表示真实面积。'],
+   ['office-calendar','季度交接',['台历'],'检查待批事件和执政提醒，再推进下一季度。经济、内阁、改革与局势按原规则结算，未回复的季度事件须先处理。']
+  ])entries.push({id,title,aliases:[title,...aliases],text:body,category:'页面与操作'});
+  return entries;
+ }
+
 /* Presentation adapter: every decision uses the existing simulation and save format. */
 (function(){
  'use strict';
@@ -132,25 +152,7 @@
  renderNotices107=function(){baseNotices();if(document.body.classList.contains('at-title')){$('alert-notice').hidden=true;$('alert-dock').hidden=true}};
  $('modal').addEventListener('close',()=>{delete $('modal').dataset.officeKind;advanceConfirmation=null});
 
- guideCatalog104=function(){
-  const entries=baseGuideCatalog().map(entry=>({...entry,aliases:[...entry.aliases]}));
-  const text={
-   advance:'点击“进入下一季度”结算经济、官员施政、科研与持续局势，并发放新一季行动点。还有剩余行动点时会先询问是否继续；右下角可勾选“本局不再提示”，该设置保存在本局存档，新历史恢复提示。待决事件、结算和结束页面按原流程处理。',
-   tutorial:'顶部的入门教程简要介绍政体、受托机构、任期、执政目标、9维评估、桌面入口与分板块学习方法。按空格进入下一步，或用左右方向键浏览，右下角跳过或Esc退出。',
-   'page-tutorial':'从办公桌的文件、电话、档案或地图进入所需板块，再点击纸页右上方的“本页教程”。按空格进入下一步；只介绍当前板块，不执行政策或消耗行动点。',
-   console:'仅在创建新世界时选择管理员模式后开放，入口位于办公室顶部，也可从档案打开。可调整数据和触发局势，保留正常模拟，但取消所有失败结局和回合上限；开启新历史才会替换本局。',
-   'new-world':'在主菜单点击“开启新历史”，可设置种子、政体、经济制度、困难模式与行动点规则。生成国家会替换当前进度，保留旧进度请先到档案中的国家档案导出存档。'
-  };
-  for(const entry of entries){if(text[entry.id])entry.text=text[entry.id];if(entry.id==='advance'){entry.title='进入下一季度';entry.aliases.push('进入下一季度','本局不再提示','行动点提醒')}}
-  for(const [id,title,aliases,body]of [
-   ['office-desk','办公桌',['办公室','桌面'],'点击桌上的文件、电话、档案、地图处理国务。桌面下按数字1至4也可打开；收回桌面或Esc可返回。办公室陈设随政体变化。'],
-   ['office-files','文件',['待批文件','公文'],'处理本季事件、财政预算、结构性改革和持续局势，也可从宪制议程联系修宪、释宪的受理机关。'],
-   ['office-phone','电话',[],`联系${institutionSectionName()}、内阁和最高司法机关。会见、协商、任免、任务和提案继续使用现有行动点与表决规则。`],
-   ['office-map','地图',['地区目录'],'查看全部地区、地方诉求、完成进度及选举预测。点击编号或目录定位地区；示意图不表示真实面积。'],
-   ['office-calendar','季度交接',['台历'],'检查待批事件和执政提醒，再推进下一季度。经济、内阁、改革与局势按原规则结算，未回复的季度事件须先处理。']
-  ])entries.push({id,title,aliases:[title,...aliases],text:body,category:'页面与操作'});
-  return entries;
- };
+ guideCatalog104=()=>officeGuideEntries104(baseGuideCatalog());
 
  tutorialSteps104=function(scope='intro',page=tab){
   if(scope==='page'&&ui.custom){

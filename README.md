@@ -2,7 +2,7 @@
 
 在线游戏：https://henrada.github.io/nation-state/
 
-[Wiki 主页与玩法手册](https://github.com/henrada/nation-state/wiki) · [搜索与术语索引](https://github.com/henrada/nation-state/wiki/搜索与术语索引)
+[图文百科](https://henrada.github.io/nation-state/wiki/) · [词条搜索](https://henrada.github.io/nation-state/wiki/#search) · [GitHub Wiki](https://github.com/henrada/nation-state/wiki)
 
 ## 测试版
 
@@ -395,3 +395,7 @@ node tests/release104.test.cjs
 - 象征性民主在换届后重新开放参议院组建，沿用三类倾向、1%输入精度及原有一次性影响，不增加额外换届机制。组建不消耗行动点。
 - 君主立宪、西敏与半总统制换届后执政力量不足50%时进入三季度政府危机，沿用各自失败规则；扩充现有联盟恢复多数不撤换仍在联盟内的阁员。
 - 民意与选举新增议会得票预测、选前与选后席位对照、地区政党得票；国家档案保存历次换届报告。细则默认收起，治国指南和本页教程补充对应内容。已通过的法案与正在执行的改革继续生效，待审议案后续按新席位计票。
+
+### 国策百科
+
+- 图文首页按八个主题整理玩法，提供十二种政体的图片图鉴、快速入门与近期收录。可检索词条标题、别名及正文，也可在适用词条中切换政体查看规则。游戏开始页的 Wiki 按钮直接进入图文百科。
