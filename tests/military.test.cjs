@@ -8,7 +8,7 @@ function calm(){sits().active=sits().active.filter(x=>MINORITY_KINDS107.includes
 const sizes=new Set();let technologies={civilian:0,personal:0};
 for(let i=0;i<100;i++){
  pendingDifficulty=i%2===0;fresh('army-world-'+i);const m=militaryState();sizes.add(m.members.length);
- check(regime().name==='军政府制'&&regime().player==='军事委员会主席','identity');check(m.members.length>=12&&m.members.length<=15,'12–15');check(m.members.filter(x=>x.faction===0).length>m.members.length*.7,'army majority');check(m.members.some(x=>x.rank==='中将')&&m.members.filter(x=>['少将','准将'].includes(x.rank)).length>=2,'rank guarantees');check(m.members.filter(x=>x.rank.includes('将')).length<m.members.length/2,'general minority');
+ check(regime().name==='军政府制'&&regime().player==='军事委员会主席','identity');check(m.members.length>=12&&m.members.length<=15,'12–15');check(m.members.filter(x=>x.faction===0).length>m.members.length*.7,'army majority');check(m.members.filter(x=>x.rank==='上将').length>=2&&m.members.filter(x=>x.rank==='中将').length>=2&&m.members.filter(x=>x.rank==='准将').length>=3,'new rank minimums');check(m.members.every(x=>MILITARY_RANKS.includes(x.rank))&&m.members[0].rank==='上将','allowed ranks and chairman');
  for(const x of m.members)if(x.view==='technocrat')technologies[x.route]++;
  check(sits().active.filter(x=>['strike','economy','scandal'].includes(x.kind)).length===(pendingDifficulty?2:1),'opening crises preserved');check(!activeSit('justice')&&activeSit('military-transition'),'opening situations');check(pstate().factions.length===3&&pstate().factions.every(x=>!x.name.includes('地方')),'three social factions');near(m.routes.committee,100,'default100');
  check(validSave(s),'new save valid '+i);const saved=JSON.stringify(s);initPolitics();assembly();overview();archive();judiciary();guideCatalog104();check(JSON.stringify(s)===saved,'pure views');s=JSON.parse(saved);initPolitics();check(validSave(s)&&JSON.stringify(s)===saved,'load stable');
@@ -45,7 +45,7 @@ for(const id of ['tyranny','presidential','absolute','aristocratic','party','fed
 console.log('PASS interactions, tax-sensitive ballots, amendments, interpretations, three transitions, failure, event quotas, reforms, 72 real quarters');
 `,c);
 // Public schema must reject malformed military records without harming valid base saves.
-const data=vm.runInContext('fresh();JSON.parse(JSON.stringify(s))',c);for(const mutate of [v=>v.military.routes.civilian=99,v=>v.military.members[1].rank='上将',v=>v.military.members[1].agenda=NaN,v=>v.military.backing=-1]){const bad=structuredClone(data);mutate(bad);c.bad=bad;if(vm.runInContext('validSave(bad)',c))throw Error('invalid military accepted')}
+const data=vm.runInContext('fresh();JSON.parse(JSON.stringify(s))',c);for(const mutate of [v=>v.military.routes.civilian=99,v=>v.military.members[1].rank='元帅',v=>v.military.members[1].agenda=NaN,v=>v.military.backing=-1]){const bad=structuredClone(data);mutate(bad);c.bad=bad;if(vm.runInContext('validSave(bad)',c))throw Error('invalid military accepted')}
 console.log('PASS malformed saves rejected');
 vm.runInContext(`
 // Ordinary laws require strictly more than half of actual committee members.
@@ -73,3 +73,17 @@ if(process.env.MILITARY_LEGACY_ROOT){
 
 const cold=boot();cold.savedMilitary=data;if(!vm.runInContext('validSave(savedMilitary)',cold))throw Error('cold-start military save rejected');
 console.log('PASS save validation before game state is assigned');
+
+// Old active committees acquire the new minima without changing political state or RNG.
+vm.runInContext(`
+fresh('rank-upgrade');calm();delete s.military.rankVersion;
+s.military.members.forEach((x,i)=>x.rank=i===0?'中将':i<3?'少将':'少校');
+const rankLegacy=JSON.parse(JSON.stringify(s));check(validSave(rankLegacy),'old rank allocation accepted');
+const otherFields=v=>{const copy=JSON.parse(JSON.stringify(v));delete copy.military.rankVersion;copy.military.members.forEach(x=>delete x.rank);return JSON.stringify(copy)};
+const rankBefore=otherFields(s);initPolitics();check(militaryRanksMeetMinimums(s.military),'old committee rank minimums');check(otherFields(s)===rankBefore,'only ranks changed on load');
+const ranked=JSON.stringify(s);initPolitics();check(JSON.stringify(s)===ranked,'rank upgrade once');check(validSave(s),'updated save valid');
+const invalidRanks=JSON.parse(ranked);invalidRanks.military.members.forEach(x=>x.rank='少校');check(!validSave(invalidRanks),'missing minimum ranks rejected');
+const rankCounts=Object.fromEntries(MILITARY_RANKS.map(r=>[r,0]));for(let i=0;i<30000;i++)rankCounts[randomMilitaryRank()]++;
+for(let i=1;i<MILITARY_RANKS.length;i++)check(rankCounts[MILITARY_RANKS[i]]>rankCounts[MILITARY_RANKS[i-1]],'higher ranks rarer in random allocation');
+console.log('PASS rank minima, rank-only old-save update, idempotence, validation and weighted random allocation');
+`,c);

@@ -6,7 +6,28 @@ const MILITARY_VIEWS={
  order:{name:'内部秩序',color:'#7a8160',text:'重视军队权利、国防投入与秩序稳定，维护军事委员会统治。',route:'committee',budget:{security:2,infrastructure:.5,welfare:-.5},tax:{property:-.5,tariff:.5}},
  reform:{name:'理想革新',color:'#9b6788',text:'支持军队专业化、反腐与政治改革，倾向建立文官政府。',route:'civilian',budget:{education:1.5,welfare:1,health:1,security:-.5},tax:{property:1,tariff:-.5}}
 };
-const MILITARY_RANKS=['中将','少将','准将','上校','中校','少校'];
+const MILITARY_RANKS=['上将','中将','少将','准将','上校','中校','少校'];
+const MILITARY_RANK_MINIMUMS={上将:2,中将:2,准将:3};
+const MILITARY_REQUIRED_RANKS=['上将','上将','中将','中将','准将','准将','准将'];
+function randomMilitaryRank(){
+ const weights=[1,2,3,4,8,12,18];let roll=rand()*weights.reduce((n,w)=>n+w,0);
+ for(let i=0;i<weights.length;i++){if(roll<weights[i])return MILITARY_RANKS[i];roll-=weights[i]}
+ return '少校';
+}
+function militaryRanksMeetMinimums(m){return Object.entries(MILITARY_RANK_MINIMUMS).every(([rank,count])=>m.members.filter(x=>x.rank===rank).length>=count)}
+function updateMilitaryRanks(){
+ const m=militaryState();if(!militaryGovernment()||!m||m.resolved||m.rankVersion===2)return;
+ // Existing appointments retain their identities and political state; only ranks change.
+ m.members.find(x=>x.player).rank='上将';
+ const reserved=new Set();
+ for(const [rank,count]of Object.entries(MILITARY_RANK_MINIMUMS))for(const x of m.members.filter(x=>x.rank===rank).slice(0,count))reserved.add(x.id);
+ for(const [rank,count]of Object.entries(MILITARY_RANK_MINIMUMS)){
+  let missing=count-m.members.filter(x=>x.rank===rank).length;
+  const available=m.members.filter(x=>!reserved.has(x.id)).sort((a,b)=>MILITARY_RANKS.indexOf(a.rank)-MILITARY_RANKS.indexOf(b.rank)||a.id-b.id);
+  for(const x of available){if(missing--<=0)break;x.rank=rank;reserved.add(x.id)}
+ }
+ m.rankVersion=2;
+}
 const MILITARY_REFORMS={digital:'civilian',courts:'civilian',education:'civilian',autonomy:'civilian',command:'personal',defence:'committee',nationalize:'committee',privatize:'oligarch',fund:'oligarch',competition:'oligarch'};
 let militaryPageView='factions',militaryInitializing=false,militaryTransitioning=false;
 function militaryGovernment(){return s?.political?.regime==='tyranny'}
@@ -48,11 +69,11 @@ function initializeMilitary(){
   const oldDocket=constitution().docket;if(oldDocket?.mode==='interpret'&&oldDocket.action==='relations')oldDocket.target=String(Number(oldDocket.target)%3);
   p.judicial=50;p.highCourtStreak=0;
   const count=12+Math.floor(rand()*4),civilCount=2+Math.floor(rand()*2),members=[];
-  s.military={version:1,backing:75+Math.floor(rand()*11),militarization:65+Math.floor(rand()*11),routes:{committee:100,civilian:0,personal:0,oligarch:0},members,resolved:null,lastQ:s.q,lastEventQ:s.q,history:[],completedSeen:s.reforms.filter(x=>x.completed).map(x=>x.id),voteHistory:[],situationId:null};
+  s.military={version:1,rankVersion:2,backing:75+Math.floor(rand()*11),militarization:65+Math.floor(rand()*11),routes:{committee:100,civilian:0,personal:0,oligarch:0},members,resolved:null,lastQ:s.q,lastEventQ:s.q,history:[],completedSeen:s.reforms.filter(x=>x.completed).map(x=>x.id),voteHistory:[],situationId:null};
   const pool=p.candidates.filter(c=>!c.judicialCareer),used=new Set(),views=Object.keys(MILITARY_VIEWS);
   for(let id=0;id<count;id++){
    const faction=id>=count-civilCount?1:0,view=id===0?'order':id<5?views[id-1]:pick(views),route=view==='technocrat'?(rand()<.5?'civilian':'personal'):MILITARY_VIEWS[view].route;
-   const rank=id===0?'中将':id===1?'少将':id===2?(rand()<.5?'少将':'准将'):id===3&&rand()<.3?'准将':pick(['上校','中校','中校','少校','少校','少校']);
+   const rank=MILITARY_REQUIRED_RANKS[id]||randomMilitaryRank();
    const c=id===0?null:pool.find(c=>c.faction===faction&&!used.has(c.id));if(c)used.add(c.id);
    const baseName=id===0?'主席（玩家）':c?c.baseName:personName();
    members.push({id,baseName,name:baseName,rank,faction,view,route,candidate:c?.id??null,player:id===0,agenda:id===0?100:52+Math.floor(rand()*14),relation:id===0?100:50+Math.floor(rand()*21),last:-1});
@@ -69,7 +90,7 @@ function initializeMilitary(){
 SIT_NAMES['military-transition']='枕戈待旦';
 SIT_INFO['military-transition']=['军队接管政权之后，委员会共治、文官治理、个人集权与寡头秩序的主张相互竞争。','任一转型路线达到100%，按该路线建立新制度','无固定局势损耗；军方拥护与军政化程度按军政规则影响国家'];
 const militaryInitBefore=initPolitics;
-initPolitics=function(...args){militaryInitBefore(...args);initializeMilitary();if(militaryGovernment()&&militaryState()){pstate().judicial=50;pstate().highCourtStreak=0}};
+initPolitics=function(...args){militaryInitBefore(...args);initializeMilitary();updateMilitaryRanks();if(militaryGovernment()&&militaryState()){pstate().judicial=50;pstate().highCourtStreak=0}};
 const militaryModBefore=mod;
 mod=function(values){if(militaryGovernment()&&Object.hasOwn(values,'judicial')){values={...values};delete values.judicial}return militaryModBefore(values)};
 const militarySnapshotBefore=snapshot;
@@ -231,7 +252,7 @@ function militaryGuide(entries){
  const add=(id,title,aliases,text)=>entries.push({id,title,aliases:[title,...aliases],text,category:'军政府与转型'});
  add('military-government','军政府制',['军政府','军事委员会主席'],'玩家担任军事委员会主席。积薪厝火负责派系沟通，军事委员会负责法案表决；宪法法庭受理释宪与修宪。开局额外出现枕戈待旦，不占普通或困难模式的危机名额。军政期间不计算司法独立度，不触发司法公平事件；竞争性选举修宪须等政体改变后才开放。');
  add('military-factions','积薪厝火',['军队建制派','军官革新派','文官治理派'],'监察机构的第一个页面。军队建制派整合国家发展利益，与文官治理派、军官革新派直接沟通；不展示席位图，也不进行投票。每派每季一次互动，消耗1行动点，可改变团体关系、军方拥护度、军政化程度或小幅推进路线。地方军政集团不设固定派系，其诉求通过事件出现。');
- add('military-council','军事委员会',['委员表决',...Object.values(MILITARY_VIEWS).map(x=>x.name),...MILITARY_RANKS],'开局随机12—15人，含玩家主席一席；文官治理派2—3人，其余为军队建制派。委员均有少校至中将军衔，至少一名中将和两名少将或准将，校官占多数。委员有国家发展、技术官僚、内部秩序、理想革新四种倾向；技术官僚的文官或个人集权方向各50%。每人一票，本案意愿达到60投赞成票；预算和改革过半，修宪三分之二后进入审查。委员与内阁的互动、忠诚分开计算。');
+ add('military-council','军事委员会',['委员表决',...Object.values(MILITARY_VIEWS).map(x=>x.name),...MILITARY_RANKS],'开局随机12—15人，含玩家主席一席；文官治理派2—3人，其余为军队建制派。委员军衔从少校至上将，每届至少两名上将、两名中将、三名准将；其余席位按高军衔更稀少的权重随机授衔，最低为少校。委员有国家发展、技术官僚、内部秩序、理想革新四种倾向；技术官僚的文官或个人集权方向各50%。每人一票，本案意愿达到60投赞成票；预算和改革过半，修宪三分之二后进入审查。委员与内阁的互动、忠诚分开计算。');
  add('military-backing','军方拥护度',['军方支持','军方拥护'],militaryBackingRules()+' 初始75—85。派系沟通、委员项目、事件与改革可调整。行政安全预算达到5%每季+0.5，低于3%每季−1。');
  add('militarization','军政化程度',['军政化'],'表示军队介入行政的程度，初始65—75。达到70每季公众支持−0.5、军方拥护+0.5；低于40每季公众支持+0.5、军方拥护−1；中间区间无此项损耗。文官试点与专业化改革降低军政化，扩充军政权限提高军政化。转型后停止计算。');
  add('military-transition','枕戈待旦',Object.values(MILITARY_ROUTES),'军政府开局长期局势。四条竞争路线合计100%，初始委员会统治100，其余0。推进路线优先减少委员会进度，不足时按比例减少其他路线。每季一次路线行动、1行动点；派系和委员互动小幅推进，季度特殊事件和指定改革完成也推进。文官政府100转为象征性民主；个人权力100转为君主专制；寡头统治100转为贵族制。维持共治不会结束局势。'+Object.values(militaryRouteSpecs).map(x=>x.label+'：'+x.detail).join(' '));
@@ -249,7 +270,9 @@ const militaryValidBefore=validSave;
 validSave=function(v){if(!militaryValidBefore(v))return false;const m=v.military;if(!m)return true;const finite=n=>Number.isFinite(n)&&n>=0&&n<=100;
  if(m.version!==1||!finite(m.backing)||!finite(m.militarization)||!m.routes||Object.keys(m.routes).length!==4||Object.keys(MILITARY_ROUTES).some(k=>!finite(m.routes[k]))||Math.abs(Object.values(m.routes).reduce((a,b)=>a+b,0)-100)>1e-6||![null,'civilian','personal','oligarch'].includes(m.resolved))return false;
  if(!Array.isArray(m.members)||m.members.length<12||m.members.length>15||m.members.some((x,i)=>x.id!==i||typeof x.baseName!=='string'||typeof x.name!=='string'||!MILITARY_RANKS.includes(x.rank)||![0,1].includes(x.faction)||!Object.hasOwn(MILITARY_VIEWS,x.view)||!Object.hasOwn(MILITARY_ROUTES,x.route)||!finite(x.agenda)||!finite(x.relation)||typeof x.player!=='boolean'||x.player!==(i===0)||!Number.isInteger(x.last)||x.last>v.q||x.candidate!==null&&(!Number.isInteger(x.candidate)||!v.political.candidates[x.candidate])))return false;
- if(m.members.filter(x=>x.faction===1).length<2||m.members.filter(x=>x.faction===1).length>3||!m.members.some(x=>x.rank==='中将')||m.members.filter(x=>['少将','准将'].includes(x.rank)).length<2||new Set(m.members.map(x=>x.name)).size!==m.members.length)return false;
+ if(m.members.filter(x=>x.faction===1).length<2||m.members.filter(x=>x.faction===1).length>3||new Set(m.members.map(x=>x.name)).size!==m.members.length)return false;
+ if(m.rankVersion===2){if(!militaryRanksMeetMinimums(m))return false}
+ else if(m.rankVersion!==undefined||!m.members.some(x=>x.rank==='中将')||m.members.filter(x=>['少将','准将'].includes(x.rank)).length<2)return false;
  if(!Number.isInteger(m.lastQ)||m.lastQ>v.q||!Number.isInteger(m.lastEventQ)||m.lastEventQ>v.q||!Array.isArray(m.history)||m.history.some(h=>!Number.isInteger(h.q)||h.q>v.q||typeof h.text!=='string')||!Array.isArray(m.voteHistory)||!Array.isArray(m.completedSeen)||m.completedSeen.some(i=>!REFORMS[i]))return false;
  const active=v.situations.active.filter(x=>x.kind==='military-transition');if(!m.resolved){if(v.political.regime!=='tyranny'||active.length!==1||active[0].id!==m.situationId||v.political.factions.length!==3||v.situations.active.some(x=>x.kind==='justice'))return false;for(const x of m.members)if(x.candidate!==null&&v.political.candidates[x.candidate].judicialCareer)return false}else if(active.length)return false;return true};
 // Inactive judicial effects are omitted from choices and reports as well as from calculation.
