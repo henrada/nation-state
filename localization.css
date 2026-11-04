@@ -1,0 +1,30 @@
+.language-switch{display:flex;gap:4px;align-items:center;width:max-content;margin:16px 0 8px;padding:4px;border:1px solid #c0af8c66;border-radius:6px;background:#15231d66}
+.language-switch button{font-family:inherit;font-size:14px;line-height:1.4;padding:8px 18px;color:#e9dfcb;border:1px solid transparent;background:transparent;border-radius:3px;cursor:pointer}
+.language-switch button[aria-pressed=true]{background:#c3b187;color:#1a2821;border-color:#d6c49d}
+.language-switch button:focus-visible{outline:2px solid #fff;outline-offset:3px}
+html[lang=en] #start-screen h1{font-size:clamp(36px,5.2vw,78px);letter-spacing:.025em;line-height:1.05;max-width:660px}
+html[lang=en] .start-menu{width:330px}
+html[lang=en] .office-mode .start-button{letter-spacing:.02em}
+html[lang=en] .start-english{display:none}
+html[lang=en] .start-disclaimer{font-size:12px;line-height:1.55;max-width:640px;letter-spacing:0}
+html[lang=en] .office-brand{font-size:19px;letter-spacing:.015em;white-space:nowrap}
+html[lang=en] .office-brand small{display:none}
+html[lang=en] button,html[lang=en] .tag,html[lang=en] .eyebrow{letter-spacing:0;white-space:normal;overflow-wrap:normal}
+html[lang=en] #nation-office .of-object-label{min-width:max-content;letter-spacing:.015em}
+html[lang=en] #nation-office .of-hud h1{font-size:clamp(20px,2.5vw,36px);line-height:1.15;letter-spacing:.02em}
+html[lang=en] #nation-office .of-hud-stats button{min-width:98px}
+html[lang=en] #nation-office .of-hud-stats button>span{font-size:12px;line-height:1.25;text-align:center;white-space:normal}
+html[lang=en] .workspace-heading{gap:18px;flex-wrap:wrap}
+html[lang=en] .workspace-heading h1{font-size:clamp(24px,3vw,40px);letter-spacing:0}
+html[lang=en] .header-actions{flex-wrap:wrap;gap:8px}
+html[lang=en] .nav-item{min-height:42px;line-height:1.3}
+html[lang=en] .metric,html[lang=en] .card,html[lang=en] .person{min-width:0}
+html[lang=en] .metric small,html[lang=en] .metric .label{line-height:1.4;white-space:normal}
+html[lang=en] .faction-row{gap:12px}
+html[lang=en] .faction-row>div{min-width:0}
+html[lang=en] .faction-row button{min-width:85px}
+html[lang=en] .office-toolbar{gap:12px}
+html[lang=en] .office-tools{flex-wrap:wrap}
+html[lang=en] .regime-art-card strong,html[lang=en] .regime-card strong{line-height:1.25;letter-spacing:0}
+html[lang=en] .guide-query{font-size:17px}
+@media(max-width:760px){html[lang=en] #start-screen h1{font-size:40px}html[lang=en] .office-toolbar{flex-wrap:wrap}html[lang=en] .office-brand{font-size:16px}html[lang=en] #nation-office .of-hud-stats button{min-width:74px}html[lang=en] .office-footbar{flex-wrap:wrap}html[lang=en] .start-disclaimer{font-size:11px}}
