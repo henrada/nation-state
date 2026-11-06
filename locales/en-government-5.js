@@ -311,7 +311,7 @@ Object.assign(globalThis.NATION_EN ||= {}, {
  "已通过税收政策": "Tax policy adopted",
  "实际生效税收政策": "Tax policy in effect",
  "国策 · 国家治理模拟": "Nation / State · A Political Strategy Game",
- "退出游戏": "Exit Game",
+ "退出游戏": "Exit",
  "本游戏中的人物、国家及相关名称均为虚构并随机生成；制度、宗教与机构设定仅服务于游戏叙事，无意影射或冒犯任何个人、宗教、机构或国家。如有雷同，纯属巧合。": "All people, countries and related names in this game are fictional and randomly generated. Its institutions, religions and political systems serve the fictional setting and are not intended to portray or offend any real person, faith, institution or country. Any resemblance is coincidental.",
  "测试版": "Beta",
  "主菜单": "Main Menu",
