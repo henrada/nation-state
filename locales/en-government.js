@@ -148,7 +148,7 @@ Object.assign(globalThis.NATION_EN ||= {}, {
  "直接送联邦院手动复审": "We'll send him to the Federal Court for a manual review.",
  "不需国民院三分之二支持": "Two-thirds of the support of the National Council is not required.",
  "复审通过后启动三季度司法审查": "Three-quarter judicial review initiated following review",
- "司法赞成达到半数且地区加权支持率超过": "Justice is in favour of half and regional weights exceed",
+ "司法赞成达到半数且加权支持率超过": "Justice is in favour of half and regional weights exceed",
  "才可生效": "It's effective only.",
  "若被退回": "If it's returned,",
  "国民院过半复议后送审": "After half-reviewed by the National Council, he's on his way to trial.",

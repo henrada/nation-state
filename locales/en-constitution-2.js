@@ -7,7 +7,7 @@ Object.assign(globalThis.NATION_EN ||= {}, {
  "多元修宪": "Pluralism",
  "长期少数群体问题仍存在": "Long-standing minority issues still exist",
  "尚未选择强制措施": "No coercive measures have been chosen",
- "且加权支持度达到": "And weighted support is up.",
+ "且加权支持率达到": "And weighted support is up.",
  "时可提出": "Quite a while ago.",
  "两项条件恰好达到也符合": "Two conditions that happen to be met.",
  "进入修宪程序后不再反复核验": "No more repeated checks after entering the constitutional revision process.",

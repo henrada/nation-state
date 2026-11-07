@@ -505,7 +505,7 @@ Object.assign(globalThis.NATION_EN ||= {}, {
  "三季度内": "Three quarters.",
  "最高司法机关赞成达到半数": "The highest judicial authority is in favour of half.",
  "计入首席关键一票": "Counting in for the first key.",
- "且当前地区加权支持率超过": "And the current regional weighted approval is above",
+ "且当前加权支持率超过": "And the current Weighted Support is above",
  "两项同时满足才会生效": "Both will only take effect if they are satisfied.",
  "释宪规则不变": "The constitutional rule remains unchanged.",
  "联邦委员会恢复集体施政": "The Federal Council resumed collective governance",

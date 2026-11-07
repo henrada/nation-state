@@ -257,7 +257,7 @@ Object.assign(globalThis.NATION_EN ||= {}, {
  "院内支持率按席位加权": "approval ratings in the chamber weighted by seats",
  "预算和改革须超过": "Budget and reform must go beyond",
  "同时全国支持率须达到": "Meanwhile, the national approval must be reached.",
- "修宪另看最高司法机关与地区加权支持": "The constitutional amendment is based on the highest judicial authority and regional weighting support.",
+ "修宪另看最高司法机关与加权支持率": "The constitutional amendment is based on the highest judicial authority and regional weighting support.",
  "这是院内支持率": "It's the rate of support in the chamber.",
  "按席位加权": "Weighted by seats",
  "这是院内支持率，按席位加权。": "This is the rate of support in the chamber, weighted by seats.",

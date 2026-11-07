@@ -132,7 +132,7 @@ Object.assign(globalThis.NATION_EN ||= {}, {
  "任期评估在游戏结束后开放。": "The term evaluation is open at the end of the game.",
  "当前指标走势可在国家档案查看。": "The current trend in indicators can be viewed in national archives.",
  "低于35亮起预警；事件冲突使忠诚低于30时可能辞职。": "Less than 35 flash alerts; conflict of events may result in resignations when loyalty is less than 30.",
- "回应地方诉求、改善发展与全国支持，可提高加权选票。": "Responding to local demands, improving development and national support would increase the weighting of votes.",
+ "回应地方诉求、改善发展与全国支持，可提高加权支持率。": "Fulfilling regional demands, improving development and raising national approval can increase weighted support.",
  "尚未查看和保留的改革草案将在下季度改革窗口确认后替换。": "Reform drafts that have not yet been viewed and retained will be replaced following confirmation of the next quarterly reform window.",
  "已查看、已提交与执行中的项目保留。": "Projects viewed, submitted and under implementation retained.",
  "民意影响选举、地区选票与稳定。": "Public opinion affects elections, regional votes and stability.",

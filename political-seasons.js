@@ -118,7 +118,7 @@ function supportPartyRoute107(x,id){
 const actBeforeSeasons107=situationAct;
 situationAct=function(id,key){const x=sits().active.find(a=>a.id===id);if(x?.kind==='electionSeason'){const match=/^back-faction-([012])$/.exec(key);if(match)supportPartyRoute107(x,Number(match[1]));return}return actBeforeSeasons107(id,key)};
 const progressBeforeSeasons107=situationProgress;
-situationProgress=function(x){if(x.kind!=='electionSeason')return progressBeforeSeasons107(x);return `<div class="election-season-progress"><p>第 ${x.start}—${x.deadline} 季度 · ${Math.max(0,x.deadline-s.q)} 季度后换届结算</p><p>全国加权选票预测 ${fmt(electionForecast().total,1)}%。${regime().id==='party'?x.chosen===null?'本季可选择支持党内三派之一；民主党派与无党籍团体不能成为玩家所属派系。':'本轮已确认：'+esc(pstate().factions[x.chosen].name)+'。':'背景局势，无需处置。'}</p></div>`};
+situationProgress=function(x){if(x.kind!=='electionSeason')return progressBeforeSeasons107(x);return `<div class="election-season-progress"><p>第 ${x.start}—${x.deadline} 季度 · ${Math.max(0,x.deadline-s.q)} 季度后换届结算</p><p>加权支持率 ${fmt(electionForecast().total,1)}%。${regime().id==='party'?x.chosen===null?'本季可选择支持党内三派之一；民主党派与无党籍团体不能成为玩家所属派系。':'本轮已确认：'+esc(pstate().factions[x.chosen].name)+'。':'背景局势，无需处置。'}</p></div>`};
 const alertsBeforeSeasons107=activeAlerts107;
 activeAlerts107=function(){const background=activeSit('electionSeason');return alertsBeforeSeasons107().filter(a=>!background||a.id!=='situation:'+background.id)};
 function decayPanel107(){

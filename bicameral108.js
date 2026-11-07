@@ -215,7 +215,7 @@ proposeBudget=function(){if(hasUpper108()&&constitution().docket)return toast('�
 const withdrawBeforeBicameral108=withdrawBill;
 withdrawBill=function(){if(hasUpper108()&&pstate().bill?.chamber108)archiveChamberVote108(pstate().bill,'withdrawn');return withdrawBeforeBicameral108()};
 
-function bicameralAmendmentText108(){return isFederal108()?`联邦修宪由国民院议长受理，直接送联邦院手动复审，不需国民院三分之二支持。复审通过后启动三季度司法审查，司法赞成达到半数且地区加权支持率超过50%才可生效。若被退回，国民院过半复议后送审。释宪不经两院复审。`:`修宪先在${regime().body}取得三分之二院内支持，再交${upperName108()}手动复审；复审获过半支持后，才开始三季度最高司法机关审查。${regime().id==='theorepublic'?'监护委员会可以驳回修宪案，导致流案。':`退回后可由${regime().body}再次取得三分之二支持，直接送司法审查。`}${regime().id==='presidential'?'退回后重获通过的修宪案，在司法通过后再延缓两个季度生效。':''}释宪不增加上院程序。`}
+function bicameralAmendmentText108(){return isFederal108()?`联邦修宪由国民院议长受理，直接送联邦院手动复审，不需国民院三分之二支持。复审通过后启动三季度司法审查，司法赞成达到半数且加权支持率超过50%才可生效。若被退回，国民院过半复议后送审。释宪不经两院复审。`:`修宪先在${regime().body}取得三分之二院内支持，再交${upperName108()}手动复审；复审获过半支持后，才开始三季度最高司法机关审查。${regime().id==='theorepublic'?'监护委员会可以驳回修宪案，导致流案。':`退回后可由${regime().body}再次取得三分之二支持，直接送司法审查。`}${regime().id==='presidential'?'退回后重获通过的修宪案，在司法通过后再延缓两个季度生效。':''}释宪不增加上院程序。`}
 federalAmendmentText108=function(){return bicameralAmendmentText108()};
 const menuBeforeBicameral108=constitutionalMenu;
 constitutionalMenu=function(mode='interpret'){menuBeforeBicameral108(mode);if(hasUpper108()&&mode==='amend')$('modal').innerHTML=$('modal').innerHTML.replace(/<h2>提出修宪<\/h2><p>[\s\S]*?<\/p>/,`<h2>提出修宪</h2><p>提出消耗1行动点，进入宪法修订局势。${bicameralAmendmentText108()}</p>`)};
@@ -424,7 +424,7 @@ function bicameralGuide108(entries){
  for(const e of entries){
   if(e.id==='constitutional-docket')e.text=bicameralAmendmentText108();
   if(e.id==='constitution')e.text='国家档案记载现行根本条款。'+bicameralAmendmentText108();
-  if(['constitutional-transfer','pluralism-amendment','centralize-amendment'].includes(e.id))e.text=e.text.replace(/先获议事机关三分之二支持，再经当前最高司法机关半数赞成|联邦制直接进入司法审查|司法审查达到半数、公民加权支持率超过50%后|两项条件恰好达到也符合；进入修宪程序后不再反复核验。须依次通过议事机关三分之二与司法半数门槛/g,'完成两院立法程序后进入司法审查')+' '+bicameralAmendmentText108();
+  if(['constitutional-transfer','pluralism-amendment','centralize-amendment'].includes(e.id))e.text=e.text.replace(/先获议事机关三分之二支持，再经当前最高司法机关半数赞成|联邦制直接进入司法审查|司法审查达到半数、加权支持率超过50%后|两项条件恰好达到也符合；进入修宪程序后不再反复核验。须依次通过议事机关三分之二与司法半数门槛/g,'完成两院立法程序后进入司法审查')+' '+bicameralAmendmentText108();
   if(e.id==='pass-rate')e.text='两院各自按团体席位权重计算院内支持率，普通议案都须严格超过50%。上院不适用低倾向稳定惩罚。'+bicameralAmendmentText108();
   if(e.id==='federal-referendum')e.text='联邦预算和改革先经国民院过半、联邦院复审（可退回国民院过半重投），再核验全国支持率达到50%。全国支持不足时公民复决否决，草案保留；民意恢复后可重新核验（无行动点消耗）。政府信任案、释宪不走两院程序。';
  }

@@ -45,7 +45,7 @@ Object.assign(globalThis.NATION_EN ||= {}, {
  "季度；": "Quarterly;",
  "每季度至少": "At least quarterly",
  "件决策事件": "Decision-making events",
- "加权地区预测": "Weighted Regional Forecast:",
+ "加权支持率": "Weighted Regional Forecast:",
  "高独立增加审查": "High-level independent additional review",
  "低独立引发抗议": "Low independence triggers protests.",
  "高独立增加审查，低独立引发抗议": "High independence brings scrutiny; low independence risks protests",

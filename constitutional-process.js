@@ -58,7 +58,7 @@ constitutionalSpec=function(mode,action,target){
   return {mode,action,target,stance:'liberal',title:'增加竞争性选举条文',description:`确立竞争性选举，修宪成功后各以 50% 概率转为${targets}。保留执政时间、人物成果和经济数据；按新政体重组执政联盟，不符合入阁资格的官员按现行离任规则离任。`,values:{},axes:{authority:-4,law:4,elite:-2},costText:'通过后执行政体转型；不会额外扣减固定的支持或稳定，但内阁离任仍有正常后果。'};
  }
  if(action==='pluralism'&&target==='enabled'&&x&&!x.method&&(minorityGate107()||c.docket?.action==='pluralism'&&c.docket.admission?.weighted>=80&&c.docket.admission?.stability>=60)){
-  return {mode,action,target,stance:'social',title:'社会多元修正案',description:`保障少数群体平等的信仰、语言与公共参与权利，完成全部修宪程序后结束“${situationTitle(x)}”。提出时要求加权支持度达到 80%、政治稳定达到 60；进入程序后不反复核验这两个触发条件。`,values:{},axes:{law:4,authority:-3,welfare:2},costText:'完整程序通过后结束长期问题，不追加固定财政成本。'};
+  return {mode,action,target,stance:'social',title:'社会多元修正案',description:`保障少数群体平等的信仰、语言与公共参与权利，完成全部修宪程序后结束“${situationTitle(x)}”。提出时要求加权支持率达到 80%、政治稳定达到 60；进入程序后不反复核验这两个触发条件。`,values:{},axes:{law:4,authority:-3,welfare:2},costText:'完整程序通过后结束长期问题，不追加固定财政成本。'};
  }
  return specBeforeProcedure107(mode,action,target);
 };
@@ -71,7 +71,7 @@ constitutionalMenu=function(mode='interpret'){
  if(s.ended)return;
  if(constitution().docket){modal(`<h2>已有宪制议案待审</h2>${constitutionalDocketHTML()}<button onclick="$('modal').close()">返回</button>`);return}
  let issue=minoritySituation107(),gate=issue&&!issue.method&&!minorityGate107();
- modal(`<span class="tag">${esc(regime().body)} · ${memberRole(0)}</span><h2>提出修宪</h2><p>所有修宪均从这里发起：提出消耗 1 行动点，并进入“宪法修订”局势。先在${esc(regime().body)}获得至少三分之二院内支持，再交最高司法机关审查；审查开始后三季度内须达到半数赞成。修宪不能强行颁行。</p><div class="choices constitution-choices">${constitutionalChoices(mode).map(x=>`<button onclick="proposeConstitution('amend','${x.action}','${x.target}')"><strong>${esc(x.title)}</strong><small>${esc(x.description)} ${esc(x.costText)}</small></button>`).join('')}${gate?`<button disabled><strong>社会多元修正案 · 尚未开放</strong><small>当前加权支持度 ${fmt(electionForecast().total,1)}% / 需要 80%；政治稳定 ${fmt(s.stability,1)} / 需要 60。须在长期局势尚未开始强制措施时提出。</small></button>`:''}</div><button onclick="$('modal').close()">返回</button>`);
+ modal(`<span class="tag">${esc(regime().body)} · ${memberRole(0)}</span><h2>提出修宪</h2><p>所有修宪均从这里发起：提出消耗 1 行动点，并进入“宪法修订”局势。先在${esc(regime().body)}获得至少三分之二院内支持，再交最高司法机关审查；审查开始后三季度内须达到半数赞成。修宪不能强行颁行。</p><div class="choices constitution-choices">${constitutionalChoices(mode).map(x=>`<button onclick="proposeConstitution('amend','${x.action}','${x.target}')"><strong>${esc(x.title)}</strong><small>${esc(x.description)} ${esc(x.costText)}</small></button>`).join('')}${gate?`<button disabled><strong>社会多元修正案 · 尚未开放</strong><small>当前加权支持率 ${fmt(electionForecast().total,1)}% / 需要 80%；政治稳定 ${fmt(s.stability,1)} / 需要 60。须在长期局势尚未开始强制措施时提出。</small></button>`:''}</div><button onclick="$('modal').close()">返回</button>`);
 };
 const proposeBeforeProcedure107=proposeConstitution;
 proposeConstitution=function(mode,action,target){
@@ -221,7 +221,7 @@ situationProgress=function(x){
  if(x.kind==='amendment'){let d=amendmentInProgress107();if(!d)return '本修宪程序已经结案。';return d.stage==='legislature'?`议会阶段：院内支持率 ${fmt(billPassRate104(),2)}%，目标为三分之二。<br>法案：${esc(d.title)}。立法通过后才开始司法审查计时。`:`司法审查：赞成比例 ${fmt(reviewRate107(d),1)}%。${d.route==='court'?courtBallotText107(d)+'计入关键一票后须过半。':'院内支持率达到半数即可通过。'}<br>剩余 ${Math.max(0,d.reviewDeadline-s.q)} 季度；第 ${d.reviewDeadline} 季度开始时截止。<br>无需在局势页操作；到审查机关争取支持。`}
  if(MINORITY_KINDS107.includes(x.kind)){
   if(x.method)return `<b>${x.method==='forced-migration'?'强制迁徙':'强制同化'}执行中 · 不可取消</b><br>已执行 ${x.elapsed} / ${x.duration} 季度，剩余 ${x.duration-x.elapsed} 季度。<br>${x.method==='forced-migration'?'每季度公众支持 −2、稳定 −2、实际年化增长率 −0.5 个百分点。开始时的信心 −20 已执行，不会重复扣减。':'每季度公众支持 −1、稳定 −2、信心 −0.5。'}<br>执行期间不能改选其他路径。`;
-  return `社会多元修正案：${minorityGate107()?'已达到提出条件':'尚未达到提出条件'}。<br>当前加权支持度 ${fmt(electionForecast().total,1)}% / 需要 80%；政治稳定 ${fmt(s.stability,1)} / 需要 60。<br>请与${esc(regime().body+memberRole(0))}互动提出修宪。${regime().democratic?'本政体只能通过修宪解决。':'本政体也可选择下方不可撤销的强制措施。'}<br>未采取强制措施时，本局势本身不扣减季度指标。`;
+  return `社会多元修正案：${minorityGate107()?'已达到提出条件':'尚未达到提出条件'}。<br>当前加权支持率 ${fmt(electionForecast().total,1)}% / 需要 80%；政治稳定 ${fmt(s.stability,1)} / 需要 60。<br>请与${esc(regime().body+memberRole(0))}互动提出修宪。${regime().democratic?'本政体只能通过修宪解决。':'本政体也可选择下方不可撤销的强制措施。'}<br>未采取强制措施时，本局势本身不扣减季度指标。`;
  }
  return progressBeforeProcedure107(x);
 };
@@ -284,7 +284,7 @@ constitutionGuideEntries=function(){
  const add=(id,title,aliases,text,category='宪法与司法')=>entries.push({id,title,aliases:[title,...aliases],text,category});
  add('competitive-amendment','增加竞争性选举条文',['竞争性选举','政体转型'],'非民主国家固定提供此修宪项。成功后：象征性民主／一党制各以50%概率转为总统制或半总统制；神权专制各以50%概率转为神权共和制或总统制；其他非民主政体各以50%概率转为君主立宪制或西敏议会制。保留历史与人物成果；按新体制重组联盟，失去入阁资格者正常离任。');
  add('minority-issue','长期少数群体问题',['宗教少数派问题','少数民族问题','长期局势'],'所有新世界额外抽取一个，两类各50%，不占普通／困难危机名额。旧档补充一次，不追溯损耗。民主国家须通过社会多元修正案解决；非民主国家也可执行强制迁徙或强制同化。未选择强制措施时，这个局势不额外扣减指标。','局势与处置');
- add('pluralism-amendment','社会多元修正案',['社会多元','多元修宪'],'长期少数群体问题仍存在、尚未选择强制措施，且加权支持度达到80%、政治稳定达到60时可提出。两项条件恰好达到也符合；进入修宪程序后不再反复核验。须依次通过议事机关三分之二与司法半数门槛，成功即结束长期问题。');
+ add('pluralism-amendment','社会多元修正案',['社会多元','多元修宪'],'长期少数群体问题仍存在、尚未选择强制措施，且加权支持率达到80%、政治稳定达到60时可提出。两项条件恰好达到也符合；进入修宪程序后不再反复核验。须依次通过议事机关三分之二与司法半数门槛，成功即结束长期问题。');
  add('forced-migration','强制迁徙',[],'仅非民主国家可在长期问题局势中选择，1行动点，确认后不可撤回或切换。信心立即一次性−20；从下一季度起执行20季度，每季支持−2、稳定−2、实际年化增长率−0.5个百分点。执行期满局势结束，已产生的后果保留。转型为民主后也不能提前终止。','局势与处置');
  add('forced-assimilation','强制同化',[],'仅非民主国家可选择，1行动点，确认后不可撤回或切换。下一季度起执行25季度，每季支持−1、稳定−2、信心−0.5。没有额外的一次性信心扣减；期限届满局势结束，转型或存档刷新不会取消既定措施。','局势与处置');
  add('party-colors','政党颜色',['党派颜色','议会颜色','席位颜色'],'座席、党派名称与人物标识使用一致的政治路线配色：社会民主／劳动派为梅红，自由民主／自由市场派为黄色，国民／保守派为蓝色，绿色派为绿色，法治自由派为浅蓝，国家统制派为红色，地方自治派为青绿，技术改革派为紫色，传统宗教派为赭金。颜色由名称与政治路线决定，不由列表顺序决定。','立法与政治');

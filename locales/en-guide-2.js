@@ -199,7 +199,7 @@ Object.assign(globalThis.NATION_EN ||= {}, {
  "之后支持率可以超出开局范围": "And then the approval goes beyond the start.",
  "全国支持仍反映共同施政基础": "National support still reflects the foundations of common governance",
  "地区选票同时受地方认同与履约影响": "Area votes are influenced by both local identity and compliance",
- "加权票率不必等于全国支持率": "Weighted votes need not be equal to national support.",
+ "加权支持率不必等于全国支持率": "Weighted Support need not be equal to national support.",
  "已有存档保留原来的地区支持": "Archiving of original area support",
  "基本盘": "Basic Disk",
  "主要产业": "Main industries",

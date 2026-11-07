@@ -33,11 +33,11 @@ Object.assign(globalThis.NATION_EN ||= {}, {
  "该局势仍在持续": "The situation continues.",
  "请查看结束条件与每季度影响": "Please check the end conditions and the quarterly impact.",
  "该局势仍在持续，请查看结束条件与每季度影响。": "The situation is still ongoing, and please see the closure conditions and the quarterly impact.",
- "加权选票不足": "Weighted Vote Forecast Below",
+ "加权支持率不足": "Weighted Support Below",
  "回应地方诉求": "Responding to local demands",
  "改善发展与全国支持": "Improved development and national support",
- "可提高加权选票": "Weighted ballots",
- "%。回应地方诉求、改善发展与全国支持，可提高加权选票。": "%. Responding to local demands, improving development and national support would increase the weighting of votes.",
+ "可提高加权支持率": "Weighted ballots",
+ "%。回应地方诉求、改善发展与全国支持，可提高加权支持率。": "%. Fulfilling regional demands, improving development and raising national approval can increase weighted support.",
  "改革草案将在下季度刷新": "The draft reform will be updated next quarter",
  "尚未查看和保留的改革草案将在下季度改革窗口确认后替换": "Reform drafts not yet viewed and retained will be replaced after confirmation by the next quarter reform window",
  "已提交与执行中的项目保留": "Retention of projects submitted and under implementation",
@@ -198,8 +198,8 @@ Object.assign(globalThis.NATION_EN ||= {}, {
  "联系议长": "Contact the Speaker.",
  "联系议长 / 主席": "Contact the Speaker/Chair",
  "选择修宪条款": "Selecting to amend the constitutional provision",
- "争取司法赞成与公民加权支持": "Seeking judicial support and citizen weighting",
- "选择修宪条款，争取司法赞成与公民加权支持。": "Selecting to amend the constitutional provisions to obtain judicial support and a weight of support from citizens.",
+ "争取司法赞成与加权支持率": "Seeking judicial support and citizen weighting",
+ "选择修宪条款，争取司法赞成与加权支持率。": "Selecting to amend the constitutional provisions to obtain judicial support and a weight of support from citizens.",
  "争取院内支持并推进三季度司法审查": "Seeking support and advancement of three-quarter judicial review in the institution",
  "选择修宪条款、争取院内支持并推进三季度司法审查。": "Selecting to amend the constitutional provisions, seeking the support of the Court and advancing the three-quarter judicial review.",
  "宪法解释": "Constitutional Interpretation",
@@ -363,5 +363,5 @@ Object.assign(globalThis.NATION_EN ||= {}, {
  "不会再次收取申办费用": "No further bidding fee is charged",
  "不会再次收取申办费用。": "The application will not be charged again.",
  "每季议程倾向 −2；协商可抵消累计损耗。": "Agenda alignment falls by 2 each quarter; negotiations can offset the accumulated decline.",
- "加权选票不足50%": "Weighted Vote Forecast Below 50%"
+ "加权支持率不足50%": "Weighted Support Below 50%"
 });

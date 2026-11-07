@@ -145,8 +145,8 @@ Object.assign(globalThis.NATION_EN ||= {}, {
  "增加竞争性选举条款": "Introduce Competitive Elections",
  "半数": "half",
  "加权支持率": "Weighted Approval",
- "加权支持度": "Weighted Approval",
- "地方加权支持率": "Regionally Weighted Approval",
+ "加权支持率": "Weighted Approval",
+ "加权支持率率": "Regionally Weighted Approval",
  "每季度": "each quarter",
  "本季": "this quarter",
  "下季度": "next quarter",
@@ -310,4 +310,25 @@ Object.assign(globalThis.NATION_EN ||= {}, {
  "折算倾向 = 议程倾向 −（本案全票门槛 − 60）。联邦个人所得税每提高1个百分点、联邦企业所得税每提高2个百分点、国内消费税每提高1.5个百分点，全票门槛各＋1，降税相反。财产／土地税、关税和可征收的宗教税按各派系偏好增减门槛；详见各派系的“查看细则”。公共预算按各派系偏好调整，执政党同样适用。": "Adjusted alignment = agenda alignment − (this bill’s full-support threshold − 60). Each increase of 1 percentage point in Federal personal income tax, 2 in Federal corporate income tax, or 1.5 in Domestic consumption tax raises the full-support threshold by 1. Tax cuts reverse this effect. Property/land tax, tariffs and any religious tax adjust the threshold according to each group’s preferences; open View Details for the breakdown. Public-spending preferences apply to every group, including your own party.",
  "折算倾向 = 议程倾向 −（本案全票门槛 − 60）。国民所得税每提高1个百分点、企业所得税每提高2个百分点、商品消费税每提高1.5个百分点，全票门槛各＋1，降税相反。财产／土地税、关税和可征收的宗教税按各派系偏好增减门槛；详见各派系的“查看细则”。公共预算按各派系偏好调整，执政党同样适用。": "Adjusted alignment = agenda alignment − (this bill’s full-support threshold − 60). Each increase of 1 percentage point in National income tax, 2 in Corporate Income Tax, or 1.5 in Consumer taxes on goods raises the full-support threshold by 1. Tax cuts reverse this effect. Property/land tax, tariffs and any religious tax adjust the threshold according to each group’s preferences; open View Details for the breakdown. Public-spending preferences apply to every group, including your own party.",
  "折算倾向 = 议程倾向 −（本案全票门槛 − 60）。国民所得税每提高1个百分点、公司利得税每提高2个百分点、消费税每提高1.5个百分点，全票门槛各＋1，降税相反。财产／土地税、关税和可征收的宗教税按各派系偏好增减门槛；详见各派系的“查看细则”。公共预算按各派系偏好调整，执政党同样适用。": "Adjusted alignment = agenda alignment − (this bill’s full-support threshold − 60). Each increase of 1 percentage point in National income tax, 2 in Tax on corporate profits, or 1.5 in Consumption Tax raises the full-support threshold by 1. Tax cuts reverse this effect. Property/land tax, tariffs and any religious tax adjust the threshold according to each group’s preferences; open View Details for the breakdown. Public-spending preferences apply to every group, including your own party."
+});
+
+/* Canonical non-electoral regional indicator. */
+Object.assign(globalThis.NATION_EN, {
+ "加权支持率": "Weighted Support",
+ "增长压力": "Growth Pressure",
+ "年化增长压力": "Annualized Growth Pressure",
+ "临时增长修正": "Temporary Growth Modifier",
+ "潜在增长": "Potential Growth",
+ "潜在增长率": "Potential Growth Rate",
+ "长期增长潜力": "Long-term Growth Potential",
+ "当前加权选票预测": "Weighted Vote Forecast",
+ "全国加权选票预测": "National Weighted Vote Forecast",
+ "加权选票": "Weighted Votes",
+ "加权支持度": "Weighted Support",
+ "加权支持": "Weighted Support",
+ "地方加权认同": "Weighted Regional Support",
+ "当前加权支持率": "Current Weighted Support",
+ "加权支持率不足50%": "Weighted Support Below 50%",
+ "加权支持率不足": "Weighted Support Below",
+ "可提高加权支持率": "can improve weighted support"
 });

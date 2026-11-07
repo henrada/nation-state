@@ -1,6 +1,6 @@
 /* 1.0.6 additions: live history charts and non-blocking government reminders. */
 function institutionSectionName(){return ['absolute','aristocratic','tyranny','theoabsolute'].includes(regime().id)?'监察机构':'立法机构'}
-const EXTRA_SERIES107=[['forecast','当前加权选票预测','%'],['eventsChosen','本季已回复事件','件'],['human','人力资本','/100'],['capitalStock','基础设施资本','/100'],['researchLevel','科研等级','级'],['researchProgress','科研进度','%'],['politicalCapacity','本季政治行动点总数','点']];
+const EXTRA_SERIES107=[['forecast','加权支持率','%'],['eventsChosen','本季已回复事件','件'],['human','人力资本','/100'],['capitalStock','基础设施资本','/100'],['researchLevel','科研等级','级'],['researchProgress','科研进度','%'],['politicalCapacity','本季政治行动点总数','点']];
 const snapshotBeforeCharts107=snapshot;
 snapshot=function(){return {...snapshotBeforeCharts107(),...(v3()?.regions?.length?{forecast:electionForecast().total,eventsChosen:v3().eventsChosen}:{}),human:s.human,capitalStock:s.capitalStock,...(rules103()?{researchLevel:rules103().research.level,researchProgress:rules103().research.progress,politicalCapacity:politicalCapacity()}:{} )}};
 function chartSeries107(key){return [...SERIES,...EXTRA_SERIES107].find(row=>row[0]===key)}
@@ -17,7 +17,7 @@ function openMetricChart107(key){
  let dialog=$('chart-modal');dialog.innerHTML=`<div class="chart-modal-header"><div><span class="tag">国家指标 / 季度走势</span><h2>${name}</h2></div><button onclick="$('chart-modal').close()" aria-label="关闭指标图表">关闭</button></div><div class="chart-summary"><strong>${Number.isFinite(current)?fmt(current,2):'—'}<small> ${unit}</small></strong><span>较首次记录 ${change>0?'+':''}${fmt(change,2)} ${unit}</span></div>${seriesChart(key,name,unit,300)}<p class="note">与国家档案使用相同的季度记录；同一季度内显示最近一次决策后的数值。旧存档未记录的历史不会补造。</p>`;if(!dialog.open)dialog.showModal();
  dialog.onclick=e=>{if(e.target===dialog&&typeof dialog.getBoundingClientRect==='function'){let r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close()}};
 }
-const METRIC_KEYS107={'公众支持':'approval','全国支持率':'approval','支持率':'approval','政府支持率':'approval','政治稳定':'stability','国家稳定':'stability','司法独立':'judicial','实际年化增长':'growth','实际 GDP 增长':'growth','GDP 增长':'growth','失业率':'unemployment','通胀':'inflation','通货膨胀':'inflation','债务 / GDP':'debt','政府债务 / GDP':'debt','投资者信心':'confidence','政策利率':'rate','当前加权选票预测':'forecast','本季已回复事件':'eventsChosen'};
+const METRIC_KEYS107={'公众支持':'approval','全国支持率':'approval','支持率':'approval','政府支持率':'approval','政治稳定':'stability','国家稳定':'stability','司法独立':'judicial','实际年化增长':'growth','实际 GDP 增长':'growth','GDP 增长':'growth','失业率':'unemployment','通胀':'inflation','通货膨胀':'inflation','债务 / GDP':'debt','政府债务 / GDP':'debt','投资者信心':'confidence','政策利率':'rate','加权支持率':'forecast','本季已回复事件':'eventsChosen'};
 const metricBeforeCharts107=metric;
 metric=function(label,n,unit,sub,good=true){let key=METRIC_KEYS107[label],html=metricBeforeCharts107(label,n,unit,sub,good);if(key)html=html.replace('<div class="card">',`<div class="card metric-chart" data-metric="${key}" role="button" tabindex="0" aria-label="查看${label}折线图" onclick="openMetricChart107('${key}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openMetricChart107('${key}')}">`);return html};
 const archiveBeforeCharts107=archive;archive=function(){return archiveBeforeCharts107()+historyCharts107()};
@@ -27,7 +27,7 @@ function activeAlerts107(){
  if(!features107()||s.ended)return [];let alerts=[],add=(id,title,text,tabs,metric=null,slot=null)=>alerts.push({id,title,text,tabs,metric,slot});
  for(let slot of cabinetSlots103()){let item=pstate().cabinet[slot];if(!item)add('vacant:'+slot,office(slot)+'空缺','请在内阁与人事中任命接替者，职位空缺会影响行政运转。',['cabinet'],null,slot);else{let c=pstate().candidates[item.candidate];if(c.loyalty<35)add('loyal:'+slot,office(slot)+'忠诚度偏低',c.name+'忠诚度为 '+fmt(c.loyalty,1)+'。低于35亮起预警；事件冲突使忠诚低于30时可能辞职。',['cabinet'],null,slot)}}
  for(let x of sits().active)add('situation:'+x.id,'未解决局势：'+SIT_NAMES[x.kind],x.kind==='government'?governmentText107(x):'该局势仍在持续，请查看结束条件与每季度影响。',['situations']);
- if(electionForecast().total<50)add('forecast','加权选票不足50%',`当前预测 ${fmt(electionForecast().total,1)}%。回应地方诉求、改善发展与全国支持，可提高加权选票。`,['politics'],'forecast');
+ if(electionForecast().total<50)add('forecast','加权支持率不足50%',`当前预测 ${fmt(electionForecast().total,1)}%。回应地方诉求、改善发展与全国支持，可提高加权支持率。`,['politics'],'forecast');
  if(s.q%6===5&&v3().offers.some(o=>!o.kept&&pstate().bill?.offer!==o.uid))add('reforms','改革草案将在下季度刷新','尚未查看和保留的改革草案将在下季度改革窗口确认后替换。已查看、已提交与执行中的项目保留。',['reforms']);
  if(s.approval<50)add('approval','全国支持率不足50%',`当前公众支持 ${fmt(s.approval,1)}%。民意影响选举、地区选票与稳定。`,['overview','politics'],'approval');
  if(s.stability<35)add('stability','政治稳定偏低，存在叛乱风险','稳定度低于35；持续低位并伴随地方失信可能触发叛乱。低于20会结束普通模式的游戏。',['overview'],'stability');

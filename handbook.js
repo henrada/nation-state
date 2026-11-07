@@ -76,7 +76,7 @@ function hbAliases(entry){const seen=new Set([guideNormalize104(entry.title)]);r
 function hbParagraphs(text){return String(text).split(/\n+/).filter(Boolean).map(p=>`<p>${esc(p)}</p>`).join('')}
 function hbFold(title,hint,html,extra=''){return `<details class="hb-rule ${extra}"><summary><span>${esc(title)}</span>${hint?`<small>${esc(hint)}</small>`:''}</summary><div class="hb-rule-body">${html}</div></details>`}
 function hbRelated(entry){
- const links={stability:['approval','policy-security','rebellion'],approval:['stability','forecast','spring'],ap:['research','calendar','advance'],rate:['inflation','yield','centralbank'],debt:['balance','interest','economy-situation'],research:['policy-education','ap','programme-education'],'pass-rate':['agenda','full-support','effective-agenda'],forecast:['local-demands','regional-start','elections'],guide:['tutorial','page-tutorial','office-desk']};
+ const links={stability:['approval','policy-security','rebellion'],approval:['stability','forecast','spring'],ap:['research','calendar','advance'],rate:['inflation','yield','centralbank'],growth:['growth-pressure','potential','gdp'],'growth-pressure':['growth','potential','reforms'],potential:['capital','human','growth'],confidence:['yield','rating','debt'],unemployment:['strike','growth','policy-welfare'],inflation:['economy-situation','rate','growth'],balance:['revenue','spending','debt'],debt:['balance','interest','economy-situation'],research:['policy-education','ap','programme-education'],'pass-rate':['agenda','full-support','effective-agenda'],forecast:['local-demands','regional-start','elections'],guide:['tutorial','page-tutorial','office-desk']};
  let ids=links[entry.id];
  if(!ids){ids=[];const category=hbCategory(entry);for(const candidate of handbookState.entries){if(candidate.id!==entry.id&&hbCategory(candidate)===category&&!hbSubgroup(candidate))ids.push(candidate.id);if(ids.length===3)break}}
  return ids.filter(id=>handbookState.byId.has(id)).slice(0,3).map(id=>hbEntryButton(handbookState.byId.get(id),'hb-related-link')).join('');
@@ -84,7 +84,9 @@ function hbRelated(entry){
 function hbArticleHTML(entry){
  let lead=entry.text.match(/^.*?(?:[。！？]|\.(?:\s|$)|$)/s)?.[0]||entry.text,sections='';
  const original=hbParagraphs(entry.text),aliases=hbAliases(entry);
- if(entry.id==='stability'){
+ const detailed=hbMetricSections(entry);
+ if(detailed){lead=detailed.lead;sections=detailed.sections}
+ else if(entry.id==='stability'){
   lead=hbText('衡量国家秩序、政府运作与社会冲突的可控程度。\n支持率反映民意，稳定度反映国家能否维持正常运转。','Measures how well the country maintains order, functioning government and control of social conflict.\nApproval measures popular support; stability measures the state’s ability to keep functioning.');
   sections+=hbFold(hbText('数值与风险','Values & Risks'),hbText('0—100 · 低于20会结束统治','0–100 · Below 20 ends your rule'),`<dl class="hb-values"><div><dt>${hbText('数值范围','Range')}</dt><dd>0—100</dd></div><div><dt>${hbText('低于 35','Below 35')}</dt><dd class="hb-caution">${hbText('持续低位会增加叛乱风险','Prolonged low stability raises rebellion risk')}</dd></div><div><dt>${hbText('低于 20','Below 20')}</dt><dd class="hb-danger">${hbText('统治结束','Your rule ends')}</dd></div></dl><p>${hbText('叛乱还受持续季度与未完成地方诉求影响。管理员模式不触发失败结局。','Rebellion also depends on consecutive quarters and unmet regional demands. Administrator Mode prevents defeat endings.')}</p>`);
   sections+=hbFold(hbText('如何提高稳定度','Improving Stability'),hbText('事件选择、局势应对、行政安全预算','Events, situation responses and security spending'),hbParagraphs(hbText('部分事件和局势选项可以提高稳定度。增加行政安全预算，会逐步提高经济模型中的稳定目标；具体费用、效果与生效时间以对应选项为准。','Some event choices and situation responses improve stability. Higher administration-and-security spending gradually raises the model’s stability target. Consult each option for its costs, effects and timing.')));

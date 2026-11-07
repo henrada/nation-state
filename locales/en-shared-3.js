@@ -239,7 +239,7 @@ Object.assign(globalThis.NATION_EN ||= {}, {
  "社民路线在世俗工业、新型产业及公共服务地区更有基础，在企业主与白领、驻军家庭和地方传统信仰地区相对较弱。": "The social welfare route is more based in secular industries, new industries and public service areas, and is relatively weak in the areas of business owners and white collars, military-mannered families and local traditional beliefs.",
  "其他路线拥有各自的优势地区。": "Other routes have their own areas of advantage.",
  "基础随本局保存，刷新、读档和更换所属派系不会重抽；之后支持率可以超出开局范围。": "The foundation is kept with this game, so that it is not retweeted, scalable or replaced by the faction to which it belongs; the approval can then go beyond the start.",
- "全国支持仍反映共同施政基础，地区选票同时受地方认同与履约影响，加权票率不必等于全国支持率。": "National support continues to reflect the basis of common governance, with regional votes being influenced by local identity and compliance, and the weighting rate need not be equal to the national rate.",
+ "全国支持仍反映共同施政基础，地区选票同时受地方认同与履约影响，加权支持率不必等于全国支持率。": "National support continues to reflect the basis of common governance, with regional votes being influenced by local identity and compliance, and the weighting rate need not be equal to the national rate.",
  "已有存档保留原来的地区支持。": "The original area support has been kept on file.",
  "地区主要居民、产业与生活背景。": "The main inhabitants of the region, their industry and their living background.",
  "新世界中，开局执政党派与这些群体的契合程度影响初始地区支持；例如社民路线更容易获得产业工人、世俗居民及新中产的支持。": "In the new world, the degree of convergence between the ruling parties and these groups has affected initial regional support; for example, social roads have made it easier to obtain support from industrial workers, secular residents and new middle-borns.",

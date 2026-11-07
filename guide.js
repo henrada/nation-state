@@ -88,13 +88,13 @@ function guideCatalog104(){
  add('judicial-pressure','司法干预',['司法干预历史','行政施压'],'行政机关施压司法的记录。可以短期争取配合，但会降低独立性，增加政治风险，并影响选举争论及统治倾向评估。','立法与政治');
  add('court-actions','司法互动',['与最高司法机关互动'],'与最高司法机关沟通或调整制度保障。各项行动的即时效果在按钮中列明，通常消耗1点行动点。','页面与操作');
  add('elections','民意与选举',['选举','选情','全国选举结果','单轮多数选举','单轮两方多数决'],'全国选票由地区票率按人口权重加总。民主国家得票必须超过50%才能继续执政，选举前最后六季度会增加与历史决策有关的竞选事件。象征性民主等政体的选举主要改变稳定与席位。','页面与操作');
- add('forecast','当前加权选票预测',['预测票率','得票率','地区得票率','当前预测','加权支持','当前选情'],'根据全国支持度、开局地方政治基础、地方履约、历史政策、地区发展与季度民意修正估算的票率。地区完全未履约时，基础票率最多乘80%；全国结果按地区人口权重计算。预测不等于已经完成的选举结果。','地区与选举');
+ add('forecast','加权支持率',['预测票率','得票率','地区得票率','当前预测','加权支持率','当前选情'],'根据全国支持度、开局地方政治基础、地方履约、历史政策、地区发展与季度民意修正估算的票率。地区完全未履约时，基础票率最多乘80%；全国结果按地区人口权重计算。预测不等于已经完成的选举结果。','地区与选举');
  add('capital-region','首都地区',['首都','特别行政区','大市','领地'],'首都是独立计票地区，拥有自己的产业、社会基本盘、发展状况与地方诉求。公共服务、科研和安全相关政策可以改善首都履约；与其他地区按人口权重共同决定全国得票率。名称随政体采用特别行政区、特别市、特区、大市或领地。','地区与选举');
  add('regions','地区',['省','特区','自治区','领','州','自治州','自治领','邦','加盟共和国','共和国（加盟）','特别市'],'国家由七个非首都地区与一个首都地区组成，称谓随政体变化。产业、地理、社会基本盘与发展状况不同，所以相同政策对各地选票的影响也不同。具体随机地名不影响操作方式。','地区与选举');
  add('local-demands','地方诉求',['地方要求','诉求','本届诉求','本轮诉求','地区诉求','地方履约','履约进度','未满足诉求扣减'],'每12季度刷新一轮，并由事件提示。符合产业或民生需要的决策、内阁任务和改革可推进诉求。一般相关决策推进70个百分点，相关预算通过推进35个百分点；部长成功执行相关任务通常推进8.4个百分点，部长提案单次行动推进14个百分点。地方重点项目和选举专项每次最多推进70个百分点，分期审查最多推进28个百分点，以选项所列数值为准；已完成的要求不会重复索要。持续不履约会损害选票和稳定，灾区暂缓原有诉求惩罚。','地区与选举');
  add('development','发展状况',['发展','当前发展','发展程度'],'地区发展水平及其变化，影响地区对政府的认同和票率。灾害会损害发展，重建与合适政策可以改善。','地区与选举');
  add('population','人口',['人口权重','地区人口','65 岁以上人口','人口结构'],'本版人口与初始年龄结构固定，不模拟人口迁移。人口权重决定各地区在全国选举结果中占多大比例。','地区与选举');
- add('regional-start','地方政治基础',['开局地区支持','开局支持率','开局民意修正','地方基础','党派认同'],'新世界各地初始支持在21%至55%之间：每局既有二十出头的薄弱区，也有五十出头的优势区。执政党派倾向、当地居民与产业背景决定大体高低，地方随机差异形成同类地区的波动。社民路线在世俗工业、新型产业及公共服务地区更有基础，在企业主与白领、驻军家庭和地方传统信仰地区相对较弱。其他路线拥有各自的优势地区。基础随本局保存，刷新、读档和更换所属派系不会重抽；之后支持率可以超出开局范围。全国支持仍反映共同施政基础，地区选票同时受地方认同与履约影响，加权票率不必等于全国支持率。已有存档保留原来的地区支持。','地区与选举');
+ add('regional-start','地方政治基础',['开局地区支持','开局支持率','开局民意修正','地方基础','党派认同'],'新世界各地初始支持在21%至55%之间：每局既有二十出头的薄弱区，也有五十出头的优势区。执政党派倾向、当地居民与产业背景决定大体高低，地方随机差异形成同类地区的波动。社民路线在世俗工业、新型产业及公共服务地区更有基础，在企业主与白领、驻军家庭和地方传统信仰地区相对较弱。其他路线拥有各自的优势地区。基础随本局保存，刷新、读档和更换所属派系不会重抽；之后支持率可以超出开局范围。全国支持仍反映共同施政基础，地区选票同时受地方认同与履约影响，加权支持率不必等于全国支持率。已有存档保留原来的地区支持。','地区与选举');
  add('base','社会基本盘',['基本盘','主要产业','产业结构','农业 / 工业 / 服务业','地理','宗教','历史政策修正'],'地区主要居民、产业与生活背景。新世界中，开局执政党派与这些群体的契合程度影响初始地区支持；例如社民路线更容易获得产业工人、世俗居民及新中产的支持。此后政策契合度会通过履约与态度修正影响选票。','地区与选举');
  for(let p of PROFILES)add('sector-'+p.sector,p.name,[],`此类地区主要依靠${p.industry}，社会基本盘为${p.base}。较关注${p.need}；相应政策、改革和内阁任务可以推进地方诉求。`,'地区与选举');
  add('regional-modifiers','地区选票修正',['未满足扣减','超额履约','超额履约加成','政策修正','发展修正','综合地区修正','上次实际得票','当前票率预测'],'地区票率以全国支持率为基准，按未履约、超额履约、历史政策与发展状况调整，再加开局民意修正与季度累计修正。未履约最多扣20%，超额履约最多加8%；上次实际得票是已结束选举的历史结果，当前预测会随治理变化。','地区与选举');
@@ -201,7 +201,7 @@ function tutorialStepsBase104(scope='intro',page=tab){let steps=[],add=(page,id,
  target('assembly','ap','.political-banner .action-count',actionTutorialText);
  target('assembly','groups','.seat-strip',legislativeGroups104);
  for(let id of ['seats','faction-relation','agenda','faction-profile','faction-support','negotiate','faction-details','full-support','effective-agenda'])target('assembly',id,`[data-guide="${id}"]`);
- target('assembly','pass-rate','[data-guide="pass-rate"]',()=>(regime().id==='federal')?'院内支持率按席位加权。预算和改革须超过50%，同时全国支持率须达到50%；修宪另看最高司法机关与地区加权支持。':`这是院内支持率，按席位加权。${pstate().bill?.mode==='amend'?'修宪案必须达到三分之二院内支持':pstate().bill?.kind==='constitution'?'释宪案必须严格超过50%':'普通议案达到'+threshold()+'%即可通过'}；先提出预算、改革或宪制议案。`);
+ target('assembly','pass-rate','[data-guide="pass-rate"]',()=>(regime().id==='federal')?'院内支持率按席位加权。预算和改革须超过50%，同时全国支持率须达到50%；修宪另看最高司法机关与加权支持率。':`这是院内支持率，按席位加权。${pstate().bill?.mode==='amend'?'修宪案必须达到三分之二院内支持':pstate().bill?.kind==='constitution'?'释宪案必须严格超过50%':'普通议案达到'+threshold()+'%即可通过'}；先提出预算、改革或宪制议案。`);
  target('assembly','vote','button[onclick="voteBill()"]');target('assembly','withdraw','button[onclick="withdrawBill()"]');
  target('assembly','meet','button[onclick^="meetMember("]','点击这里会见主要成员并回应诉求，每人每季一次。党团总召也负责符合条件时的联合政府邀请。');
  target('assembly','promise','[data-guide="promise"]');
@@ -252,7 +252,7 @@ function tutorialStepsBase104(scope='intro',page=tab){let steps=[],add=(page,id,
  return [...steps.filter(step=>step.page===page&&!introIds.includes(step.id)&&step.id!=='guide'),{page,id:'guide',selector:'#guide-open',text:'本页教程到此结束。若仍有不清楚的概念，可在“治国指南”中搜索详细解释。',title:'本页教程完成'}];
 }
 function decorateGuide104(){if(!document.querySelectorAll)return;
- let concepts=[['approval',/^(公众支持|全国支持率)$/],['stability',/^(政治稳定|国家稳定)$/],['judicial',/^司法独立$/],['growth',/^(实际年化增长|GDP 增长)$/],['unemployment',/^失业率$/],['inflation',/^(通胀|通货膨胀)$/],['debt',/^债务\s*\/\s*GDP$/],['faction-relation',/^团体关系/],['skill',/^能力\s*\d/],['loyalty',/^忠诚\s*\d/],['achievements',/^累计政绩/],['tenure',/^任职\s*\d/],['reports',/^季度施政报告$/],['promise',/^协商承诺追踪$/],['coalition',/^组阁资格$/],['judicial-pressure',/^司法干预历史$/],['forecast',/^(当前加权选票预测|预测票率)$/],['population',/^(人口|人口权重|地区人口)/],['base',/^(地理|主要产业|产业|宗教|社会基本盘|基本盘)/],['development',/^(发展|当前发展)/],['local-demands',/^(本轮诉求|地方诉求|地区诉求|诉求|本轮地方诉求|本届诉求)/],['revenue',/^预计财政收入$/],['spending',/^公共支出/],['interest',/^利息支出/],['balance',/^预计(盈余|赤字)$/],['per-capita',/^当前人均名义 GDP$/],['seed',/^世界种子$/],['economic-model',/^经济类型$/]];
+ let concepts=[['approval',/^(公众支持|全国支持率)$/],['stability',/^(政治稳定|国家稳定)$/],['judicial',/^司法独立$/],['growth',/^(实际年化增长|GDP 增长)$/],['unemployment',/^失业率$/],['inflation',/^(通胀|通货膨胀)$/],['debt',/^债务\s*\/\s*GDP$/],['faction-relation',/^团体关系/],['skill',/^能力\s*\d/],['loyalty',/^忠诚\s*\d/],['achievements',/^累计政绩/],['tenure',/^任职\s*\d/],['reports',/^季度施政报告$/],['promise',/^协商承诺追踪$/],['coalition',/^组阁资格$/],['judicial-pressure',/^司法干预历史$/],['forecast',/^(加权支持率|预测票率)$/],['population',/^(人口|人口权重|地区人口)/],['base',/^(地理|主要产业|产业|宗教|社会基本盘|基本盘)/],['development',/^(发展|当前发展)/],['local-demands',/^(本轮诉求|地方诉求|地区诉求|诉求|本轮地方诉求|本届诉求)/],['revenue',/^预计财政收入$/],['spending',/^公共支出/],['interest',/^利息支出/],['balance',/^预计(盈余|赤字)$/],['per-capita',/^当前人均名义 GDP$/],['seed',/^世界种子$/],['economic-model',/^经济类型$/]];
  for(let el of document.querySelectorAll('#content .metric-label,#content .row>span,#content .mini-stats span,#content h3,#content b')){let text=el.textContent.trim();let match=concepts.find(([id,re])=>re.test(text));if(match&&!el.dataset.guide)el.dataset.guide=match[0]}
  let debtLabel=document.querySelector('[data-guide="debt"]');if(debtLabel){let sub=debtLabel.closest('.card')?.querySelector('.sub');if(sub)sub.dataset.guide='rating'}
  let stats=document.querySelector('#content .mini-stats');if(stats){let desc=stats.previousElementSibling;if(desc)desc.dataset.guide='traits'}
