@@ -1,0 +1,100 @@
+/* Charcoal pages, restrained brass rules, and a compact encyclopedia directory. */
+#handbook-modal{--hb-bg:#252725;--hb-ink:#eee6cd;--hb-muted:#b3ad99;--hb-gold:#c7b27b;--hb-rule:#847757;--hb-olive:#464d34;box-sizing:border-box;width:min(1500px,calc(100vw - 36px));max-width:none;height:min(960px,calc(100dvh - 36px));max-height:none;padding:5px;border:1px solid var(--hb-gold);border-radius:0;background:#252725;color:var(--hb-ink);box-shadow:0 0 0 3px #20231f,0 0 0 4px #887a54,0 16px 60px #0007;overflow:hidden;font-family:'Noto Serif SC','Songti SC','SimSun',Georgia,serif;font-size:16px}
+#handbook-modal::backdrop{background:#111b1394;backdrop-filter:blur(1px)}
+#handbook-modal *,#handbook-modal *::before,#handbook-modal *::after{box-sizing:border-box}
+#handbook-modal .hb-frame{height:100%;border:1px solid #82744e;display:grid;grid-template-rows:auto minmax(0,1fr);position:relative}
+#handbook-modal .hb-frame::before,#handbook-modal .hb-frame::after{content:'';position:absolute;width:10px;height:10px;border:1px solid var(--hb-gold);pointer-events:none;z-index:5}
+#handbook-modal .hb-frame::before{top:-4px;left:-4px}#handbook-modal .hb-frame::after{bottom:-4px;right:-4px}
+#handbook-modal button{font:inherit;color:var(--hb-ink);background:transparent;border:0;border-radius:0;box-shadow:none;min-height:0;letter-spacing:0;cursor:pointer;transform:none;filter:none;transition:background .12s,color .12s;text-align:left;white-space:normal;line-height:1.5}
+#handbook-modal button:hover{background:#c8b27b13;color:#fff4cf;transform:none;filter:none}
+#handbook-modal button:focus-visible,#handbook-modal summary:focus-visible,#handbook-modal input:focus-visible{outline:2px solid #d4be84;outline-offset:-2px}
+#handbook-modal button[hidden]{display:none!important}
+#handbook-modal .hb-icon{width:33px;height:33px;flex-shrink:0;color:var(--hb-gold);display:block}
+#handbook-modal .hb-header{margin:0;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:13px 23px;border-bottom:1px solid var(--hb-gold);background:#282725;min-width:0}
+#handbook-modal .hb-brand{display:flex;align-items:center;gap:19px;min-width:0}
+#handbook-modal .hb-brand>.hb-icon{width:51px;height:44px}
+#handbook-modal .hb-brand h2{font:500 clamp(23px,2.4vw,34px)/1.3 'Noto Serif SC','Songti SC','SimSun',Georgia,serif;letter-spacing:.1em;color:var(--hb-ink);margin:0;white-space:nowrap}
+#handbook-modal .hb-brand>span{border-left:1px solid #9e8f66;padding-left:20px;font:15px/1.4 Georgia,serif;letter-spacing:.13em;color:#c9b98e}
+#handbook-modal .hb-header-controls{display:flex;align-items:center;gap:12px;flex-shrink:0}
+#handbook-modal .hb-header-controls button{padding:6px 8px;display:flex;align-items:center;gap:11px;font-size:16px}
+#handbook-modal .hb-header-controls .hb-close{border-left:1px solid var(--hb-rule);padding-left:16px;margin-left:1px}
+#handbook-modal .hb-body{display:grid;grid-template-columns:29% minmax(0,1fr);min-height:0;position:relative}
+#handbook-modal .hb-sidebar{position:static;inset:auto;width:auto;z-index:auto;overflow:hidden;background:#292728;border-right:1px solid var(--hb-rule);display:flex;flex-direction:column;min-width:0;min-height:0;padding:15px 17px 13px 20px}
+#handbook-modal .hb-shortcuts{display:flex;justify-content:space-between;gap:5px;border-bottom:1px solid #655e48;padding-bottom:7px}
+#handbook-modal .hb-shortcuts button{padding:4px 8px;position:relative}
+#handbook-modal .hb-shortcuts button[aria-pressed=true]::after{content:'';position:absolute;height:2px;left:7px;right:7px;bottom:0;background:var(--hb-gold)}
+#handbook-modal .hb-directory-label{font-size:17px;color:var(--hb-gold);padding:10px 3px 8px;border-bottom:1px solid var(--hb-rule);letter-spacing:.08em}
+#handbook-modal .hb-tree{min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable;margin-right:-9px;padding-right:4px;flex:1}
+#handbook-modal details{border:0;padding:0;margin:0;background:none;border-radius:0}
+#handbook-modal summary{list-style:none;display:flex;align-items:baseline;gap:12px;cursor:pointer}
+#handbook-modal summary::-webkit-details-marker{display:none}
+#handbook-modal summary::before{content:'';width:0;height:0;border-top:4px solid transparent;border-bottom:4px solid transparent;border-left:6px solid var(--hb-gold);flex-shrink:0;align-self:center;transition:transform .1s}
+#handbook-modal details[open]>summary::before{transform:rotate(90deg)}
+#handbook-modal .hb-category{border-bottom:1px solid #766d52;padding:2px 0}
+#handbook-modal .hb-category>summary{font-size:18px;line-height:1.4;padding:8px 4px;color:#e9ddbc;letter-spacing:.025em}
+#handbook-modal .hb-category-items{padding:0 0 7px}
+#handbook-modal .hb-entry-link{display:block;width:100%;padding:5px 10px 5px 33px;position:relative;font-size:15px;line-height:1.5;margin:0}
+#handbook-modal .hb-entry-link[aria-current=page]{background:var(--hb-olive);color:#f4e8bd}
+#handbook-modal .hb-entry-link[aria-current=page]::before{content:'';position:absolute;left:0;top:0;bottom:0;width:6px;background:#d6bd7e}
+#handbook-modal .hb-subgroup>summary{padding:7px 8px 7px 23px;font-size:15px;color:#c9b98f}
+#handbook-modal .hb-subgroup .hb-entry-link{padding-left:43px;font-size:14px}
+#handbook-modal .hb-recent{padding:12px 0 0;margin-top:10px;border-top:1px solid var(--hb-rule);flex-shrink:0}
+#handbook-modal .hb-recent h3{font-size:16px;color:var(--hb-gold);font-weight:400;margin:0 0 5px 3px}
+#handbook-modal .hb-recent .hb-entry-link{font-size:13px;padding:3px 7px}
+#handbook-modal .hb-recent p{font-size:12px;margin:0 0 4px;color:var(--hb-muted)}
+#handbook-modal .hb-reader{display:flex;flex-direction:column;min-height:0;min-width:0;background:linear-gradient(110deg,#272b26,#232624 75%);padding:20px 25px 0}
+#handbook-modal .hb-search{display:flex;gap:10px;align-items:stretch;margin:0 0 14px;flex-shrink:0}
+#handbook-modal .hb-search-input{display:flex;align-items:center;gap:10px;flex:1;min-width:0;padding:0 12px;border:1px solid #b3a171;box-shadow:inset 0 0 0 2px #1b201d;background:#242824;border-radius:2px}
+#handbook-modal .hb-search-input>.hb-icon{width:24px;height:24px;color:#b3a171}
+#handbook-modal .hb-search input{font:16px/1.5 'Noto Serif SC','Songti SC',Georgia,serif;background:none!important;border:0;box-shadow:none;padding:9px 0!important;color:var(--hb-ink);margin:0;width:100%;min-width:0;min-height:44px;border-radius:0;-webkit-appearance:none;appearance:none}
+#handbook-modal .hb-search input::placeholder{color:#aaa18b;opacity:1}
+#handbook-modal .hb-search input::-webkit-search-cancel-button{-webkit-appearance:none}
+#handbook-modal .hb-search #handbook-search-clear{font:24px/1 sans-serif;padding:6px 3px;color:var(--hb-muted)}
+#handbook-modal .hb-search>button{padding:5px 26px;background:#454b32;border:1px solid #b3a171;border-radius:2px;color:#ebdfb6;box-shadow:inset 0 0 0 2px #272d20;text-align:center;font-size:18px}
+#handbook-modal .hb-search>button:hover{background:#555d3d}
+#handbook-modal .hb-reading-area{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:0 9px 20px 0;margin-right:-14px;scrollbar-gutter:stable}
+#handbook-modal .hb-breadcrumb{font-size:14px;color:#cab98c;margin:1px 0 16px;line-height:1.5}
+#handbook-modal .hb-breadcrumb>span{padding:0 8px;color:#958e74}
+#handbook-modal .hb-title-line{display:flex;align-items:baseline;gap:20px;flex-wrap:wrap;margin-bottom:16px}
+#handbook-modal .hb-title-line h3{font:500 clamp(26px,2.6vw,36px)/1.3 'Noto Serif SC','Songti SC','SimSun',Georgia,serif;color:#f0e6c8;margin:0;letter-spacing:.03em;outline-offset:4px}
+#handbook-modal .hb-title-line>span{font-size:15px;color:#bdb59e}
+#handbook-modal p{font:15px/1.9 'Noto Serif SC','Songti SC','SimSun',Georgia,serif;color:#d7d4c2;margin:0 0 9px}
+#handbook-modal .hb-intro{margin-bottom:23px}
+#handbook-modal .hb-intro p{font-size:16px;line-height:1.85;margin:0}
+#handbook-modal .hb-rules{display:grid;gap:11px}
+#handbook-modal .hb-rule>summary{border:1px solid #9b8b61;border-width:1px 0;background:linear-gradient(90deg,#454a32,#333b2e 58%,#2b3029);padding:9px 13px;gap:13px;min-height:43px}
+#handbook-modal .hb-rule>summary>span{font-size:18px;line-height:1.5;flex:0 1 43%;color:#eadfbc}
+#handbook-modal .hb-rule>summary>small{font-size:13px;line-height:1.6;flex:1;color:#b8b49e;font-family:'Noto Sans SC',system-ui,sans-serif}
+#handbook-modal .hb-rule>summary:hover{background:#414835}
+#handbook-modal .hb-rule-body{padding:15px 20px 10px;background:#333b2b55;border-bottom:1px solid #615d48}
+#handbook-modal .hb-rule-body p:last-child{margin-bottom:0}
+#handbook-modal .hb-values{margin:0 0 13px;font-size:16px}
+#handbook-modal .hb-values>div{display:grid;grid-template-columns:30% 1fr;gap:16px;align-items:baseline;padding:8px 8px;border-bottom:1px solid #6d6d55}
+#handbook-modal .hb-values dt{color:#dfdcc4}#handbook-modal .hb-values dd{margin:0}
+#handbook-modal .hb-caution{color:#d6bc72!important}#handbook-modal .hb-danger{color:#d68f78!important}
+#handbook-modal ol{font:15px/1.9 'Noto Sans SC',system-ui,sans-serif;color:#ddd9c7;padding-left:22px;margin:0 0 10px}
+#handbook-modal .hb-related{display:flex;align-items:baseline;flex-wrap:wrap;gap:12px 22px;margin:30px 7px 0}
+#handbook-modal .hb-related h4{font-size:16px;color:#c9b78a;font-weight:400;margin:0 10px 0 0}
+#handbook-modal .hb-related .hb-related-link{width:auto;display:inline;padding:2px 0;font-size:15px;color:#e0ce98;text-decoration:underline;text-underline-offset:5px;max-width:100%}
+#handbook-modal .hb-related .hb-related-link+.hb-related-link::before{content:'◇';margin-right:20px;display:inline;position:static;background:none;width:auto;color:#bcaa76;text-decoration:none}
+#handbook-modal .hb-footer{border-top:1px solid #827653;margin-top:10px;padding:11px 6px;color:#b4aa8d;font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-shrink:0;line-height:1.5}
+#handbook-modal .hb-key-hint{white-space:nowrap;font-family:system-ui,sans-serif;color:#c7b383}#handbook-modal .hb-key-hint span{margin-left:5px;font-size:11px;color:#9e9a85}
+#handbook-modal .hb-search-results h3{font-size:28px;color:var(--hb-ink);margin:5px 0 8px;font-weight:400}
+#handbook-modal .hb-search-results .hb-result-count{font-size:13px;color:var(--hb-muted);margin-bottom:15px}
+#handbook-modal .hb-search-result{display:grid;width:100%;grid-template-columns:minmax(0,1fr) auto 12px;gap:14px;align-items:center;border-bottom:1px solid #655f49;padding:13px 10px;font-size:17px}
+#handbook-modal .hb-search-result small{font-size:12px;color:#b6a780}#handbook-modal .hb-search-result b{font-weight:400;color:#d2bf89}
+#handbook-modal .hb-empty{padding:55px 25px;max-width:650px;margin:0 auto;text-align:center}
+#handbook-modal .hb-empty>.hb-icon{width:42px;height:42px;margin:0 auto 20px}
+#handbook-modal .hb-empty h3{font-size:26px;font-weight:400;color:var(--hb-ink)}
+#handbook-modal .hb-empty button{color:var(--hb-gold);border-bottom:1px solid var(--hb-rule);margin-top:12px}
+#handbook-modal .hb-sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+#handbook-modal #handbook-directory-toggle,#handbook-modal .hb-sidebar-scrim{display:none}
+#handbook-modal .hb-tree,#handbook-modal .hb-reading-area{scrollbar-width:thin;scrollbar-color:#8d846d #242823}
+html[lang=en] #handbook-modal .hb-brand h2{letter-spacing:.025em;font-size:clamp(21px,2.3vw,32px)}
+html[lang=en] #handbook-modal .hb-category>summary{font-size:16px}html[lang=en] #handbook-modal .hb-entry-link{font-size:14px}
+html[lang=en] #handbook-modal .hb-title-line h3{letter-spacing:0}
+html[lang=en] #handbook-modal .hb-rule>summary>span{font-size:16px}html[lang=en] #handbook-modal .hb-rule>summary>small{font-size:12px}
+@media(min-width:1600px){#handbook-modal .hb-body{grid-template-columns:28% minmax(0,1fr)}#handbook-modal .hb-reader{padding:25px 31px 0}#handbook-modal .hb-category>summary{font-size:20px}#handbook-modal .hb-entry-link{font-size:17px}#handbook-modal .hb-rule>summary{min-height:49px}}
+@media(max-width:1000px){#handbook-modal .hb-brand>span{display:none}#handbook-modal .hb-body{grid-template-columns:29% minmax(0,1fr)}#handbook-modal .hb-sidebar{padding:11px 10px}#handbook-modal .hb-shortcuts button{padding:4px}#handbook-modal .hb-shortcuts .hb-icon{width:27px;height:27px}#handbook-modal .hb-reader{padding:17px 18px 0}#handbook-modal .hb-rule>summary{flex-wrap:wrap;gap:5px 10px}#handbook-modal .hb-rule>summary>span{flex:1 1 calc(100% - 25px);font-size:17px}#handbook-modal .hb-rule>summary>small{flex:1 1 100%;padding-left:16px}#handbook-modal .hb-category>summary{font-size:16px}#handbook-modal .hb-entry-link{font-size:14px;padding-left:25px}}
+@media(max-width:760px){#handbook-modal{width:calc(100vw - 12px);height:calc(100dvh - 16px);padding:3px}#handbook-modal .hb-header{padding:10px;gap:8px}#handbook-modal .hb-brand{gap:8px}#handbook-modal .hb-brand>.hb-icon{width:29px;height:31px}#handbook-modal .hb-brand h2{font-size:22px;letter-spacing:.03em}#handbook-modal .hb-header-controls{gap:3px}#handbook-modal .hb-header-controls button{padding:5px;min-height:36px;gap:4px;font-size:12px}#handbook-modal .hb-header-controls .hb-icon{width:24px;height:24px}#handbook-modal .hb-header-controls .hb-close{padding-left:5px;margin-left:0}#handbook-modal .hb-back{display:none!important}#handbook-modal #handbook-directory-toggle{display:flex}#handbook-modal .hb-body{display:block;min-height:0}#handbook-modal .hb-sidebar{display:none;position:absolute;inset:0 auto 0 0;width:min(330px,85%);z-index:3;border-right:1px solid var(--hb-gold);box-shadow:12px 0 25px #0005;padding:15px 18px}#handbook-modal.hb-directory-open .hb-sidebar{display:flex}#handbook-modal.hb-directory-open .hb-sidebar-scrim{display:block;position:absolute;inset:0;background:#0008;width:100%;z-index:2}#handbook-modal .hb-reader{height:100%;padding:15px 13px 0}#handbook-modal .hb-search{gap:7px;margin-bottom:16px}#handbook-modal .hb-search>button{font-size:15px;padding:5px 13px}#handbook-modal .hb-search-input{padding:0 8px;gap:7px}#handbook-modal .hb-search input{font-size:16px;min-height:40px}#handbook-modal .hb-search-input>.hb-icon{width:20px;height:20px}#handbook-modal .hb-breadcrumb{font-size:12px;margin-bottom:14px}#handbook-modal .hb-title-line{gap:7px 15px;margin-bottom:14px}#handbook-modal .hb-title-line h3{font-size:28px}#handbook-modal .hb-title-line>span{font-size:13px}#handbook-modal .hb-intro p{font-size:15px}#handbook-modal .hb-rule-body{padding:13px}#handbook-modal .hb-values>div{grid-template-columns:28% 1fr;font-size:14px;gap:10px;padding:8px 0}#handbook-modal .hb-footer{font-size:11px;padding:10px 0}#handbook-modal .hb-key-hint{display:none}#handbook-modal .hb-search-result{grid-template-columns:minmax(0,1fr) 12px;gap:4px 10px;font-size:16px}#handbook-modal .hb-search-result small{grid-row:2;grid-column:1}#handbook-modal .hb-search-result b{grid-column:2;grid-row:1/3}#handbook-modal .hb-related{gap:10px 15px}#handbook-modal .hb-related h4{width:100%;margin:0}#handbook-modal .hb-related .hb-related-link{font-size:14px}#handbook-modal .hb-related .hb-related-link+.hb-related-link::before{margin-right:14px}html[lang=en] #handbook-modal .hb-brand h2{font-size:18px;white-space:normal;line-height:1.2}html[lang=en] #handbook-modal .hb-brand>.hb-icon{display:none}#handbook-modal .hb-empty{padding:35px 10px}}
+@media(prefers-reduced-motion:reduce){#handbook-modal *{transition:none!important;scroll-behavior:auto!important}}
