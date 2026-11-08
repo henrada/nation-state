@@ -17,9 +17,14 @@ for(const language of ['zh','en']){
   assert.equal(missing.length,0,'missing metric entries: '+missing.join(','));
   for(const id of run('handbookState.entries.filter(e=>e.metricGuide).map(e=>e.id)')){
    c.entryId=id;
-   assert.equal(run("['increase','decrease','thresholds','notes'].every(k=>metricGuideDefinition(entryId)[k].length===2&&metricGuideDefinition(entryId)[k].every(t=>t.length>20))"),true,id+' complete bilingual guidance');
+   assert.equal(run("['increase','decrease','notes'].every(k=>metricGuideDefinition(entryId)[k].length===2&&metricGuideDefinition(entryId)[k].every(t=>t.length>20))"),true,id+' complete bilingual guidance');
    run('hbSelectEntry(entryId)');
-   for(const label of language==='zh'?['如何提高','如何降低','数值与门槛','计算与关联']:['How to Increase','How to Decrease','Values &amp; Thresholds','Calculation &amp; Connections'])assert.ok(nodes['guide-results'].innerHTML.includes(label),id+' '+label);
+   for(const label of language==='zh'?['如何提高','如何降低','计算与关联']:['How to Increase','How to Decrease','Calculation &amp; Connections'])assert.ok(nodes['guide-results'].innerHTML.includes(label),id+' '+label);
+   const riskEntries=['approval','forecast','inflation','unemployment','debt','confidence','judicial','local-demands','faction-relation','loyalty','clergy-loyalty','family-recognition','central-authority','military-backing'];
+   assert.equal(nodes['guide-results'].innerHTML.includes(language==='zh'?'数值与门槛':'Values &amp; Thresholds'),riskEntries.includes(id),id+' only real risk or situation thresholds get a section');
+   const retainedEffects=run('metricGuideLanguage(metricGuideDefinition(entryId).effects)');
+   if(retainedEffects){c.retainedEffects=retainedEffects;assert.ok(nodes['guide-results'].innerHTML.includes(run('hbParagraphs(retainedEffects)')),id+' ordinary effects retained under calculation');}
+   assert.doesNotMatch(nodes['guide-results'].innerHTML,/没有独立危机或失败门槛|没有单独由增长压力触发|no independent crisis or defeat threshold/);
    assert.doesNotMatch(nodes['guide-results'].innerHTML,/<details[^>]*\sopen(?:[\s=>])/);
    total++;
   }
