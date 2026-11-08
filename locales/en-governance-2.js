@@ -23,8 +23,6 @@ Object.assign(globalThis.NATION_EN ||= {}, {
  "本存档已达到宪法规定的任期上限": "This archive has reached the constitutional maximum term of office.",
  "进入结算": "Into assessment.",
  "本存档已达到宪法规定的任期上限，进入结算。": "The file has reached the constitutional maximum term of office and is now closed.",
- "政府失去可持续融资渠道": "Loss of sustainable financing by Governments",
- "债务危机：政府失去可持续融资渠道。": "Debt crisis: Governments lose sustainable access to finance.",
  "旧存档已达到宪法规定的任期上限": "The old archive has reached the constitutional maximum term of office",
  "旧存档已达到宪法规定的任期上限。": "The old archive has reached the constitutional maximum term of office.",
  "选择制度": "Selection system",

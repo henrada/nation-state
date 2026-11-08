@@ -141,8 +141,6 @@ Object.assign(globalThis.NATION_EN ||= {}, {
  "分阶段协商": "Phased consultations",
  "坚持现有安排": "Maintaining the existing arrangements",
  "支持率 -5；稳定度 -6。": "Rate of support - 5; stability - 6.",
- "政府失去了可持续的融资渠道": "Governments lost sustainable access to finance",
- "债务危机：政府失去了可持续的融资渠道。": "Debt crisis: Governments have lost sustainable access to finance.",
  "政治危机": "Political crisis",
  "政府失去维持行政运转的能力": "The Government has lost its capacity to maintain the functioning of the administration",
  "政治危机：政府失去维持行政运转的能力。": "Political crisis: Government has lost its capacity to maintain the functioning of the administration.",

@@ -20,7 +20,7 @@ for(const language of ['zh','en']){
    assert.equal(run("['increase','decrease','notes'].every(k=>metricGuideDefinition(entryId)[k].length===2&&metricGuideDefinition(entryId)[k].every(t=>t.length>20))"),true,id+' complete bilingual guidance');
    run('hbSelectEntry(entryId)');
    for(const label of language==='zh'?['如何提高','如何降低','计算与关联']:['How to Increase','How to Decrease','Calculation &amp; Connections'])assert.ok(nodes['guide-results'].innerHTML.includes(label),id+' '+label);
-   const riskEntries=['approval','forecast','inflation','unemployment','debt','confidence','judicial','local-demands','faction-relation','loyalty','clergy-loyalty','family-recognition','central-authority','military-backing'];
+   const riskEntries=['approval','forecast','inflation','unemployment','debt','judicial','local-demands','faction-relation','loyalty','clergy-loyalty','family-recognition','central-authority','military-backing'];
    assert.equal(nodes['guide-results'].innerHTML.includes(language==='zh'?'数值与门槛':'Values &amp; Thresholds'),riskEntries.includes(id),id+' only real risk or situation thresholds get a section');
    const retainedEffects=run('metricGuideLanguage(metricGuideDefinition(entryId).effects)');
    if(retainedEffects){c.retainedEffects=retainedEffects;const groups=run("hbClassifiedData(entryId,'effects',metricGuideDefinition(entryId))");assert.ok(nodes['guide-results'].innerHTML.includes(groups?run("hbClassifiedHTML(hbClassifiedData(entryId,'effects',metricGuideDefinition(entryId)))"):run('hbParagraphs(retainedEffects)')),id+' ordinary effects retained under calculation');}
@@ -42,7 +42,8 @@ for(const language of ['zh','en']){
   run("hbSelectEntry('approval')");
   assert.equal(nodes['guide-results'].innerHTML.includes(language==='zh'?'联邦委员会制附加规则':'Additional Federal Council Rules'),regime==='federal','federal conditions appear only in federal games');
   assert.ok(nodes['guide-results'].innerHTML.includes(language==='zh'?'每季度额外：稳定度 −4、信心 −3。':'Additional quarterly loss: −4 stability and −3 confidence.'));
-  run("hbSelectEntry('debt')");assert.ok(nodes['guide-results'].innerHTML.includes(language==='zh'?'债务/GDP超过190%，且信心低于25':'Debt-to-GDP above 190% AND confidence below 25'),'joint financing conditions stay in one row');
+  run("hbSelectEntry('debt')");assert.ok(nodes['guide-results'].innerHTML.includes(language==='zh'?'债务/GDP低于60%，且通胀低于20%':'Debt-to-GDP below 60% AND inflation below 20%'),'joint crisis recovery conditions stay in one row');
+  for(const id of ['debt','confidence']){c.entryId=id;run('hbSelectEntry(entryId)');assert.doesNotMatch(nodes['guide-results'].innerHTML,/190%|融资失败|融资渠道|financing failure|sustainable financing/,'removed financing defeat absent from all guide sections');}
   run("hbSelectEntry('rating')");assert.equal(run("hbClassifiedData('rating','effects',metricGuideDefinition('rating'))[0].rows.length"),7,'all seven rating bands');assert.ok(nodes['guide-results'].innerHTML.includes('CCC'));
   run("hbSelectEntry('ap')");assert.ok(nodes['guide-results'].innerHTML.includes(language==='zh'?'可超过6点':'may exceed 6'),'planned mode is not capped at six');
   assert.doesNotMatch(run("hbClassifiedHTML([hbListGroup('<script>','<script>',[hbListRow('<img>','<img>','<script>','<script>')])])"),/<script>|<img>/,'classified text is escaped');

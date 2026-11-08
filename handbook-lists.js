@@ -45,14 +45,8 @@ function hbClassifiedData(id,key,definition){
    row('超过 70%','Above 70%','增加执政财政压力。','Adds governing fiscal pressure.','caution'),
    row('超过 90%','Above 90%','出现经济危机风险提醒。','Displays an economic-crisis risk alert.','caution'),
    row('达到 / 超过 100%','At / Above 100%','达到100%可触发经济危机；超过100%另增加国债风险溢价。','At 100%, an economic crisis can start; above 100%, an additional bond-risk premium applies.','danger'),
-   row('危机结束：两项同时满足','Recovery: both conditions','债务/GDP低于60%，且通胀低于20%。','Debt-to-GDP below 60% AND inflation below 20%.'),
-   row('融资失败：两项同时满足','Financing failure: both conditions','债务/GDP超过190%，且信心低于25，失去可持续融资渠道并结束游戏。','Debt-to-GDP above 190% AND confidence below 25 end the game through loss of sustainable financing.','danger')
-  ],...admin)];
-  case 'confidence':return [group('融资与经济影响','Financing & Economic Effects',[
-   row('信心低于 25，且债务/GDP超过 190%','Confidence below 25 AND debt-to-GDP above 190%','触发融资失败，执政结束；单独信心低于25不足以触发。','Triggers financing failure and ends your rule; confidence below 25 alone is insufficient.','danger'),
-   row('信心下降','Falling confidence','国债风险溢价提高、信用评级变差。','Raises bond-risk premiums and worsens credit ratings.','caution'),
-   row('信心提高','Rising confidence','有利于经济增长和融资。','Supports growth and financing.')
-  ],...admin)];
+   row('危机结束：两项同时满足','Recovery: both conditions','债务/GDP低于60%，且通胀低于20%。','Debt-to-GDP below 60% AND inflation below 20%.')
+  ])];
   case 'judicial':return [group('低独立性与司法危机','Low Independence & Judicial Crisis',[
    row('低于 35','Below 35','每季度支持率 −2、稳定度 −2。','−2 approval and −2 stability per quarter.','caution'),
    row('低于 20','Below 20','每季度支持率 −3、稳定度 −3，替代上一档，不重复叠加。','−3 approval and −3 stability per quarter, replacing the previous tier.','danger'),
@@ -110,6 +104,10 @@ function hbClassifiedData(id,key,definition){
   ])];
  }
  if(key==='effects')switch(id){
+  case 'confidence':return [group('融资与经济影响','Financing & Economic Effects',[
+   row('信心下降','Falling confidence','国债风险溢价提高、信用评级变差。','Raises bond-risk premiums and worsens credit ratings.','caution'),
+   row('信心提高','Rising confidence','有利于经济增长和融资。','Supports growth and financing.')
+  ])];
   case 'ap':return [group('每季度行动点','Action Points per Quarter',[
    row('固定行动点','Fixed','每季3点＋科研等级，上限6点。','3 per quarter + research level, capped at 6.'),
    row('随机行动点','Random','初始1—6点；科研每升1级，下限提高1点，最多缩至6—6。','Initially 1–6; each research level raises the lower bound by 1, eventually reaching 6–6.'),
