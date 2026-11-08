@@ -337,7 +337,7 @@ Object.assign(globalThis.NATION_EN ||= {}, {
  "调整游戏数据": "Adjust Game Data",
  "参数": "Parameters",
  "管理员模式 / 测试存档": "Administrator Mode / Test Archive",
- "此存档没有任期上限，也不会因选举、财政、稳定、叛乱或政府危机结束。正常季度事件仍需回复。点击“开启新历史”才会替换本局。": "The archive has no maximum term of office and will not end as a result of elections, finances, stability, rebellion or government crisis. The regular quarterly events still require a response. You can only replace this game by clicking on \"Closing New History\".",
+ "管理员存档支持无限季度，豁免失败结局。正常季度事件仍需回复。点击“开启新历史”才会替换本局。": "Administrator saves allow unlimited quarters and are exempt from defeat endings. Regular quarterly events still require replies. Start a New History replaces the current game.",
  "当前值": "Current value [p]",
  "当前值：": "Current value [v]",
  "可用范围": "Scope available",

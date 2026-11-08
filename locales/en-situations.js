@@ -305,7 +305,7 @@ Object.assign(globalThis.NATION_EN ||= {}, {
  "成功举办将增加支持度": "Successful hosting will increase support",
  "投资信心和增长压力": "Investment confidence and growth pressures",
  "具体收益见局势说明": "Specific gains are reflected in the situation statement",
- "体育投入与国家稳定让你获得申办机会。本局最多申办一次，接受后启动八季度筹备任务；取消或失败也不会返还机会。拒绝不消耗申办机会。成功举办将增加支持度、投资信心和增长压力，具体收益见局势说明。": "Sport investment and national stability give you the opportunity to apply. this game would apply for a maximum of one application and would then start an eight-quarter preparatory mission; the opportunity would not be returned if cancelled or failed. Refusal not to waste the application. The success of the event will increase support, investment confidence and growth pressure, with concrete benefits as illustrated by the situation.",
+ "体育投入与国家稳定让你获得申办机会。本局最多申办一次，接受后启动八季度筹备任务。拒绝不消耗申办机会。成功举办将增加支持度、投资信心和增长压力，具体收益见局势说明。": "Sports investment and national stability have earned a hosting opportunity. Each game allows one bid; acceptance begins eight quarters of preparations. Declining preserves the opportunity. Successful games raise approval, investor confidence and growth pressure; see the situation for the rewards.",
  "新宪法生效": "Entry into force of the new Constitution",
  "举行首次竞争性选举": "Conduct of first competitive elections",
  "此前执政时间与历史全部保留": "All the time and history of the previous administration were preserved.",

@@ -187,7 +187,7 @@ Object.assign(globalThis.NATION_EN ||= {}, {
  "议题修正": "Subject amendment",
  "主席始终赞成自己提交的法案": "The chairman has always been in favour of the bill he submitted.",
  "反对票不触发下院派系的额外稳定惩罚": "The vote doesn't trigger an additional stable punishment for the lower house faction.",
- "每位委员本案意愿达到60时投赞成票。预算与改革须超过半数；修宪须达到三分之二。预算增减结合个人倾向折算，五项税收均参与；改革与宪法议题按委员路线调整。军衔、内阁职务与派系人数不会赋予额外票数。": "When the will of each member in the present case reached 60. Budgets and reforms must be more than half; constitutional amendments must be two thirds. The budget increases and decreases are converted in line with individual preferences, with the participation of five taxes; the reform and constitutional issues are aligned along the lines of the Council. No additional votes will be granted for ranks, cabinet posts and factional numbers.",
+ "每位委员本案意愿达到60时投赞成票。预算与改革须超过半数；修宪须达到三分之二。预算增减结合个人倾向折算，五项税收均参与；改革与宪法议题按委员路线调整。每位委员拥有一票。": "A councillor votes yes at case willingness of 60. Budgets and reforms require more than half the votes; amendments require two thirds. All five tax rates and spending changes are assessed against individual preferences; reforms and constitutional matters follow each councillor’s outlook. Each councillor has one vote.",
  "主持委员会会议": "Chairing of Committee meetings",
  "拥有一票": "One vote.",
  "主持委员会会议，拥有一票。": "Chairing the Committee with one vote.",

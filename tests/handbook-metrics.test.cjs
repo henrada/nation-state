@@ -17,7 +17,7 @@ for(const language of ['zh','en']){
   assert.equal(missing.length,0,'missing metric entries: '+missing.join(','));
   for(const id of run('handbookState.entries.filter(e=>e.metricGuide).map(e=>e.id)')){
    c.entryId=id;
-   assert.equal(run("['increase','decrease','notes'].every(k=>metricGuideDefinition(entryId)[k].length===2&&metricGuideDefinition(entryId)[k].every(t=>t.length>20))"),true,id+' complete bilingual guidance');
+   assert.equal(run("['increase','decrease','notes'].every(k=>metricGuideDefinition(entryId)[k].length===2&&metricGuideDefinition(entryId)[k].every(t=>t.trim().length>0))"),true,id+' complete bilingual guidance');
    run('hbSelectEntry(entryId)');
    for(const label of language==='zh'?['如何提高','如何降低','计算与关联']:['How to Increase','How to Decrease','Calculation &amp; Connections'])assert.ok(nodes['guide-results'].innerHTML.includes(label),id+' '+label);
    const riskEntries=['approval','forecast','inflation','unemployment','debt','judicial','local-demands','faction-relation','loyalty','clergy-loyalty','family-recognition','central-authority','military-backing'];
@@ -30,6 +30,7 @@ for(const language of ['zh','en']){
     assert.equal(run('hbClassifiedData(entryId,field,metricGuideDefinition(entryId)).every(g=>g.rows.every(r=>r.label.length===2&&r.text.length===2&&r.label.every(Boolean)&&r.text.every(Boolean)))'),true,id+' complete bilingual classification');
    }
    assert.doesNotMatch(nodes['guide-results'].innerHTML,/没有独立危机或失败门槛|没有单独由增长压力触发|no independent crisis or defeat threshold/);
+   assert.doesNotMatch(nodes['guide-results'].innerHTML,/不会|并不是额外|not another random roll|does not add a second interest penalty/,'redundant non-effects are absent from the rendered article');
    assert.doesNotMatch(nodes['guide-results'].innerHTML,/<details[^>]*\sopen(?:[\s=>])/);
    total++;
   }

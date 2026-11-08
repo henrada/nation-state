@@ -79,7 +79,7 @@ function judgeNominations107(seat=null){
 }
 function judgeAppointmentPreview107(seat,key){
  const c=judicialNomineeSource107(key),j=constitution().judges[seat];if(s.ended||!j?.vacant||!eligibleForCourt107(c)){toast('该席位或候选人已不符合任命条件');return}
- modal(`<span class="tag">司法任命 · 第 ${seat+1} 席</span><h2>任命${esc(c.name)}为${esc(JUDGE_TITLES[pstate().regime][0])}</h2><p>${esc(pstate().factions[c.faction].name)} · ${TRAITS[c.trait].name}</p>${honourDescription107(c)}<p>司法倾向：${judgeTraitText107(c.trait)}。结果在确认时确定，刷新或读档不会重抽。人物的原姓名和称号保留。</p><p>消耗 1 政治行动点；不改变司法独立度。此人将永久退出政府任命候选名单。${judicialStaff107().chiefPending?'补缺后，从全体现任法官中等概率抽取新首席。':''}</p><button onclick="judgeNominations107(${seat})">返回候选池</button> <button class="primary" onclick="appointJudge107(${seat},'${key}')">确认任命法官 · 1 行动点</button>`);
+ modal(`<span class="tag">司法任命 · 第 ${seat+1} 席</span><h2>任命${esc(c.name)}为${esc(JUDGE_TITLES[pstate().regime][0])}</h2><p>${esc(pstate().factions[c.faction].name)} · ${TRAITS[c.trait].name}</p>${honourDescription107(c)}<p>司法倾向：${judgeTraitText107(c.trait)}。结果在确认任命时确定并保存。人物的原姓名和称号保留。</p><p>消耗 1 政治行动点；不改变司法独立度。此人将永久退出政府任命候选名单。${judicialStaff107().chiefPending?'补缺后，从全体现任法官中等概率抽取新首席。':''}</p><button onclick="judgeNominations107(${seat})">返回候选池</button> <button class="primary" onclick="appointJudge107(${seat},'${key}')">确认任命法官 · 1 行动点</button>`);
 }
 function appointJudge107(seat,key){
  const c=judicialNomineeSource107(key),old=constitution().judges[seat];if(s.ended||!old?.vacant||!eligibleForCourt107(c))return;

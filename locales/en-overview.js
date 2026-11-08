@@ -51,7 +51,7 @@ Object.assign(globalThis.NATION_EN ||= {}, {
  "刷新或读档不会重投": "Refreshing or reading files will not be re-invested",
  "科研在新季度结算时生效": "Research is effective at the end of the new quarter.",
  "模式创建后固定": "Fixed after mode is created",
- "每季额度只发放一次；刷新或读档不会重投。科研在新季度结算时生效，模式创建后固定。": "Points are granted once per quarter; refreshing or loading cannot reroll them. Research takes effect at the next quarterly update. The chosen mode is fixed for this game.",
+ "每季额度发放一次，投骰结果随本局保存。科研在新季度结算时生效，模式创建后固定。": "Points are granted once per quarter, and the roll is saved with the game. Research takes effect during the next quarterly update. The selected mode is fixed for this game.",
  "温带海岸与河口平原": "Temperature coast and estuary plain",
  "繁忙的港口联通世界市场": "Busy ports connect to the world market",
  "服务业与出口制造业支撑经济": "Services and export manufacturing support economies",

@@ -1075,7 +1075,7 @@ Object.assign(globalThis.NATION_EN ||= {}, {
  "进度完成": "Progress complete.",
  "未来六季度增长压力": "Growth pressures for the next six quarters",
  "确认并继续": "Confirm and Continue",
- "每季额度只发放一次；刷新或读档不会重投。": "Quarterly amounts are issued only once; refreshing or reading files are not re-invested.",
+ "每季额度发放一次，投骰结果随本局保存。": "Points are granted once per quarter, and the roll is saved with the game.",
  "科研在新季度结算时生效，模式创建后固定。": "Scientific research takes effect at the time of the closing of the new quarter and the model is fixed when it is created.",
  "在特许经营、职位分配与公共采购中的负面材料。": "Negative material in franchising, job allocation and public procurement.",
  "你可以利用材料迫使家族承认统治，或公开调查并收回一项势力。": "You can use the material to force the family to recognize rule, or to publicly investigate and take back a power.",

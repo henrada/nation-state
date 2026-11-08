@@ -112,7 +112,7 @@ Object.assign(globalThis.NATION_EN ||= {}, {
  "复议通过的议案延缓两个季度实施；修宪仍须司法审查，通过后再延缓两个季度生效。": "The bill passed by the Review has been deferred for two quarters; constitutional amendments are still subject to judicial review and have been delayed for two more quarters.",
  "复议通过后不再重复提交上院": "After review, no repeats to the House of Lords",
  "修宪随后进入司法审查": "Constitutional revision followed by judicial review",
- "复议通过后不再重复提交上院；修宪随后进入司法审查。": "The review is not repeated before the House of Lords; the constitutional amendment is subsequently subject to judicial review.",
+ "复议通过后实施；修宪随后进入司法审查。": "An approved reconsideration proceeds to implementation; an amendment next enters judicial review.",
  "议程生效": "Entry into force",
  "已完成两院程序": "Two house procedures have been completed",
  "已完成两院程序，开始实施。": "The two-chamber procedure has been completed and has been implemented.",

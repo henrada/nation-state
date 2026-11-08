@@ -66,7 +66,7 @@ function constitutionalSpec(mode,action,target){
    spec.description=`保留这份未启动草案；启动成本由 ${fmt(reformStartCost(offer.catalog,offer.uid),2)}% GDP 降至 ${fmt(ref.cost*(1-discount),2)}% GDP。每次减免原价的 25%，累计最多减免 50%；通过后仍需另交改革案。`;
    spec.discount=discount;
   }else if(action==='relations'&&pstate().factions[Number(target)]){
-   spec.title='关于政治团体参与公共事务的解释';spec.description=`${pstate().factions[Number(target)].name}团体关系 +10（最高 100）。不直接改变席位。`;
+   spec.title='关于政治团体参与公共事务的解释';spec.description=`${pstate().factions[Number(target)].name}团体关系 +10（最高 100）。`;
    spec.stance='liberal';spec.axes={authority:-2,law:1};
   }else return null;
  }else if(mode==='amend'){

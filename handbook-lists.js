@@ -22,13 +22,13 @@ function hbClassifiedData(id,key,definition){
    group('模式说明','Mode Note',[],...admin)
   ];
   case 'forecast':return [group('民意提醒与评议','Approval Alerts & Reviews',[
-   row('低于 50%','Below 50%','出现提醒；平时不会据此直接判定败选。','Displays an alert; it does not immediately cause election defeat between elections.','caution'),
+   row('低于 50%','Below 50%','出现执政提醒。','Displays a governing alert.','caution'),
    row('民主国家：选举结算','Democracy: election settlement','加权支持率必须超过50%才能胜选，恰好50%不足。','Weighted support must exceed 50% to win; exactly 50% is insufficient.','danger'),
-   row('非民主国家：权力评议','Non-democratic legitimacy review','按高于或低于50%的差额修正稳定，不统一套用民主国家的败选结局。','Adjusts stability by the gap above or below 50%, rather than universally applying democratic election defeat.')
+   row('非民主国家：权力评议','Non-democratic legitimacy review','按高于或低于50%的差额修正稳定。','Adjusts stability by the gap above or below 50%, rather than universally applying democratic election defeat.')
   ]),group('宪制条件','Constitutional Conditions',[
    row('社会多元修正案','Social Pluralism Amendment','加权支持率达到80%，且稳定达到60；长期少数群体问题仍存在、尚未采取强制措施，才可提出。','To propose: weighted support at least 80%, stability at least 60, and an unresolved minority issue with no coercive policy underway.'),
    row('联邦修宪审查','Federal amendment review','司法赞成达到半数，同时加权支持率超过50%，两项必须同时满足。','Judicial approval of at least half and weighted support above 50% must hold simultaneously.')
-  ],'达到提出条件不等于修宪通过，仍须完成审议程序。','Eligibility to propose does not enact an amendment; its review procedure must still be completed.')];
+  ],'提出修正案后，须完成审议程序。','After proposing an amendment, complete its review procedure.')];
   case 'inflation':return [group('通胀阶段','Inflation Levels',[
    row('央行目标：2%','Central-bank target: 2%','偏离2%越远，民意目标受到的损害越大；过低或负通胀也有代价。','Greater deviation from 2% harms the approval target; very low or negative inflation also has costs.'),
    row('超过 45%','Above 45%','出现经济危机风险提醒。','Displays an economic-crisis risk alert.','caution'),
@@ -49,7 +49,7 @@ function hbClassifiedData(id,key,definition){
   ])];
   case 'judicial':return [group('低独立性与司法危机','Low Independence & Judicial Crisis',[
    row('低于 35','Below 35','每季度支持率 −2、稳定度 −2。','−2 approval and −2 stability per quarter.','caution'),
-   row('低于 20','Below 20','每季度支持率 −3、稳定度 −3，替代上一档，不重复叠加。','−3 approval and −3 stability per quarter, replacing the previous tier.','danger'),
+   row('低于 20','Below 20','每季度支持率 −3、稳定度 −3，按本档数值结算。','−3 approval and −3 stability per quarter, replacing the previous tier.','danger'),
    row('达到 20 或更低','20 or lower','可触发司法公平事件。','Can trigger a judicial-fairness movement.','danger'),
    row('恢复至超过 40','Recovery above 40','司法公平事件结束，恰好40不足。','The judicial-fairness movement ends; exactly 40 is insufficient.')
   ]),group('司法互动频率','Judicial Interaction Frequency',[
@@ -59,10 +59,10 @@ function hbClassifiedData(id,key,definition){
   ])];
   case 'local-demands':return [group('履约进度','Demand Progress',[
    row('完全未履约','No fulfilment','地区基准支持最多扣减20%。','Regional baseline support can fall by up to 20%.'),
-   row('达到 100%','At least 100%','完成本轮要求，同一项未完成诉求不再重复出现。','Completes the current demand; that same unfinished request no longer repeats.'),
+   row('达到 100%','At least 100%','完成本轮地方诉求。','Completes the current regional demand.'),
    row('超额履约','Overdelivery','最多额外增加8%的基准支持修正。','Adds at most an 8% baseline support bonus.'),
    row('诉求周期第六季度起','From the sixth quarter of a cycle','未履约追加执政压力；灾区可暂缓原诉求惩罚。','Unmet demands add governing pressure; disaster-hit regions may be temporarily exempt.','caution'),
-   row('至少三地未履约','At least three unmet regions','若稳定连续两季度低于35，则同时满足叛乱的常规触发条件；并非必然发生叛乱。','Combined with two quarters of stability below 35, meets the ordinary rebellion conditions; rebellion is not guaranteed.','caution')
+   row('至少三地未履约','At least three unmet regions','若稳定同时连续两季度低于35，每季有35%概率触发叛乱。','With stability also below 35 for two consecutive quarters, each quarter has a 35% chance of rebellion.','caution')
   ])];
   case 'faction-relation':return [group('党派关系与联合政府','Group Relations & Coalitions',[
    row('数值范围','Range','0—100。','0–100.'),
@@ -155,7 +155,6 @@ function hbClassifiedData(id,key,definition){
   case 'human':return [group('教育投入与人力资本','Education & Human Capital',[
    row('教育预算超过 4.5%','Education spending above 4.5%','人力资本积累项为正；4.5%为基础积累分界。','Positive human-capital accumulation; 4.5% is the baseline.'),
    row('每增加 1 点人力资本','Each additional human-capital point','潜在增长提高0.025个百分点。','Adds 0.025 percentage points to potential growth.'),
-   row('人力资本达到 100','Human capital at 100','不会直接增加行动点；该收益由科研等级决定。','Does not directly grant action points; research level determines that benefit.')
   ])];
   case 'development':return [group('地区发展与地方支持','Regional Development & Support',[
    row('数值范围','Range','0—100。','0–100.'),row('低于 50','Below 50','对地区支持产生负修正。','Applies a negative regional-support modifier.'),
@@ -172,13 +171,13 @@ function hbClassifiedData(id,key,definition){
    row('折算倾向 50','Effective willingness 50','本团体0%支持。','0% of the group supports the bill.'),
    row('折算倾向 51','Effective willingness 51','本团体10%支持。','10% of the group supports the bill.'),
    row('折算倾向 60 或以上','Effective willingness 60 or higher','本团体100%支持；中间线性计算，支持比例限制在0%—100%。','100% group support; intermediate values scale linearly, bounded to 0–100%.'),
-   row('下院折算倾向低于 50','Lower-house willingness below 50','法案通过后，每低1点稳定度 −0.1，各团体累加；上院不适用此惩罚。','After passage, −0.1 stability per missing point, summed across groups. The upper house does not apply this penalty.','caution'),
+   row('下院折算倾向低于 50','Lower-house willingness below 50','法案通过后，每低1点稳定度 −0.1，各团体累加。','After passage, −0.1 stability per missing point, summed across groups.','caution'),
    ...(id==='agenda'?[row('军委会成员意愿达到 60','Committee-member willingness at least 60','该成员投赞成票；按每人一票计算。','That member votes yes; each member has one vote.')]:[])
   ])];
   case 'full-support':return [group('全票支持门槛','Full-support Threshold',[
    row('基准门槛','Baseline','60。','60.'),row('议程倾向达到本案门槛','Willingness reaches this bill’s threshold','该派系全票支持。','The faction fully supports the bill.'),
    row('低于门槛 10 点','10 points below the threshold','该派系不提供支持；中间差额按比例计算。','The faction provides no support; intermediate values scale proportionally.')
-  ],'更高门槛代表更难取得全票，不代表更多议席支持。','A higher threshold makes full support harder to obtain; it does not mean more seats support the bill.')];
+  ],'门槛越高，取得全票支持所需的议程倾向越高。','A higher threshold requires greater agenda willingness to secure full support.')];
   case 'pass-rate':return [group('法案审议条件','Legislative Requirements',[
    row('两院制：预算与改革','Bicameral budgets & reforms','两院院内支持率均须超过50%。','More than 50% chamber support in each house.'),
    row('一院制：一般预算与改革','Ordinary unicameral budgets & reforms','院内支持率须达到51%。','Chamber support must reach at least 51%.'),
@@ -186,12 +185,11 @@ function hbClassifiedData(id,key,definition){
    row('释宪','Interpretation','须超过50%支持。','Requires more than 50% support.'),
    row('通常修宪程序','Usual amendment procedure','下院三分之二支持，再经适用的上院复审与司法审查。','Two-thirds lower-house support, then any applicable upper-house and judicial review.'),
    row('联邦附加条件','Additional federal conditions','依议案类型，另要求全国支持率或加权支持率达标。','The applicable national-approval or weighted-support condition must also be met.')
-  ],'未通过不实施政策；退回、复议、延迟和流案规则以本局制度及议案类型为准。','Rejection does not enact policy. Return, reconsideration, delay and lapse rules depend on the current system and bill type.')];
+  ],'政策通过后实施；退回、复议、延迟和流案规则见本局制度。','Policy takes effect after approval; return, reconsideration, delay and lapse rules follow the current system and bill type.')];
   case 'upper-support':return [group('上院支持与复审','Upper-house Support & Review',[
    row('倾向 50 / 51 / 60','Willingness 50 / 51 / 60','分别对应本团体0% / 10% / 100%支持，再按席位占比汇总。','Gives 0% / 10% / 100% group support respectively, then aggregates by seat share.'),
    row('复审支持率超过 50%','Review support above 50%','复审通过，恰好50%不足。','Review passes; exactly 50% is insufficient.'),
    row('复审未通过','Review rejected','依政体及议案类型退回或流案。','Returns or lapses according to system and bill type.'),
-   row('倾向低于 50','Willingness below 50','不适用下院的额外稳定惩罚。','The lower house’s additional stability penalty does not apply.')
   ])];
   case 'militarization':return [group('军政化程度与季度影响','Militarization & Quarterly Effects',[
    row('低于 40','Below 40','全国支持率 ＋0.5、军方拥护度 −1。','+0.5 national approval and −1 military backing.'),
