@@ -73,6 +73,30 @@ for(const id of ['theorepublic','theoabsolute']){
  votingTendency=originalTendency;check(validSave(s),'clergy valid');
  for(const value of [40,39,20,19,1]){const c=clergyState();c.loyalty=value;s.approval=80;s.stability=90;s.q++;clergyQuarter();near(s.approval,value<40?79:80,'approval threshold '+value);near(s.stability,value<20?88:90,'stability threshold '+value);clergyQuarter();near(s.approval,value<40?79:80,'no stacked penalty');check(activeAlerts107().some(a=>a.id==='clergy-loyalty')===(value<40),'reminder threshold')}
 }
+// A returned budget settles each chamber once, including across reloads and old saves.
+for(const legacyStage of [null,'upper','returned'])for(const firstAgenda of [55,80]){
+ fresh('theorepublic','returned-clergy-'+legacyStage+'-'+firstAgenda);calm();
+ const originalTendency=votingTendency,cleric=pstate().factions.find(clergyLowerFaction);
+ votingTendency=f=>f.id===cleric.id?firstAgenda:80;billPassRate104=()=>90;upperSupport108=()=>0;
+ budget();voteBill();const afterFirst=clergyState().loyalty;
+ near(afterFirst,firstAgenda===55?95:100,'first passage cost');
+ check(pstate().bill.clergySettled.lower,'zero-cost passages also recorded');
+ if(legacyStage==='upper')delete pstate().bill.clergySettled;
+ upperReview108();check(pstate().bill.chamber108.stage==='returned','upper returns budget');
+ if(legacyStage==='returned')delete pstate().bill.clergySettled;
+ const raw=JSON.stringify(s);s=JSON.parse(raw);initPolitics();
+ check(validSave(s),'returned bill roundtrip valid');
+ votingTendency=f=>f.id===cleric.id?51:80;s.q++;pstate().ap=100;voteBill();
+ near(clergyState().loyalty,afterFirst,'return does not charge lower again');
+ check(!pstate().bill&&pstate().passed.length===1,'returned budget enacted');
+ check(clergyState().history.length===(firstAgenda===55?1:0),'one lower ledger entry');
+ // A later bill with the same title is a separate decision and has its own cost.
+ s.q++;pstate().ap=100;budget();voteBill();near(clergyState().loyalty,afterFirst-9,'new bill charges normally');
+ const malformed=JSON.parse(JSON.stringify(s));malformed.political.bill.clergySettled={lower:'yes'};
+ check(!validSave(malformed),'invalid settlement flag rejected');
+ votingTendency=originalTendency;
+}
+upperSupport108=upperOriginal;
 // Budget changes that fail passage cannot reduce loyalty.
 fresh('theorepublic','failed-bill');calm();billPassRate104=()=>0;budget();voteBill();near(clergyState().loyalty,100,'failed lower no penalty');
 // Zero and resolution paths, with no automatic end in administrator mode.

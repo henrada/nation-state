@@ -1,5 +1,6 @@
 /* English text: shared. Numbers and internal game identifiers stay unchanged. */
 Object.assign(globalThis.NATION_EN ||= {}, {
+ "存档导入失败，当前进度保持不变": "Save import failed. Your current progress has been preserved.",
  "点": "points",
  "超过": "above",
  "最多": "Most",

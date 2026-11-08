@@ -10,7 +10,7 @@ vm.runInContext(`
 function check(x,m){if(!x)throw Error(m)}
 function near(a,b,m){check(Math.abs(a-b)<.00001,m+': '+a+' vs '+b)}
 function fresh(reg='presidential',seed='constitution-test'){
- selectedRegime=reg;pendingAdmin107=true;pendingModel=false;create(seed);if(s.constitution?.minority)Object.assign(s.constitution.minority,{status:'resolved',resolution:'amendment',resolvedQ:s.q});sits().active=[];sits().notices=[];pstate().current=null;pstate().queue=[];features107().notices=[];pstate().ap=100;s.approval=75;s.stability=80;
+ selectedRegime=reg;pendingAdmin107=true;pendingModel=false;create(seed);if(s.constitution?.minority)Object.assign(s.constitution.minority,{status:'resolved',resolution:'amendment',resolvedQ:s.q});sits().active=sits().active.filter(x=>x.kind==='military-transition');sits().notices=[];pstate().current=null;pstate().queue=[];features107().notices=[];pstate().ap=100;s.approval=75;s.stability=80;
 }
 function majority(){constitution().judges.forEach(j=>j.boosts.push({docketId:constitution().docket.id,until:s.q+3,amount:100}))}
 function nextVote(){s.q++;pstate().ap=100}

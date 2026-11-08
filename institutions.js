@@ -101,7 +101,11 @@ function clergyBillDetails(b,chamber){
  return groups.map(g=>({name:g.name,agenda:chamber==='upper'?upperAgenda108(g,b):votingTendency(g)})).filter(g=>g.agenda<60).map(g=>({...g,loss:60-g.agenda}));
 }
 function clergyBillPassed(b,chamber){
- const c=clergyState();if(!c)return;const details=clergyBillDetails(b,chamber),loss=details.reduce((n,g)=>n+g.loss,0);if(!loss)return;
+ const c=clergyState();if(!c)return;
+ const settled=b.clergySettled||(b.clergySettled={});if(settled[chamber])return;settled[chamber]=true;
+ // Older pending bills already settled their first lower-house passage.
+ if(chamber==='lower'&&['upper','returned','approved','referendum','delayed'].includes(b.chamber108?.stage))return;
+ const details=clergyBillDetails(b,chamber),loss=details.reduce((n,g)=>n+g.loss,0);if(!loss)return;
  c.loyalty=clamp(c.loyalty-loss,0,100);c.history.push({q:s.q,title:b.title,chamber,loss,details});
  log('神职人员忠诚度下降',`${b.title}在${chamber==='upper'?upperName108():regime().body}通过；${details.map(g=>g.name+'本案倾向'+fmt(g.agenda,1)+'，忠诚度−'+fmt(g.loss,1)).join('；')}。当前忠诚度${fmt(c.loyalty,1)}%。`);
 }
@@ -160,7 +164,11 @@ function institutionsGuide(entries){
 }
 const validBeforeInstitutions=validSave;
 validSave=function(v){
- if(!validBeforeInstitutions(v))return false;const i=v.institutions;if(!i)return true;
+ if(!validBeforeInstitutions(v))return false;
+ for(const b of [v.political?.bill,v.constitution?.docket,...(v.bicameral108?.delayed||[])].filter(Boolean)){
+  if(b.clergySettled!==undefined&&(!b.clergySettled||typeof b.clergySettled!=='object'||Array.isArray(b.clergySettled)||Object.entries(b.clergySettled).some(([k,value])=>!['lower','upper'].includes(k)||value!==true)))return false;
+ }
+ const i=v.institutions;if(!i)return true;
  if(i.version!==1||i.regime!==v.political.regime||!['new','continued'].includes(i.origin)||!['two','multi'].includes(i.partySystem)||typeof i.twoChambers!=='boolean'||typeof i.lowerName!=='string'||!i.lowerName.length)return false;
  const p=v.political;if(p.factions.some((f,id)=>f.id!==id||f.profileKey&&!FACTION_PROFILES103[f.profileKey])||new Set(p.factions.map(f=>f.name)).size!==p.factions.length)return false;
  if(i.regime==='semi'&&i.origin==='new'&&(p.factions.length<7||!['众议院','国民议会'].includes(i.lowerName)))return false;
