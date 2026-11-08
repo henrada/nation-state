@@ -23,7 +23,12 @@ for(const language of ['zh','en']){
    const riskEntries=['approval','forecast','inflation','unemployment','debt','confidence','judicial','local-demands','faction-relation','loyalty','clergy-loyalty','family-recognition','central-authority','military-backing'];
    assert.equal(nodes['guide-results'].innerHTML.includes(language==='zh'?'数值与门槛':'Values &amp; Thresholds'),riskEntries.includes(id),id+' only real risk or situation thresholds get a section');
    const retainedEffects=run('metricGuideLanguage(metricGuideDefinition(entryId).effects)');
-   if(retainedEffects){c.retainedEffects=retainedEffects;assert.ok(nodes['guide-results'].innerHTML.includes(run('hbParagraphs(retainedEffects)')),id+' ordinary effects retained under calculation');}
+   if(retainedEffects){c.retainedEffects=retainedEffects;const groups=run("hbClassifiedData(entryId,'effects',metricGuideDefinition(entryId))");assert.ok(nodes['guide-results'].innerHTML.includes(groups?run("hbClassifiedHTML(hbClassifiedData(entryId,'effects',metricGuideDefinition(entryId)))"):run('hbParagraphs(retainedEffects)')),id+' ordinary effects retained under calculation');}
+   for(const key of ['thresholds','effects','decrease']){
+    c.field=key;const groups=run('hbClassifiedData(entryId,field,metricGuideDefinition(entryId))');if(!groups)continue;
+    assert.match(nodes['guide-results'].innerHTML,new RegExp('data-hb-classified="'+id+'-'+key+'"'));
+    assert.equal(run('hbClassifiedData(entryId,field,metricGuideDefinition(entryId)).every(g=>g.rows.every(r=>r.label.length===2&&r.text.length===2&&r.label.every(Boolean)&&r.text.every(Boolean)))'),true,id+' complete bilingual classification');
+   }
    assert.doesNotMatch(nodes['guide-results'].innerHTML,/没有独立危机或失败门槛|没有单独由增长压力触发|no independent crisis or defeat threshold/);
    assert.doesNotMatch(nodes['guide-results'].innerHTML,/<details[^>]*\sopen(?:[\s=>])/);
    total++;
@@ -34,6 +39,13 @@ for(const language of ['zh','en']){
   assert.equal(run("handbookState.byId.get('forecast').title"),language==='zh'?'加权支持率':'Weighted Support');
   assert.equal(run("EXTRA_SERIES107.find(x=>x[0]==='forecast')[1]"),'加权支持率');
   assert.equal(run("metricGuideDefinition('approval').thresholds[0].includes('联邦委员会制另要求')"),regime==='federal');
+  run("hbSelectEntry('approval')");
+  assert.equal(nodes['guide-results'].innerHTML.includes(language==='zh'?'联邦委员会制附加规则':'Additional Federal Council Rules'),regime==='federal','federal conditions appear only in federal games');
+  assert.ok(nodes['guide-results'].innerHTML.includes(language==='zh'?'每季度额外：稳定度 −4、信心 −3。':'Additional quarterly loss: −4 stability and −3 confidence.'));
+  run("hbSelectEntry('debt')");assert.ok(nodes['guide-results'].innerHTML.includes(language==='zh'?'债务/GDP超过190%，且信心低于25':'Debt-to-GDP above 190% AND confidence below 25'),'joint financing conditions stay in one row');
+  run("hbSelectEntry('rating')");assert.equal(run("hbClassifiedData('rating','effects',metricGuideDefinition('rating'))[0].rows.length"),7,'all seven rating bands');assert.ok(nodes['guide-results'].innerHTML.includes('CCC'));
+  run("hbSelectEntry('ap')");assert.ok(nodes['guide-results'].innerHTML.includes(language==='zh'?'可超过6点':'may exceed 6'),'planned mode is not capped at six');
+  assert.doesNotMatch(run("hbClassifiedHTML([hbListGroup('<script>','<script>',[hbListRow('<img>','<img>','<script>','<script>')])])"),/<script>|<img>/,'classified text is escaped');
   assert.equal(run('JSON.stringify(s)'),before,'reading does not change simulation');
  }
 }

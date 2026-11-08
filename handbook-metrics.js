@@ -313,13 +313,13 @@ guideCatalog104=function(){
 };
 function hbMetricSections(entry){
  const d=entry.metricGuide;if(!d)return null;
- const fold=(key,zh,en,hintZh,hintEn)=>hbFold(hbText(zh,en),hbText(hintZh,hintEn),hbParagraphs(metricGuideLanguage(d[key])));
+ const fold=(key,zh,en,hintZh,hintEn)=>hbFold(hbText(zh,en),hbText(hintZh,hintEn),hbMetricBlock(entry,key));
  return {
   lead:d.intro?metricGuideLanguage(d.intro):entry.text.match(/^.*?(?:[。！？]|\.(?:\s|$)|$)/s)?.[0]||entry.text,
   sections:(d.thresholds?fold('thresholds','数值与门槛','Values & Thresholds','阶段变化、危机与结束条件','Ranges, risks and recovery conditions'):'')+
    fold('increase','如何提高','How to Increase','可采取的措施与生效方式','Actions and how they take effect')+
    fold('decrease','如何降低','How to Decrease','消耗、削减与负面来源','Spending, reductions and causes of decline')+
-   hbFold(hbText('计算与关联','Calculation & Connections'),hbText('与其他指标的区别和相互影响','How this metric relates to others'),hbParagraphs([metricGuideLanguage(d.effects),metricGuideLanguage(d.notes)].filter(Boolean).join('\n')))+
+   hbFold(hbText('计算与关联','Calculation & Connections'),hbText('与其他指标的区别和相互影响','How this metric relates to others'),(d.effects?hbMetricBlock(entry,'effects'):'')+hbMetricBlock(entry,'notes'))+
    hbFold(hbText('完整说明','Full Reference'),hbText('本局规则与制度差异','Current rules and system differences'),hbParagraphs(entry.text))
  };
 }
