@@ -14,7 +14,7 @@ function hbCategoryTitle(id){if(id==='legislature'&&typeof institutionSectionNam
 function hbCategory(entry){
  const id=entry.id,is=(...names)=>names.some(name=>entry.category===name||entry.category===hbLocalized(name));
  if(['country','calendar','ap','approval','stability','confidence','player','overview','advance','alerts','pressure','guide','tutorial','page-tutorial'].includes(id)||id.startsWith('ap-')||/^office-(desk|files|phone|map|calendar)$/.test(id))return 'basics';
- if(id.startsWith('reform-')||['reforms','sports','culture'].includes(id))return 'reforms';
+ if(id.startsWith('reform-')||id==='reforms')return 'reforms';
  if(['judicial','judicial-pressure','judiciary','court-actions','casting-vote','competitive-amendment','pluralism-amendment'].includes(id)||/^(constitution|judg|judicial)/.test(id))return 'justice';
  if(is('家族政治','军政府与转型','联邦委员会制')||id.startsWith('regime-')||['party-routes','clergy-loyalty'].includes(id))return 'systems';
  if(is('局势与处置','局势处置')||['situations','government','minority-issue','forced-migration','forced-assimilation'].includes(id))return 'situations';

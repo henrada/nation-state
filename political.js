@@ -35,15 +35,23 @@ function officialPanel(k){let item=pstate().cabinet[k],c=item?pstate().candidate
 function setTask(k,v){if(s.ended||!TASKS[v]||!pstate().cabinet[k])return;pstate().cabinet[k].task=v;save();toast('任务方向已更新，下季度由官员自行执行')}
 function dismissalImpact(k){let p=pstate(),c=p.candidates[p.cabinet[k].candidate],power=k==='head'?(regime().head==='宰相'?1.6:1.2):.55,popular=c.achievements>=8;return {approval:(popular?-3:1)*power,stability:(regime().democratic?-1:-3)*power,confidence:(c.trait===2&&popular?-3:0)*power,relation:popular?-7:-3,popular}}
 // One canonical label per effect key; summaries never append a second alias.
-const EFFECT_LABELS106={approval:'支持',stability:'稳定',confidence:'信心',judicial:'司法独立',cost:'债务 / GDP',human:'人力资本',capitalStock:'基建资本',unemployment:'失业率',gdp:'名义 GDP',growth:'年化增长压力',inflation:'通胀',sports:'体育基础',culture:'文化基础'};
+function normalizePublicInvestmentEffects(values){
+ const result={...values};
+ if(Number.isFinite(result.sports))result.olympicBid=(result.olympicBid||0)+result.sports*.025;
+ if(Number.isFinite(result.culture))result.growth=(result.growth||0)+result.culture*.1;
+ delete result.sports;delete result.culture;
+ return result;
+}
+const EFFECT_LABELS106={approval:'支持',stability:'稳定',confidence:'信心',judicial:'司法独立',cost:'债务 / GDP',human:'人力资本',capitalStock:'基建资本',unemployment:'失业率',gdp:'名义 GDP',growth:'年化增长压力',inflation:'通胀'};
 function formatEffectText106(values,{costLabel=EFFECT_LABELS106.cost,costUnit='%',empty='无即时指标变化'}={}){
- let parts=[];
+ values=normalizePublicInvestmentEffects(values);let parts=[];
  for(let [key,label]of Object.entries(EFFECT_LABELS106)){
   if(!Number.isFinite(values[key]))continue;
   let value=Number(values[key].toFixed(key==='cost'?3:2));if(!value)continue;
   let unit=key==='cost'?costUnit:key==='gdp'?'%':['unemployment','growth','inflation'].includes(key)?' 个百分点':'';
   parts.push(`${key==='cost'?costLabel:label} ${value>0?'+':''}${value}${unit}`);
  }
+ if(values.olympicBid)parts.push(values.olympicBid>0?'提高国际奥委会对你的评价':'降低国际奥委会对你的评价');
  return parts.join(' · ')||empty;
 }
 function impactText(v){return formatEffectText106(v)}

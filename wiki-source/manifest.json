@@ -1,16 +1,16 @@
 {
   "version": "1.0.7",
-  "entryCount": 379,
+  "entryCount": 377,
   "pages": [
     {
       "title": "创建世界与政体",
       "file": "创建世界与政体.md",
-      "characters": 8435
+      "characters": 8526
     },
     {
       "title": "界面教程与存档",
       "file": "界面教程与存档.md",
-      "characters": 1638
+      "characters": 1615
     },
     {
       "title": "快速入门",
@@ -20,27 +20,27 @@
     {
       "title": "行动点与科研",
       "file": "行动点与科研.md",
-      "characters": 1248
+      "characters": 1232
     },
     {
       "title": "核心指标",
       "file": "核心指标.md",
-      "characters": 631
+      "characters": 617
     },
     {
       "title": "财政与预算",
       "file": "财政与预算.md",
-      "characters": 4439
+      "characters": 4177
     },
     {
       "title": "议事机关与联合政府",
       "file": "议事机关与联合政府.md",
-      "characters": 3765
+      "characters": 3745
     },
     {
       "title": "内阁与人事",
       "file": "内阁与人事.md",
-      "characters": 2330
+      "characters": 2329
     },
     {
       "title": "部长提案图鉴",
@@ -50,32 +50,32 @@
     {
       "title": "司法与政治稳定",
       "file": "司法与政治稳定.md",
-      "characters": 2999
+      "characters": 2977
     },
     {
       "title": "民意与选举",
       "file": "民意与选举.md",
-      "characters": 2603
+      "characters": 2590
     },
     {
       "title": "结构性改革",
       "file": "结构性改革.md",
-      "characters": 3275
+      "characters": 3286
     },
     {
       "title": "局势与危机",
       "file": "局势与危机.md",
-      "characters": 8510
+      "characters": 8634
     },
     {
       "title": "任期评估与统治倾向",
       "file": "任期评估与统治倾向.md",
-      "characters": 5340
+      "characters": 5346
     },
     {
       "title": "内阁任务图鉴",
       "file": "内阁任务图鉴.md",
-      "characters": 6889
+      "characters": 6894
     },
     {
       "title": "常见问题",
@@ -85,27 +85,27 @@
     {
       "title": "搜索与术语索引",
       "file": "搜索与术语索引.md",
-      "characters": 58489
+      "characters": 57315
     },
     {
       "title": "更新日志",
       "file": "更新日志.md",
-      "characters": 10344
+      "characters": 10349
     },
     {
       "title": "Home",
       "file": "Home.md",
-      "characters": 4259
+      "characters": 2150
     },
     {
       "title": "_Sidebar",
       "file": "_Sidebar.md",
-      "characters": 2476
+      "characters": 971
     },
     {
       "title": "_Footer",
       "file": "_Footer.md",
-      "characters": 442
+      "characters": 227
     }
   ]
 }

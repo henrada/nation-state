@@ -170,7 +170,7 @@ function programmeDefinition107(k,design=rules103()?.proposals[k]?.design){
  const style=PROGRAMME_STYLE107[design.trait],r=REGIMES.find(r=>r.id===design.regime),texts=PROGRAMME_TEXT107[k][design.trait].split('|').map(t=>programmeCopy107(t,design.regime));
  const hard=design.trait===4,nondem=!r.democratic,central=hard||design.trait===6;
  const reward={...base.reward};for(const [key,value]of Object.entries(style.reward))reward[key]=(reward[key]||0)+value;
- if(hard){reward.approval=-3;if(k==='justice')reward.judicial=-5;if(k==='culture')Object.assign(reward,{confidence:3,culture:1})}
+ if(hard){reward.approval=-3;if(k==='justice')reward.judicial=-5;if(k==='culture')Object.assign(reward,{confidence:3,growth:(reward.growth||0)+.1})}
  if(design.trait===6&&k==='justice')reward.judicial=-2;
  const options=base.options.map((a,i)=>{
   const diverted=hard&&i===1,cost=+(a[1]*style.cost*(diverted?.55:1)).toFixed(4),values={...style.values[i]};

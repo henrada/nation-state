@@ -493,7 +493,6 @@ Object.assign(globalThis.NATION_EN ||= {}, {
  "奥运承办与叛乱另在局势页面持续处理": "The Olympians and Rebels are also being processed on the situation page on an ongoing basis",
  "地方委员会要求明确日常设施维护、防灾准备与公共活动的预算。重大灾害、奥运承办与叛乱另在局势页面持续处理。": "The local councils require clear budgets for the maintenance of daily facilities, preparedness for disaster prevention and public activities. Major disasters, Olympic missions and rebellions are also dealt with on the situation page on an ongoing basis.",
  "投资公共设施与应急准备": "Invest in Public Facilities and Emergency Readiness",
- "支出 0.4% GDP；基础设施 +1；体育基础 +0.5。": "Expenditure 0.4% GDP; infrastructure +1; sports base + 0.5.",
  "公开审计现有设施": "Publicly Audit Existing Facilities",
  "信心 +1、司法独立 +1。": "Confidence +1, independence of the judiciary +1.",
  "压缩维护预算": "Cut the Maintenance Budget",

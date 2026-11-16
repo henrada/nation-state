@@ -32,9 +32,9 @@ const DEPARTMENT_TASKS105={
   {id:'health_efficiency',name:'优化医院运营',text:'合并低效采购和管理流程，节约支出、提振信心，但会增加短期失业与不满。',values:{cost:-.1,confidence:.25,unemployment:.06,approval:-.25},axes:{market:1,elite:1},traits:[4,8]}
  ],
  culture:[
-  {id:'culture_public',name:'普惠文化服务',text:'资助社区文化设施和公共活动，提高支持、文化基础与就业，需公共投入。',values:{approval:.45,culture:.08,unemployment:-.05,cost:.12},axes:{welfare:1,populism:1},tags:['culture'],traits:[0,3,5,7]},
-  {id:'culture_heritage',name:'保护文化遗产',text:'修缮遗产并支持地方传承，增加文化基础和稳定，需要维护费用。',values:{culture:.12,stability:.3,cost:.12},axes:{nation:1,green:1},tags:['culture'],traits:[4,6]},
-  {id:'culture_exchange',name:'拓展文化交流',text:'支持文化出口与交流活动，增加文化基础、信心和短期增长，需推广经费。',values:{culture:.06,confidence:.35,growth:.04,cost:.1},axes:{market:1,law:1},tags:['trade','culture'],traits:[1,8]}
+  {id:'culture_public',name:'普惠文化服务',text:'资助社区文化设施和公共活动，提高支持、就业和本季度增长压力，需公共投入。',values:{approval:.45,growth:.02,unemployment:-.05,cost:.12},axes:{welfare:1,populism:1},tags:['culture'],traits:[0,3,5,7]},
+  {id:'culture_heritage',name:'保护文化遗产',text:'修缮遗产并支持地方传承，改善稳定与本季度增长压力，需要维护费用。',values:{growth:.03,stability:.3,cost:.12},axes:{nation:1,green:1},tags:['culture'],traits:[4,6]},
+  {id:'culture_exchange',name:'拓展文化交流',text:'支持文化出口与交流活动，提振信心和本季度增长压力，需推广经费。',values:{confidence:.35,growth:.06,cost:.1},axes:{market:1,law:1},tags:['trade','culture'],traits:[1,8]}
  ],
  labour:[
   {id:'labour_employment',name:'就业促进',text:'提供就业匹配和企业招工支持，降低失业、改善支持，需要就业服务经费。',values:{unemployment:-.18,approval:.3,cost:.18},axes:{welfare:2,nation:1},tags:['industry','welfare'],traits:[4,6]},
