@@ -170,6 +170,7 @@ function enactCompetitiveElections107(source){
  let crisis=activeSit('government');if(crisis)endSituation(crisis,'竞争性选举条文生效，依新政体重组政府。');
  rules103().coalition=[playerFactionId107()];initializeAllies107();
  if(!regime().head)delete p.cabinet.head;else if(!Object.prototype.hasOwnProperty.call(p.cabinet,'head'))p.cabinet.head=null;
+ if(typeof normalizeCabinetGovernment==='function')normalizeCabinetGovernment();
  for(let [slot,item] of Object.entries(p.cabinet))if(item&&!cabinetEligible(p.candidates[item.candidate]))removeOfficial(slot);
  sits().transition={q:s.q,from:source,to:target,constitutional:true};sits().democracyPressure=0;v3().settlementDue=false;
  let movement=activeSit('spring');if(movement)endSituation(movement,'竞争性选举条文生效，国家转入'+regime().name+'。');

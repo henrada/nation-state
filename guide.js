@@ -165,6 +165,7 @@ function guideCatalog104(){
  if(typeof institutionsGuide==='function')institutionsGuide(entries);
  if(typeof familiesGuide==='function')familiesGuide(entries);if(typeof militaryGuide==='function')militaryGuide(entries);
  if(typeof electionsGuide==='function')electionsGuide(entries);
+ if(typeof cabinetGovernmentGuide==='function')cabinetGovernmentGuide(entries);
  return entries;
 }
 let guideEntries104=[];

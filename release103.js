@@ -30,7 +30,7 @@ function factionProfile(f){
  return FACTION_PROFILES103[key];
 }
 function cabinetEligible(c){return !!c&&(!coalitionRegime()||(rules103()?.coalition||[playerFactionId107()]).includes(c.faction))}
-function cabinetSlots103(r=regime()){return [...(r.head?['head']:[]),...PORTFOLIOS.filter(x=>r.id!=='federal'||x[0]!=='deputy').map(x=>x[0])]}
+function cabinetSlots103(r=regime()){return [...(r.head?['head']:[]),...PORTFOLIOS.filter(x=>x[0]!=='deputy'||(!r.head&&r.id!=='federal')).map(x=>x[0])]}
 function ensureCandidates103(){let p=pstate();while(p.candidates.length<Math.max(75,p.factions.length*12)){let id=p.candidates.length;p.candidates.push({id,name:personName(),faction:id%p.factions.length,trait:pick(factionProfile(p.factions[id%p.factions.length]).traits),skill:45+Math.floor(rand()*46),loyalty:45+Math.floor(rand()*41),achievements:0,tenure:0})}}
 function alignPeople103(){
  let p=pstate();

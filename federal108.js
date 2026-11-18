@@ -239,12 +239,13 @@ amendmentDocketHTML107=function(){return amendmentInProgress107()?.procedure==='
 function enactFederalCentralization108(){
  const p=pstate(),stem=countryStem();p.regime='semi';s.name=stem+regime().suffix;constitution().competitiveClause=true;
  p.members.forEach((m,i)=>m.role=i<4?memberRole(i):p.factions[m.faction].name+'党团总召');
- rules103().coalition=[playerFactionId107()];p.cabinet.head=null;p.cabinet.deputy=null;
- for(const slot of ['head','deputy'])if(!rules103().proposals[slot])rules103().proposals[slot]={progress:0,completed:false,spent:0,actions:[]};
+ rules103().coalition=[playerFactionId107()];p.cabinet.head=null;
+ if(!rules103().proposals.head)rules103().proposals.head={progress:0,completed:false,spent:0,actions:[]};
+ if(typeof normalizeCabinetGovernment==='function')normalizeCabinetGovernment();
  for(const [k,item]of Object.entries(p.cabinet))if(item&&!cabinetEligible(p.candidates[item.candidate]))removeOfficial(k);
  initializeProgrammes107();cabinetSlot='head';
  const crisis=activeSit('public-trust');if(crisis)finishFederalTrust108(crisis,true,'半总统制宪法生效，联邦委员会及其解散程序终止。');
- sits().transition={q:s.q,from:'federal',to:'semi',constitutional:true};log('政府集权化完成','半总统制正式生效，玩家改任总统；请任命总理与副总理。既有季度、宪法任期和经济历史保留。');
+ sits().transition={q:s.q,from:'federal',to:'semi',constitutional:true};log('政府集权化完成','半总统制正式生效，玩家改任总统；请任命总理。既有季度、宪法任期和经济历史保留。');
 }
 
 const validBeforeFederal108=validSave;

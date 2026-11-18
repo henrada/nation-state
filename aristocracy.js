@@ -179,6 +179,7 @@ function transitionFamilyRegime(target){
  const names=factionNames12();p.factions.forEach((f,i)=>{f.name=names[i];delete f.profileKey;delete f.ideologyLabel});p.rulingParty=p.factions[playerFactionId107()].name;
  p.members.forEach((m,i)=>m.role=i<4?memberRole(i):p.factions[m.faction].name+(target==='constitutional'?'党团总召':'首席代表'));
  rules103().coalition=[playerFactionId107()];initializeAllies107();if(!regime().head){if(p.cabinet.head)removeOfficial('head');delete p.cabinet.head}
+ if(typeof normalizeCabinetGovernment==='function')normalizeCabinetGovernment();
  for(const [slot,item]of Object.entries(p.cabinet))if(item&&!cabinetEligible(p.candidates[item.candidate]))removeOfficial(slot);
  sits().transition={q:s.q,from:'aristocratic',to:target,aristocratic:true};sits().democracyPressure=0;v3().settlementDue=false;
  ensureInstitutions();initializeBicameral108();initializeTaxation107();familyView='council';

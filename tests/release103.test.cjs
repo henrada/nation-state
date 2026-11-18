@@ -79,7 +79,7 @@ fresh103();{
 }
 // Canonical effect summaries: every programme metric is displayed once; health matches its reward.
 fresh103();{
- for(let [key,def]of Object.entries(MINISTER_PROGRAMMES103)){
+ for(let [key,def]of Object.entries(MINISTER_PROGRAMMES103).filter(([key])=>cabinetSlots103().includes(key))){
   let summary=programmePanel(key).split('完成效果：')[1].split('。')[0];
   for(let metric of Object.keys(def.reward)){let label=EFFECT_LABELS106[metric];if(label)assert(summary.split(label).length-1===1,'one effect label '+key+' '+metric)}
   assert(!summary.includes('；失业 '),'no appended unemployment alias');

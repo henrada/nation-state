@@ -152,6 +152,7 @@ function switchChamber108(view){if(!hasUpper108())return;chamberView108=view==='
 function upperReview108(){
  if(s.ended||!hasUpper108())return;const u=bicameral108().upper,b=upperBill108();if(!b)return;if(!u.formed)return toast('请先组建参议院');
  const rate=upperSupport108(b);b.chamber108.upperRate=rate;
+ if(rate<=50&&typeof budgetConfidenceOutcome==='function')budgetConfidenceOutcome(b,false);
  if(rate>50){
   if(typeof clergyBillPassed==='function')clergyBillPassed(b,'upper');
   b.chamber108.stage='approved';archiveChamberVote108(b,'upper-approved');log(upperName108()+'复审通过',`${b.title}院内支持率 ${fmt(rate,2)}%。`);
@@ -181,7 +182,7 @@ function enactOrdinary108(b){
   mod({cost:reformStartCost(b.id,b.offer)});s.reforms.push({id:b.id,key:r.key,ready:s.q+r.lag,boost:r.boost,completed:false,effectsApplied:false});v3().offers=v3().offers.filter(x=>x.uid!==b.offer);
   noteDecision('启动'+r.name,r.axes,r.tags,null,1,null,{kind:'reform',identity:'reform:'+r.key});if(r.key==='inheritance')v3().inheritanceUsed=true;
  }
- p.passed.push({title:b.title,q:s.q,votes:rate,passRate:rate,upperRate:b.chamber108.upperRate});mod({approval:1,stability:1-b.chamber108.penalty});p.confidenceLoss=0;
+ p.passed.push({title:b.title,q:s.q,votes:rate,passRate:rate,upperRate:b.chamber108.upperRate});mod({approval:1,stability:1-b.chamber108.penalty});p.confidenceLoss=0;if(typeof budgetConfidenceOutcome==='function')budgetConfidenceOutcome(b,true);
  archiveChamberVote108(b,'enacted');log('议程生效',b.title+'已完成两院程序，开始实施。');toast('议程已生效');checkPoliticalEnd();if(s.ended)beginSettlement(s.ended);record();
 }
 function finalizeOrdinary108(b,returned=false){
@@ -202,7 +203,7 @@ voteBill=function(){
  const b=pstate().bill;if(!hasUpper108()||!b||!['budget','reform'].includes(b.kind))return voteBillBeforeBicameral108();
  if(s.ended)return;if(b.chamber108?.stage==='upper')return toast('请前往'+upperName108()+'手动复审');if(b.chamber108?.stage==='referendum')return retryReferendum108();
  if(!spendAction('vote'))return;
- const rate=billPassRate104();if(rate<=50){mod({approval:-2,stability:-1});pstate().confidenceLoss++;noteDecision('议程表决失败',{authority:0});log('议程受阻',b.title+'院内支持率 '+fmt(rate,2)+'%，未超过50%。');pSave();return}
+ const rate=billPassRate104();if(rate<=50){mod({approval:-2,stability:-1});pstate().confidenceLoss++;noteDecision('议程表决失败',{authority:0});log('议程受阻',b.title+'院内支持率 '+fmt(rate,2)+'%，未超过50%。');if(typeof budgetConfidenceOutcome==='function')budgetConfidenceOutcome(b,false);pSave();return}
  if(typeof clergyBillPassed==='function')clergyBillPassed(b,'lower');
  if(b.chamber108?.stage==='returned'){b.chamber108.lowerRate=rate;b.chamber108.penalty=billStabilityPenalty();finalizeOrdinary108(b,true)}
  else{b.chamber108=chamberTicket108(b,rate,billStabilityPenalty());chamberView108='upper';log('议案送交复审',b.title+'获'+regime().body+' '+fmt(rate,2)+'%支持，送交'+upperName108()+'。');}
