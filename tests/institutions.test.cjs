@@ -91,7 +91,7 @@ for(const legacyStage of [null,'upper','returned'])for(const firstAgenda of [55,
  check(!pstate().bill&&pstate().passed.length===1,'returned budget enacted');
  check(clergyState().history.length===(firstAgenda===55?1:0),'one lower ledger entry');
  // A later bill with the same title is a separate decision and has its own cost.
- s.q++;pstate().ap=100;budget();voteBill();near(clergyState().loyalty,afterFirst-9,'new bill charges normally');
+ s.q=(Math.floor(s.q/YEAR)+1)*YEAR;pstate().ap=100;budget();voteBill();near(clergyState().loyalty,afterFirst-9,'new bill charges normally');
  const malformed=JSON.parse(JSON.stringify(s));malformed.political.bill.clergySettled={lower:'yes'};
  check(!validSave(malformed),'invalid settlement flag rejected');
  votingTendency=originalTendency;

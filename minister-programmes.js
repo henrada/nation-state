@@ -220,7 +220,7 @@ validSave=function(v){
 };
 function programmeGuide107(add){
  for(const k of Object.keys(MINISTER_PROGRAMMES103)){
-  const actual=programmeDefinition107(k),base=MINISTER_PROGRAMMES103[k],sets=[['programme-'+k,actual,[base.name]],...PROGRAMME_STYLE107.map((_,trait)=>['programme-'+k+'-trait-'+trait,programmeDefinition107(k,{version:1,regime:regime().id,trait,candidate:0,faction:playerFactionId107(),legacy:false}),[]])];
+  const actual=programmeDefinition107(k),base=MINISTER_PROGRAMMES103[k],sets=[['programme-'+k,actual,[base.name]],...PROGRAMME_STYLE107.map((_,trait)=>trait).filter(trait=>typeof availablePoliticalTraits!=='function'||availablePoliticalTraits().includes(trait)).map(trait=>['programme-'+k+'-trait-'+trait,programmeDefinition107(k,{version:1,regime:regime().id,trait,candidate:0,faction:playerFactionId107(),legacy:false}),[]])];
   for(const [id,def,aliases]of sets){
    add(id,def.name,aliases,`属于${k==='head'?'政府首脑':PORTFOLIOS.find(x=>x[0]===k)[1]}的持续提案，内容由提出时的政治倾向与政体决定。完成效果：${impactText(def.reward)}。未完成每季度主管忠诚−0.5；已投入项目保留进度和原方案，未投入项目随新任主管调整。${k==='education'?'完成后科研增长系数从2提高至3。':''}`,'部长提案');
    for(const [i,a]of def.options.entries())add(id+'-action-'+i,a[0],[],`“${def.name}”的推进措施：基础支出 ${a[1]}% GDP、基础进度 ${a[2]}、主管忠诚＋${a[3]}。实际费用受相关投资折扣影响，进度受能力与倾向加权；每季每项一次，消耗1行动点。${a[5]?impactText(a[5].values)+'；提案所属派系团体关系＋'+a[5].relation+'。'+(a[5].risk?'下季度以'+fmt(a[5].risk*100,1)+'%概率揭露丑闻；多次风险分别结算。':''):''}`,'部长提案');

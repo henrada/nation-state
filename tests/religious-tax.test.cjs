@@ -19,7 +19,7 @@ for(const id of ['theorepublic','theoabsolute']){
  }
  near(s.policies.tithe,10,'levy enacted');near(s.effective.tithe,effective,'no instant lagged tax');check(validSave(s),'valid after enactment');
  s.q++;economicQuarter();near(s.effective.tithe,6.75,'gradual pass through');
- s.q++;pstate().ap=100;draft={...s.policies,tithe:0};proposeBudget();voteBill();if(id==='theorepublic'){for(const g of bicameral108().upper.groups){g.agenda=100;g.relation=100;g.decay=0}upperReview108()}near(s.policies.tithe,0,'stop collection through budget');check(validSave(s),'stop valid');
+ s.q=(Math.floor(s.q/YEAR)+1)*YEAR;pstate().ap=100;draft={...s.policies,tithe:0};proposeBudget();voteBill();if(id==='theorepublic'){for(const g of bicameral108().upper.groups){g.agenda=100;g.relation=100;g.decay=0}upperReview108()}near(s.policies.tithe,0,'stop collection through budget');check(validSave(s),'stop valid');
 }
 const targets=new Set();for(let n=0;n<20;n++){
  fresh('theoabsolute','tax-transition-'+n);s.policies.tithe=9;s.effective.tithe=8;draft={...s.policies};enactCompetitiveElections107('theoabsolute');initPolitics();targets.add(regime().id);
