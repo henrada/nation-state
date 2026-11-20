@@ -216,12 +216,32 @@ proposeBudget=function(){if(hasUpper108()&&constitution().docket)return toast('�
 const withdrawBeforeBicameral108=withdrawBill;
 withdrawBill=function(){if(hasUpper108()&&pstate().bill?.chamber108)archiveChamberVote108(pstate().bill,'withdrawn');return withdrawBeforeBicameral108()};
 
-function bicameralAmendmentText108(){return isFederal108()?`联邦修宪由国民院议长受理，直接送联邦院手动复审，不需国民院三分之二支持。复审通过后启动三季度司法审查，司法赞成达到半数且加权支持率超过50%才可生效。若被退回，国民院过半复议后送审。释宪不经两院复审。`:`修宪先在${regime().body}取得三分之二院内支持，再交${upperName108()}手动复审；复审获过半支持后，才开始三季度最高司法机关审查。${regime().id==='theorepublic'?'监护委员会可以驳回修宪案，导致流案。':`退回后可由${regime().body}再次取得三分之二支持，直接送司法审查。`}${regime().id==='presidential'?'退回后重获通过的修宪案，在司法通过后再延缓两个季度生效。':''}释宪不增加上院程序。`}
+function bicameralAmendmentRules108(){
+ if(isFederal108())return {
+  procedure:'联邦修宪由国民院议长受理，直接送联邦院手动复审，不需国民院三分之二支持。复审通过后启动三季度司法审查，司法赞成达到半数且加权支持率超过50%才可生效。',
+  detail:'若被退回，国民院过半复议后送审。释宪不经两院复审。'
+ };
+ const lower=regime().body;
+ const returned=regime().id==='theorepublic'?'监护委员会可以驳回修宪案，导致流案。':`退回后可由${lower}再次取得三分之二支持，直接送司法审查。`;
+ const delay=regime().id==='presidential'?'退回后重获通过的修宪案，在司法通过后再延缓两个季度生效。':'';
+ return {
+  procedure:`修宪先在${lower}取得三分之二院内支持，再交${upperName108()}手动复审；复审获过半支持后，才开始三季度最高司法机关审查。`,
+  detail:returned+delay+'释宪不增加上院程序。'
+ };
+}
+function bicameralAmendmentText108(){
+ const {procedure,detail}=bicameralAmendmentRules108();
+ return procedure+detail;
+}
+function bicameralAmendmentHTML108(prefix=''){
+ const {procedure,detail}=bicameralAmendmentRules108();
+ return `<p>${prefix?`<span>${esc(prefix)}</span> `:''}${esc(procedure)}</p>${ruleDetails(detail)}`;
+}
 federalAmendmentText108=function(){return bicameralAmendmentText108()};
 const menuBeforeBicameral108=constitutionalMenu;
-constitutionalMenu=function(mode='interpret'){menuBeforeBicameral108(mode);if(hasUpper108()&&mode==='amend')$('modal').innerHTML=$('modal').innerHTML.replace(/<h2>提出修宪<\/h2><p>[\s\S]*?<\/p>/,`<h2>提出修宪</h2><p>提出消耗1行动点，进入宪法修订局势。${bicameralAmendmentText108()}</p>`)};
+constitutionalMenu=function(mode='interpret'){menuBeforeBicameral108(mode);if(hasUpper108()&&mode==='amend')$('modal').innerHTML=$('modal').innerHTML.replace(/<h2>提出修宪<\/h2><p>[\s\S]*?<\/p>/,`<h2>提出修宪</h2>${bicameralAmendmentHTML108('提出消耗1行动点，进入宪法修订局势。')}`)};
 const memberBeforeBicameral108=meetMember;
-meetMember=function(id){if(hasUpper108()){chamberView108='lower';if(tab==='assembly')render()}memberBeforeBicameral108(id);if(hasUpper108()&&id===0)$('modal').innerHTML=$('modal').innerHTML.replace(/(<section class="constitution-member"><h3>宪制议程<\/h3>)<p>[\s\S]*?<\/p>/,`$1<p>${bicameralAmendmentText108()}</p>`)};
+meetMember=function(id){if(hasUpper108()){chamberView108='lower';if(tab==='assembly')render()}memberBeforeBicameral108(id);if(hasUpper108()&&id===0)$('modal').innerHTML=$('modal').innerHTML.replace(/(<section class="constitution-member"><h3>宪制议程<\/h3>)<p>[\s\S]*?<\/p>/,`$1${bicameralAmendmentHTML108()}`)};
 const proposeBeforeBicameral108=proposeConstitution;
 proposeConstitution=function(mode,action,target){
  if(!hasUpper108()||mode!=='amend'){if(hasUpper108())chamberView108='lower';return proposeBeforeBicameral108(mode,action,target)}

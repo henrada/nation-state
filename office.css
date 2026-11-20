@@ -99,7 +99,13 @@ body.office-mode{--bg:#ded3b5;--paper:#efe6cf;--ink:#343e34;--muted:#73715e;--gr
 #office-workspace .political-banner h2{font-family:'Noto Serif SC','Noto Sans SC',serif;font-weight:500;font-size:23px;letter-spacing:.06em;color:#3f4c39}
 #office-workspace .action-count{background:#c9d0ae;border:1px solid #9fa77d;border-radius:2px;color:#4a5e42;min-width:110px}
 #office-workspace .action-count b{color:#4a5e42}#office-workspace .action-count span{color:#6c7457}
-#office-workspace .political-banner>div:first-child{min-width:0}
+#office-workspace .political-banner>div:first-child{flex:1 1 auto;min-width:0}
+.rule-details{margin:.55rem 0 0;padding:0;border:0;text-align:start}
+.rule-details>summary{cursor:pointer;width:fit-content;max-width:100%;font-size:inherit}
+.rule-details>summary:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+.rule-details>p{margin:.4rem 0 0}
+#office-workspace .political-banner p,.rule-details>p{overflow-wrap:anywhere;text-align:start}
+#office-workspace .political-banner .rule-details>p{margin-top:.4rem}
 #office-workspace .action-count{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;flex:0 0 auto;width:188px;max-width:100%;min-width:0;padding:14px 16px;text-align:center}
 #office-workspace .action-count>*{width:100%;margin:0;text-align:center;overflow-wrap:anywhere}
 #office-workspace .action-count b{line-height:1.2}

@@ -217,7 +217,6 @@ Object.assign(globalThis.NATION_EN ||= {}, {
  "每增加": "For each increase of",
  "降税时反向计算。": "Tax cuts have the opposite effect.",
  "制定下一季度的财政方向。税收为名义税率；各项支出为 GDP 占比。提交后送交权力机关，表决通过才生效；经济影响逐季传导。": "Set your fiscal direction. Taxes are nominal rates; spending is measured as a share of GDP. Submit the draft for legislative approval before it takes effect. Economic effects develop over subsequent quarters.",
- "选择制度，开始新的任期": "Choose your government. Begin your term",
  "每年 6 季度，每届 24 季度。两方单轮选举，全国按地区人口权重计票，超过 50% 才胜选；第 48 季度结束第二任期并结算。": "Each year has 6 quarters and each term lasts 24. Elections have a single round with two competing sides, weighted by regional population. You must win more than 50%. Your second term ends at quarter 48, followed by the final assessment.",
  "每年 6 季度，每届 24 季度。第 48 季度首次询问结算，继续后每 12 季度再次询问；稳定低于 20 将结束游戏。": "Each year has 6 quarters and each term lasts 24. You may end your rule at quarter 48, then every 12 quarters thereafter. Stability below 20 ends the game.",
  "完成后的长期减免：每季度地区支持衰退减少 0.5 个百分点，政治稳定衰退减少 0.25 点。": "Permanent completion benefits: quarterly regional approval decay is reduced by 0.5 percentage points and political stability decay by 0.25 points.",

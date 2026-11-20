@@ -70,6 +70,11 @@ function translateGameText(value){
  const original=String(value??'');if(gameLanguage!=='en'||!/[\u3400-\u9fff]/.test(original))return original;
  if(Object.hasOwn(localeDictionary,original.trim()))return original.replace(original.trim(),localeDictionary[original.trim()]);
  const patterns=[
+  [/^下次窗口关闭还有 (\d+) 季度。$/,(_,n)=>`Drafts rotate in ${n} quarters.`],
+  [/^执政时长 · ([\d.]+) 年（(\d+) 季度）$/,(_,years,q)=>`Time in office: ${years} years (${q} quarters)`],
+  [/^修宪先在(.+?)取得三分之二院内支持，再交(.+?)手动复审；复审获过半支持后，才开始三季度最高司法机关审查。$/,(_,lower,upper)=>`Amendments need two-thirds support in the ${translateGameText(lower)}. Submit the bill to the ${translateGameText(upper)} for review. A majority there starts the three-quarter judicial review.`],
+  [/^修宪先由(.+?)议长或主席受理，取得三分之二院内支持后进入司法审查。$/,(_,house)=>`Contact the speaker or chair of the ${translateGameText(house)} to propose an amendment. It needs two-thirds support before judicial review.`],
+  [/^退回后可由(.+?)再次取得三分之二支持，直接送司法审查。(.*)$/u,(_,lower,rest)=>`After a return, the ${translateGameText(lower)} can send the bill directly to judicial review with another two-thirds vote. ${translateGameText(rest)}`],
   [/^(.+?)每提高1个百分点、(.+?)每提高2个百分点、(.+?)每提高1\.5个百分点，全票门槛各＋1，降税相反。(.*)$/s,(_,income,corporate,sales,rest)=>`Each increase of 1 percentage point in ${translateGameText(income)}, 2 in ${translateGameText(corporate)}, or 1.5 in ${translateGameText(sales)} raises the full-support threshold by 1. Tax cuts reverse this effect. ${translateGameText(rest)}`],
   [/^折算倾向 = 议程倾向 −（本案全票门槛 − 60）。(.*)$/s,(_,rest)=>`Adjusted alignment = agenda alignment − (this bill’s full-support threshold − 60). ${translateGameText(rest)}`],
   [/^已执政 ([\d.]+) 年 · (\d+) 季度；(.*)$/s,(_,years,q,rest)=>`In office: ${years} years · ${q} quarters. ${translateGameText(rest)}`],

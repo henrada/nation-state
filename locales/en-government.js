@@ -171,7 +171,7 @@ Object.assign(globalThis.NATION_EN ||= {}, {
  "在司法通过后再延缓两个季度生效": "Two additional quarterly delays after the judicial adoption",
  "退回后重获通过的修宪案，在司法通过后再延缓两个季度生效。": "A constitutional amendment that was re-adopted after its return was delayed for two more quarters after the adoption of the judiciary.",
  "释宪不增加上院程序": "The Constitution does not add to the House of Lords procedure",
- "释宪不增加上院程序。": "The constitutional interpretation does not add to the upper house procedure.",
+ "释宪不增加上院程序。": "Constitutional interpretations do not require upper-house review.",
  "已完成立法复审": "Legislative review completed",
  "司法期限至第": "The length of the judicial period to",
  "已完成立法复审，司法期限至第": "Legislative review completed, judicial period to date",

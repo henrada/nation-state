@@ -186,8 +186,6 @@ Object.assign(globalThis.NATION_EN ||= {}, {
  "待表决：": "Awaiting a Vote: ",
  "最近国务记录": "Recent Government Records",
  "宪法与国家制度": "Constitution and State system",
- "让制度为议程赋予效力": "Making the system work for the agenda",
- "让制度为议程赋予效力。": "Making the system effective for the agenda.",
  "修宪先由": "The constitutional amendment was initiated by",
  "议长或主席受理": "The Speaker or the President receives",
  "取得三分之二院内支持后进入司法审查": "Access to judicial review with two-thirds of the court's support",
@@ -298,13 +296,11 @@ Object.assign(globalThis.NATION_EN ||= {}, {
  "也可按数字": "It can also be by number.",
  "打开": "Open",
  "、内阁和司法机关。档案：国家数据与存档。地图：地区诉求和选举。点击“收回桌面”再选择其他物品，也可按数字1至4打开。": "The Cabinet and the Judiciary. Archives: national data and archives. Map: Regional demands and elections. Click \" Take Back the Desktop \" to select other items, or you can open them in numbers 1 to 4.",
- "可以安心离开": "You can leave safely.",
  "已有进度保存在当前浏览器中": "Progress saved in current browser",
  "你可以关闭此标签页": "You can close this tab",
  "或返回开始界面": "Or return to start interface",
  "返回开始界面": "Return to Start Screen",
  "国策 / NATION · STATE": "State policy / NATION STATE",
- "可以安心离开。": "You can leave safely.",
  "已有进度保存在当前浏览器中。你可以关闭此标签页，或返回开始界面。": "Progress is saved in the current browser. You can close this tab or you can return to the start interface.",
  "赵钱孙李周吴郑王冯陈褚卫蒋沈韩杨朱秦尤许何吕施张孔曹严华金魏陶姜戚谢邹喻柏水窦章云苏潘葛奚范彭郎鲁韦昌马苗凤花方俞任袁柳鲍史唐费廉岑薛雷贺倪汤滕殷罗毕郝邬安常乐于傅皮卞齐康伍余元卜顾孟平黄穆萧尹姚邵湛汪祁毛禹狄米贝明臧计伏成戴谈宋茅庞熊纪舒屈项祝董梁杜阮蓝闵席季麻强贾路娄危江童颜郭梅盛林刁钟徐邱骆高夏蔡田樊胡凌霍虞万支柯昝管卢莫经房裘缪干解应宗丁宣贲邓郁单杭洪包诸左石崔吉龚程嵇邢裴陆荣翁荀羊甄封芮储靳汲邴糜松井段富巫乌焦巴弓牧隗山谷车侯宓蓬全郗班仰秋仲伊宫宁仇栾甘祖武符刘景詹龙叶幸司韶黎乔苍双闻莘党翟谭贡劳逄姬申扶堵冉宰郦雍璩桑桂濮牛寿通边燕冀郏浦尚农温别庄晏柴阎连茹习艾鱼容向古易慎戈廖庾居衡步都耿满弘匡国文寇广阙东欧利师巩聂晁勾敖融冷辛阚简饶曾沙鞠丰巢关查荆游权盖益桓公": "Zhao Zhou Zhou Zheng Zhong Zheng Zheng Zheng Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhang Zhang Zhou Zhang Zhou Zhou Zhang Zhang Zhou Zhou Zhou Zhang Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Zhou Qian Zhou Zhou Zian Zhou Zian Zian Zhi Zian Zian Zian Zhu Zian Zian Zhu Zhi Zian Zhu Zian Zhu Qian Zhu Zhu Qi Qi Qi Qi Zhu Qi Qi Qi Qi Qi Qian Zhu Zhu Zhu Qian Qian Qian Zhu Qian Zhu Qian Zhu Qi Qian Qi Qi Qian Qian Qian Qian Zhu",
  "承启书怀明景思文修绍正允彦致庭弘立宏元嘉令维尚时秉怀仲伯季崇若闻长守昭穆敬致兴云清安乐永庆熙瑞靖远世宗德泰诚光奕和仁峻志宇泽言哲俊锦卓培荣新博星华君逸凌钧谦至青朗厚知成亦东舒勤信建振朝廷天少仲兆林宁其汉盛学道鸿腾孟礼方玉之见恺成奎嘉翰复敬蔚允善政群": "I am pleased to meet you, Sir, and I am pleased to meet you, Sir, and I am pleased to meet you.",
@@ -364,4 +360,25 @@ Object.assign(globalThis.NATION_EN ||= {}, {
  "返回当前议程。": "Return to the current agenda.",
  "每季议程倾向 −2；协商可抵消累计损耗。": "Agenda alignment falls by 2 each quarter; negotiations can offset the accumulated decline.",
  "加权支持率不足50%": "Weighted Support Below 50%"
+});
+
+Object.assign(globalThis.NATION_EN, {
+ "结束局势会产生结果事件。地方灾区暂缓原有诉求惩罚。": "Resolving a situation triggers an outcome event. Penalties for prior regional demands are suspended in disaster areas.",
+ "持续危机需要跨季度处置；处置措施消耗 1 政治行动点，政府危机须在议事机关通过协商解决。预算计划须由权力机关通过。": "Ongoing crises span multiple quarters. Responses cost 1 action point. Government crises require legislative negotiations. Budget plans require approval.",
+ "每个地区按人口权重计入全国票率。以下是当前预测，选举完成后会保留实际结果。": "The national vote is weighted by regional population. Figures below are forecasts. Actual results are recorded after the election.",
+ "创建世界": "Create World",
+ "退出游戏": "Exit Game",
+ "执政记录": "Governing Record",
+ "游戏说明": "Game Instructions",
+ "国家机要处": "State Secretariat",
+ "联邦修宪由国民院议长受理，直接送联邦院手动复审，不需国民院三分之二支持。复审通过后启动三季度司法审查，司法赞成达到半数且加权支持率超过50%才可生效。": "Submit a federal amendment through the speaker of the National Council and send it directly to the Federal Council for review. Approval starts a three-quarter judicial review. At least half the judges must approve and weighted public support must exceed 50%.",
+ "若被退回，国民院过半复议后送审。释宪不经两院复审。": "After a return, a majority in the National Council can send the amendment on for review. Constitutional interpretations skip this legislative process.",
+ "监护委员会可以驳回修宪案，导致流案。释宪不增加上院程序。": "The Guardian Council can reject the amendment outright. Constitutional interpretations do not require upper-house review.",
+ "释宪不增加上院程序。": "Constitutional interpretations do not require upper-house review.",
+ "释宪由当前有权机关受理。": "The institution with jurisdiction hears requests for constitutional interpretation.",
+ "退回后重获通过的修宪案，在司法通过后再延缓两个季度生效。释宪不增加上院程序。": "A returned amendment that passes a new vote takes effect two quarters after judicial approval. Constitutional interpretations do not require upper-house review.",
+ "提出消耗1行动点，进入宪法修订局势。": "Proposing an amendment costs 1 action point and opens the amendment process.",
+ "政府每 6 季度完成一批新草案。未查看草案在轮换提示确认后替换；已查看、已提交与执行中项目保留。": "The government prepares new drafts every 6 quarters. Confirming the rotation replaces unopened drafts. Opened drafts, submitted bills and reforms already underway are kept.",
+ "枢密院每 6 季度完成一批新草案。未查看草案在轮换提示确认后替换；已查看、已提交与执行中项目保留。": "The Privy Council prepares new drafts every 6 quarters. Confirming the rotation replaces unopened drafts. Opened drafts, submitted bills and reforms already underway are kept.",
+ "地区票率 = 全国支持率 ×（1 − 未满足诉求扣减 + 超额履约加成 + 历史政策修正 + 发展状况修正）＋开局民意修正＋季度民意累计修正。未回应诉求最多扣 20%，超过基本目标最多加 8%。新局各地初始支持约21%—55%，由开局党派路线、当地社会基础与随机差异共同形成。开局民意修正随本局保留，之后仍可提高或降低支持。例如：全国70%、诉求未回应且所有其他修正均为0时为56%。": "Regional vote share equals national approval multiplied by one minus the unmet-demand penalty plus the overdelivery, policy and development adjustments. Add the initial and cumulative quarterly regional adjustments. Unmet demands subtract up to 20%, and exceeding the target adds up to 8%. Initial regional support ranges from about 21% to 55% depending on the ruling party, local conditions and random variation. The initial adjustment persists. For example, 70% national approval with entirely unmet demands and no other adjustments yields 56%."
 });

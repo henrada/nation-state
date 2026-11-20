@@ -4,25 +4,25 @@ function executiveName(){return EXECUTIVE_NAMES[regime().id]||'政府'}
 function governmentBriefings(limit=4){return governingChronicle().slice(0,limit)}
 
 const REGIME_ART={
- constitutional:{motto:'王冠之下，议会执政',focus:'议会信任 · 联合政府',alt:'君主立宪制示意图片'},
- presidential:{motto:'行政授权，立法制衡',focus:'总统决策 · 任命总理',alt:'民主共和制·总统制示意图片'},
- semi:{motto:'总统与总理，共掌行政',focus:'双首长协调 · 议会支持',alt:'半总统制示意图片'},
- westminster:{motto:'在辩论与信任中执政',focus:'首相组阁 · 联合政府',alt:'西敏议会制示意图片'},
- federal:{motto:'让不同地区找到共识',focus:'委员共治 · 公民复决',alt:'联邦委员会制示意图片'},
- theorepublic:{motto:'选举与宗教权威并立',focus:'最高领袖 · 民选议会',alt:'神权共和制示意图片'},
- symbolic:{motto:'选举之形，集中的权力',focus:'集中行政 · 稳定维系统治',alt:'象征性民主制示意图片'},
- party:{motto:'在组织与路线间凝聚支持',focus:'党内派别 · 会议协商',alt:'一党独大制示意图片'},
- absolute:{motto:'王令从御前议事厅发出',focus:'君主裁决 · 宰相施政',alt:'君主专制示意图片'},
- aristocratic:{motto:'家族之间，权力需要平衡',focus:'贵族协商 · 家族利益',alt:'贵族制示意图片'},
- tyranny:{motto:'枕戈待旦，国运尚待抉择',focus:'委员会共治 · 军政转型',alt:'军政府制示意图片'},
- theoabsolute:{motto:'教法与政令来自同一权威',focus:'宗教等级 · 宰相行政',alt:'神权专制示意图片'}
+ constitutional:{focus:'议会信任 · 联合政府',alt:'君主立宪制示意图片'},
+ presidential:{focus:'总统决策 · 任命总理',alt:'民主共和制·总统制示意图片'},
+ semi:{focus:'双首长协调 · 议会支持',alt:'半总统制示意图片'},
+ westminster:{focus:'首相组阁 · 联合政府',alt:'西敏议会制示意图片'},
+ federal:{focus:'委员共治 · 公民复决',alt:'联邦委员会制示意图片'},
+ theorepublic:{focus:'最高领袖 · 民选议会',alt:'神权共和制示意图片'},
+ symbolic:{focus:'集中行政 · 稳定维系统治',alt:'象征性民主制示意图片'},
+ party:{focus:'党内派别 · 会议协商',alt:'一党独大制示意图片'},
+ absolute:{focus:'君主裁决 · 宰相施政',alt:'君主专制示意图片'},
+ aristocratic:{focus:'贵族协商 · 家族利益',alt:'贵族制示意图片'},
+ tyranny:{focus:'委员会共治 · 军政转型',alt:'军政府制示意图片'},
+ theoabsolute:{focus:'宗教等级 · 宰相行政',alt:'神权专制示意图片'}
 };
 function regimeImage(id){return `assets/regimes/${id}.png?v=${id==='tyranny'?'military-art1':id==='party'?'1.0.7-partyart2':'1.0.7-r1'}`}
 function regimePreview(id){
- let r=REGIMES.find(r=>r.id===id);if(!r)return '<div class="regime-random-art" aria-hidden="true">✦</div><div><span class="tag">尚未揭晓的历史</span><h3>让世界决定你的起点</h3><p>从十二种政体中抽取一个。国家名称、社会条件与政治人物随后生成。</p><small>选择下方卡片，可预览各制度的执政身份与主要挑战。</small></div>';
- let art=REGIME_ART[id];return `<img src="${regimeImage(id)}" alt="${art.alt}" width="600" height="400"><div><span class="tag">${art.motto}</span><h3>${r.name}</h3><p>${r.note}</p><div class="regime-preview-facts"><span>你的身份：<b>${r.player}</b></span><span>议事机关：<b>${r.body}</b></span><span>行政机构：<b>${EXECUTIVE_NAMES[id]}</b></span></div></div>`;
+ let r=REGIMES.find(r=>r.id===id);if(!r)return '<div class="regime-random-art" aria-hidden="true">✦</div><div><h3>随机政体</h3><p>从十二种政体中抽取一个。国家名称、社会条件与政治人物随后生成。</p><small>选择下方卡片，可预览各制度的执政身份与主要挑战。</small></div>';
+ let art=REGIME_ART[id];return `<img src="${regimeImage(id)}" alt="${art.alt}" width="600" height="400"><div><h3>${r.name}</h3><p>${r.note}</p><div class="regime-preview-facts"><span>你的身份：<b>${r.player}</b></span><span>议事机关：<b>${r.body}</b></span><span>行政机构：<b>${EXECUTIVE_NAMES[id]}</b></span></div></div>`;
 }
-function regimePicker(){return `<fieldset class="regime-picker"><legend>选择政治体制</legend><input type="hidden" id="regime" value="random"><div class="regime-preview" id="regime-preview" aria-live="polite">${regimePreview('random')}</div><div class="regime-grid"><button type="button" class="regime-choice regime-random" data-regime="random" aria-pressed="true" onclick="selectRegimeCard('random')"><span aria-hidden="true">✦</span><span><b>随机政体</b><small>让历史为你选择一种制度</small></span><i class="regime-selected" aria-hidden="true">✓</i></button>${REGIMES.map(r=>`<button type="button" class="regime-choice" data-regime="${r.id}" aria-pressed="false" onclick="selectRegimeCard('${r.id}')"><img src="${regimeImage(r.id)}" alt="" loading="lazy" width="180" height="120"><span class="regime-choice-copy"><b>${r.name}</b><small>${r.player}</small><em>${REGIME_ART[r.id].focus}</em></span><i class="regime-selected" aria-hidden="true">✓</i></button>`).join('')}</div><p class="note">图片用于标识政体；具体规则以本游戏说明为准。</p></fieldset>`}
+function regimePicker(){return `<fieldset class="regime-picker"><legend>选择政治体制</legend><input type="hidden" id="regime" value="random"><div class="regime-preview" id="regime-preview" aria-live="polite">${regimePreview('random')}</div><div class="regime-grid"><button type="button" class="regime-choice regime-random" data-regime="random" aria-pressed="true" onclick="selectRegimeCard('random')"><span aria-hidden="true">✦</span><span><b>随机政体</b></span><i class="regime-selected" aria-hidden="true">✓</i></button>${REGIMES.map(r=>`<button type="button" class="regime-choice" data-regime="${r.id}" aria-pressed="false" onclick="selectRegimeCard('${r.id}')"><img src="${regimeImage(r.id)}" alt="" loading="lazy" width="180" height="120"><span class="regime-choice-copy"><b>${r.name}</b><small>${r.player}</small><em>${REGIME_ART[r.id].focus}</em></span><i class="regime-selected" aria-hidden="true">✓</i></button>`).join('')}</div><p class="note">图片用于标识政体；具体规则以本游戏说明为准。</p></fieldset>`}
 function selectRegimeCard(id){if(id!=='random'&&!REGIMES.some(r=>r.id===id))return;$('regime').value=id;document.querySelectorAll('[data-regime]').forEach(node=>node.setAttribute('aria-pressed',String(node.dataset.regime===id)));$('regime-preview').innerHTML=regimePreview(id)}
 const newDialogBeforeImmersion=newDialog;
 newDialog=function(){newDialogBeforeImmersion();$('modal').innerHTML=$('modal').innerHTML.replace(/<label for="regime">政治体制<\/label><select id="regime">[\s\S]*?<\/select>/,regimePicker())};

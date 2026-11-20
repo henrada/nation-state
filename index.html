@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="zh-CN" data-office-ui>
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#303c35"><meta name="description" content="国策：在虚构国家的办公室中执政，与议会、内阁和司法机关协商，决定国家的未来。"><title>国策 · 国家治理模拟</title><link rel="stylesheet" href="style.css?v=elections1"><link rel="stylesheet" href="office.css?v=elections1"><link rel="stylesheet" href="military.css?v=military1">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#303c35"><meta name="description" content="国策：在虚构国家的办公室中执政，与议会、内阁和司法机关协商，决定国家的未来。"><title>国策 · 国家治理模拟</title><link rel="stylesheet" href="style.css?v=rules2"><link rel="stylesheet" href="office.css?v=rules2"><link rel="stylesheet" href="military.css?v=military1">
 <link rel="stylesheet" href="localization.css?v=languages1">
 <link rel="stylesheet" href="handbook.css?v=lists1">
 </head>
@@ -18,44 +18,44 @@
   <button class="of-object of-manual-object" data-object="guide" aria-label="治国指南"><span class="of-art-piece" data-piece="guide"></span><span class="of-object-label">治国指南</span></button>
  </div><nav class="of-pocket" aria-label="办公桌入口"><button data-object="files">文件</button><button data-object="phone">电话</button><button data-object="archives">档案</button><button data-object="map">地图</button><button data-object="calendar">季度交接</button><button data-object="guide">治国指南</button></nav><footer class="office-footbar"><span id="office-memo"></span><span id="office-quarter"></span><button id="desk-advance" onclick="advance()">进入下一季度 →</button></footer></div>
 </div>
-<div id="office-overlay" hidden><main id="office-workspace" aria-labelledby="heading"><div class="workspace-top"><button class="office-close" onclick="officeUI.close()">收回桌面 ×</button></div><header class="workspace-heading"><div><span class="eyebrow" id="executive-heading">国务办公室</span><h1 id="heading">执政总览</h1></div><div class="header-actions"><button id="page-tutorial" class="page-tutorial-launch" onclick="startPageTutorial()">本页教程</button><span id="date"></span><button class="primary" id="advance" onclick="advance()">进入下一季度 →</button></div></header><nav id="nav" aria-label="当前分类的页面"></nav><div id="content"></div><footer class="workspace-footer"><span>国家机要处 · 阅后归档</span><span id="office-folio"></span></footer></main></div>
+<div id="office-overlay" hidden><main id="office-workspace" aria-labelledby="heading"><div class="workspace-top"><button class="office-close" onclick="officeUI.close()">收回桌面 ×</button></div><header class="workspace-heading"><div><span class="eyebrow" id="executive-heading">国务办公室</span><h1 id="heading">执政总览</h1></div><div class="header-actions"><button id="page-tutorial" class="page-tutorial-launch" onclick="startPageTutorial()">本页教程</button><span id="date"></span><button class="primary" id="advance" onclick="advance()">进入下一季度 →</button></div></header><nav id="nav" aria-label="当前分类的页面"></nav><div id="content"></div><footer class="workspace-footer"><span>国家机要处</span><span id="office-folio"></span></footer></main></div>
 <dialog id="modal"></dialog><dialog id="chart-modal"></dialog><dialog id="handbook-modal" aria-labelledby="handbook-title" data-no-localize></dialog><section id="alert-notice" hidden></section><button id="alert-dock" hidden aria-controls="alert-notice" title="点击展开或收起提醒；沿边缘上下拖动" onclick="noticeDockClick(event)" onkeydown="noticeDockKey(event)" onpointerdown="noticeDockPointerDown(event)" onpointermove="noticeDockPointerMove(event)" onpointerup="noticeDockPointerUp(event)" onpointercancel="noticeDockPointerUp(event)"></button><div id="toast" role="status"></div>
 <noscript>国策需要启用 JavaScript 才能运行。请在浏览器中开启 JavaScript 后重新载入。</noscript>
-<script src="game.js?v=integrity1"></script><script src="political.js?v=platforms1"></script><script src="governance.js?v=cabinet1"></script><script src="revision12.js?v=copy1"></script><script src="situations.js?v=cabinet1"></script><script src="release103.js?v=cabinet1"></script><script src="release104.js?v=copy1"></script><script src="cabinet-tasks.js?v=investments1"></script><script src="release107.js?v=military1"></script><script src="coalition107.js?v=elections1"></script><script src="interface107.js?v=copy1"></script><script src="console107.js?v=investments1"></script><script src="action-points.js?v=copy1"></script><script src="immersion.js?v=military1"></script><script src="constitution.js?v=copy1"></script><script src="constitutional-process.js?v=cabinet1"></script><script src="personnel.js?v=military1"></script><script src="judicial-lifecycle.js?v=copy1"></script><script src="central-bank.js?v=copy1"></script><script src="minister-programmes.js?v=platforms1"></script><script src="public-support.js?v=elections1"></script><script src="political-seasons.js?v=copy1"></script><script src="taxation.js?v=elections1"></script><script src="decision-assessment.js?v=copy1"></script><script src="regional-start.js?v=elections1"></script><script src="federal108.js?v=cabinet1"></script><script src="bicameral108.js?v=cabinet1"></script><script src="institutions.js?v=integrity1"></script>
+<script src="game.js?v=rules2"></script><script src="political.js?v=rules2"></script><script src="governance.js?v=rules2"></script><script src="revision12.js?v=copy1"></script><script src="situations.js?v=rules2"></script><script src="release103.js?v=cabinet1"></script><script src="release104.js?v=copy1"></script><script src="cabinet-tasks.js?v=investments1"></script><script src="release107.js?v=military1"></script><script src="coalition107.js?v=elections1"></script><script src="interface107.js?v=copy1"></script><script src="console107.js?v=investments1"></script><script src="action-points.js?v=copy1"></script><script src="immersion.js?v=rules2"></script><script src="constitution.js?v=copy1"></script><script src="constitutional-process.js?v=cabinet1"></script><script src="personnel.js?v=military1"></script><script src="judicial-lifecycle.js?v=copy1"></script><script src="central-bank.js?v=copy1"></script><script src="minister-programmes.js?v=platforms1"></script><script src="public-support.js?v=elections1"></script><script src="political-seasons.js?v=copy1"></script><script src="taxation.js?v=elections1"></script><script src="decision-assessment.js?v=rules2"></script><script src="regional-start.js?v=elections1"></script><script src="federal108.js?v=cabinet1"></script><script src="bicameral108.js?v=rules2"></script><script src="institutions.js?v=integrity1"></script>
 <script src="aristocracy.js?v=cabinet1"></script>
 <script src="elections.js?v=copy1"></script><script src="military.js?v=copy1"></script>
 <script src="cabinet-government.js?v=cabinet1"></script>
 <script src="policy-platforms.js?v=platforms1"></script>
-<script src="guide.js?v=platforms1"></script><script src="office.js?v=copy1"></script>
+<script src="guide.js?v=platforms1"></script><script src="office.js?v=rules2"></script>
 <script src="locales/en-constitution.js?v=copy1"></script>
 <script src="locales/en-constitution-2.js?v=metrics1"></script>
 <script src="locales/en-elections.js?v=copy1"></script>
 <script src="locales/en-elections-2.js?v=copy1"></script>
-<script src="locales/en-governance.js?v=investments1"></script>
-<script src="locales/en-governance-2.js?v=financing2"></script>
-<script src="locales/en-government.js?v=investments1"></script>
+<script src="locales/en-governance.js?v=rules2"></script>
+<script src="locales/en-governance-2.js?v=rules2"></script>
+<script src="locales/en-government.js?v=rules2"></script>
 <script src="locales/en-government-2.js?v=copy1"></script>
-<script src="locales/en-government-3.js?v=copy1"></script>
+<script src="locales/en-government-3.js?v=rules2"></script>
 <script src="locales/en-government-4.js?v=languages1"></script>
-<script src="locales/en-government-5.js?v=copy1"></script>
+<script src="locales/en-government-5.js?v=rules2"></script>
 <script src="locales/en-guide.js?v=copy1"></script>
 <script src="locales/en-guide-2.js?v=investments1"></script>
 <script src="locales/en-guide-3.js?v=copy1"></script>
-<script src="locales/en-interface.js?v=copy1"></script>
-<script src="locales/en-legislature.js?v=languages1"></script>
+<script src="locales/en-interface.js?v=rules2"></script>
+<script src="locales/en-legislature.js?v=rules2"></script>
 <script src="locales/en-legislature-2.js?v=languages1"></script>
 <script src="locales/en-military.js?v=copy1"></script>
 <script src="locales/en-noble-houses.js?v=languages1"></script>
-<script src="locales/en-overview.js?v=copy1"></script>
+<script src="locales/en-overview.js?v=rules2"></script>
 <script src="locales/en-shared.js?v=investments1"></script>
 <script src="locales/en-shared-2.js?v=copy1"></script>
 <script src="locales/en-shared-3.js?v=investments1"></script>
 <script src="locales/en-shared-4.js?v=copy1"></script>
-<script src="locales/en-shared-5.js?v=copy1"></script>
+<script src="locales/en-shared-5.js?v=rules2"></script>
 <script src="locales/en-situations.js?v=investments1"></script>
 <script src="locales/en-cabinet-government.js?v=cabinet1"></script>
 <script src="locales/en-policy-platforms.js?v=platforms1"></script>
-<script src="localization.js?v=copy1"></script>
+<script src="localization.js?v=rules2"></script>
 <script src="handbook-metrics.js?v=copy1"></script>
 <script src="handbook-lists.js?v=copy1"></script>
 <script src="handbook.js?v=investments1"></script>
