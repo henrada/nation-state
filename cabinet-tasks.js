@@ -62,7 +62,7 @@ function taskStatus105(k,item){return item?`<small class="office-task" data-offi
 function taskExplanation105(k){
  let item=pstate().cabinet[k],c=item?pstate().candidates[item.candidate]:null;if(!c)return '';
  let task=departmentTask105(k,item,c);if(!task)return '';
- return `<div class="task-brief"><b>${item.task==='balanced'?'自主判断 · 当前倾向：':''}${task.name}</b><p>${task.text}</p><p>按当前能力与忠诚，任务成功时的额外效果：${departmentImpact105(departmentValues105(task,c))}。</p><small>方向持续至再次更改，每次推进季度执行一次。另计官员倾向与部门基础效果；执行受阻时效果与财政节约降至30%，投入仍全额支出。${task.values.growth?'增长影响持续1季度。':''}${k==='education'?'此处的人力资本不同于科研等级；科研进度仍由教育预算与教育现代化提案计算。':''}</small></div>`;
+ return `<div class="task-brief"><b>${item.task==='balanced'?'自主判断 · 当前倾向：':''}${task.name}</b><p>${task.text}</p><p>按当前能力与忠诚，任务成功时的额外效果：${departmentImpact105(departmentValues105(task,c))}。</p>${ruleDetails('方向持续至再次更改，每次推进季度执行一次。另计官员倾向与部门基础效果；执行受阻时效果与财政节约降至30%，投入仍全额支出。'+(task.values.growth?'增长影响持续1季度。':'')+(k==='education'?'此处的人力资本不同于科研等级；科研进度仍由教育预算与教育现代化提案计算。':''),'查看任务结算细则')}</div>`;
 }
 function recordDepartmentTask105(k,task,success){noteDecision(`${office(k)}执行：${task.name}`,Object.fromEntries(Object.entries(task.axes).map(([axis,v])=>[axis,v*(success?1:.3)])),success?task.tags||[]:[],null,.12,null,{kind:'automatic'})}
 const LEGACY_DEPARTMENT_TASKS105={

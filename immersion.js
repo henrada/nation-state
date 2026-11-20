@@ -1,7 +1,12 @@
 /* Regime-specific presentation, illustrated world setup and a movable reminder dock. */
 const EXECUTIVE_NAMES={constitutional:'内阁府',presidential:'总统行政办公室',semi:'总统府',westminster:'首相府',federal:'联邦委员会',theorepublic:'最高领袖办公室',symbolic:'总统府',party:'政务院',absolute:'御前政务院',aristocratic:'公爵政务厅',tyranny:'行政院',theoabsolute:'教廷国务署'};
 function executiveName(){return EXECUTIVE_NAMES[regime().id]||'政府'}
-function governmentBriefings(limit=4){return governingChronicle().slice(0,limit)}
+function governmentBriefings(limit=4){
+ return governingChronicle().filter(entry=>!(entry.q===0&&(
+  ['政治体制确立','新政府就职'].includes(entry.title)||
+  entry.title==='联合政府成立'&&/成为政治盟友|加入执政联盟/.test(entry.text)
+ ))).slice(0,limit);
+}
 
 const REGIME_ART={
  constitutional:{focus:'议会信任 · 联合政府',alt:'君主立宪制示意图片'},

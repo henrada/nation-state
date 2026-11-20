@@ -177,7 +177,7 @@ const budgetBeforeAnnualBudget=budget;
 budget=function(){
  let html=budgetBeforeAnnualBudget(),available=annualBudgetAvailable();
  if(!available)html=html.replace(/<button([^>]*onclick="(?:proposeBudget|applyPolicy)\([^>]*?)>/g,'<button disabled $1>');
- return `<div class="card"><b>年度预算</b><p>每游戏年6个季度，每年可通过一次预算调整。表决失败或撤回草案后仍可重新协商提交。</p><p>${available?'本年度预算调整机会尚可使用。':'本年度预算已通过，下一个游戏年恢复调整机会。'}</p></div>`+html;
+ return `<div class="card"><b>年度预算</b><p>每6个季度可进行一次预算调整，表决失败或主动撤回后可重新花费行动点调整并提交。</p>${ruleDetails(available?'本年度预算调整机会尚可使用。':'本年度预算已通过，下一个游戏年恢复调整机会。','查看预算状态')}</div>`+html;
 };
 const initBeforePolicyPlatforms=initPolitics;
 initPolitics=function(...args){

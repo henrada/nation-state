@@ -10,7 +10,7 @@ Object.assign(globalThis.NATION_EN ||= {}, {
  '保留选举制度，同时扩大行政协调与集中决策的权力。':'Retains elections while extending executive coordination and centralized decision-making.',
  '施政方案':'policy programme',
  '年度预算':'Annual Budget','年度财政与公共预算案':'Annual Fiscal and Public Budget Bill',
- '每游戏年6个季度，每年可通过一次预算调整。表决失败或撤回草案后仍可重新协商提交。':'Each game year has 6 quarters and permits one approved budget adjustment. A defeated or withdrawn draft may be negotiated and resubmitted.',
+ '每6个季度可进行一次预算调整，表决失败或主动撤回后可重新花费行动点调整并提交。':'Adjust the budget once every 6 quarters. After a failed vote or withdrawal, revise and resubmit it; another vote costs action points.',
  '本年度预算调整机会尚可使用。':'This year’s budget adjustment is still available.',
  '本年度预算已通过，下一个游戏年恢复调整机会。':'This year’s budget has been approved. Another adjustment becomes available next game year.',
  '本年度预算已通过，请在下一游戏年调整':'This year’s budget has been approved. Make the next adjustment in the next game year.',

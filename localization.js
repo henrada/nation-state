@@ -70,6 +70,7 @@ function translateGameText(value){
  const original=String(value??'');if(gameLanguage!=='en'||!/[\u3400-\u9fff]/.test(original))return original;
  if(Object.hasOwn(localeDictionary,original.trim()))return original.replace(original.trim(),localeDictionary[original.trim()]);
  const patterns=[
+  [/^距下轮诉求 (\d+) 季度。第 6 季度起，未完成诉求增加支持与稳定损耗。$/,(_,q)=>`Next demand cycle in ${q} quarters. From quarter 6 onward, unmet demands increase approval and stability losses.`],
   [/^下次窗口关闭还有 (\d+) 季度。$/,(_,n)=>`Drafts rotate in ${n} quarters.`],
   [/^执政时长 · ([\d.]+) 年（(\d+) 季度）$/,(_,years,q)=>`Time in office: ${years} years (${q} quarters)`],
   [/^修宪先在(.+?)取得三分之二院内支持，再交(.+?)手动复审；复审获过半支持后，才开始三季度最高司法机关审查。$/,(_,lower,upper)=>`Amendments need two-thirds support in the ${translateGameText(lower)}. Submit the bill to the ${translateGameText(upper)} for review. A majority there starts the three-quarter judicial review.`],
